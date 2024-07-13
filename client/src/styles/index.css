@@ -1,0 +1,7 @@
+@import url("https://fonts.googleapis.com/css2?family=Libre+Bodoni&family=Roboto&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+body {
+  @apply bg-dark text-light font-title;
+}/*# sourceMappingURL=index.css.map */

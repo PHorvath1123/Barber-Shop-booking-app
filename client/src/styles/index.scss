@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+//Variables
+
+$dark: #1E1A17;
+$light: #D9D9D9;
+$red: #EF6950;
+
+@import url('https://fonts.googleapis.com/css2?family=Libre+Bodoni&family=Roboto&display=swap');
+
+body{
+    @apply bg-dark text-light font-title
+}
+
