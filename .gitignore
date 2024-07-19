@@ -16,6 +16,7 @@ dist-ssr
 firebase.config.ts
 firebase.js
 .env
+serviceAccountKey.json
 
 # Editor directories and files
 .vscode/*
