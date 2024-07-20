@@ -1,12 +1,18 @@
+import Hero from '../components/Hero';
+import Services from '../components/Services';
+import MeetOurBarbers from '../components/MeetOurBarbers';
+import Contact from '../components/Contact';
+import Footer from '../components/Footer';
 
 export default function Home(){
 
     return(
         <>
-            <div className="h-[120vh] flex flex-col">Home Page</div>
-            <section  id="Services">
-                <h1>Services</h1>
-            </section>
+           <Hero/>
+           <Services/>
+           <MeetOurBarbers/>
+           <Contact/>
+           <Footer/>
         </>
         
     );
