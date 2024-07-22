@@ -7,14 +7,15 @@
 $dark: #1E1A17;
 $light: #D9D9D9;
 $red: #EF6950;
+$hover-red: #c9371d;
 
 // Font families
 
 @import url('https://fonts.googleapis.com/css2?family=Libre+Bodoni&family=Roboto&display=swap');
 
 // Font sizes
-$font-size-xs: clamp(0.6252rem, 0.9172rem + -0.2459vw, 0.8681rem);
-$font-size-sm: clamp(0.884rem, 1.0736rem + -0.1596vw, 1.0417rem);
+$font-size-xs: clamp(0.6252rem, 0.9172rem + 0.2459vw, 0.8681rem);
+$font-size-sm: clamp(0.884rem, 1.0736rem + 0.1596vw, 1.0417rem);
 $font-size-md: clamp(1.25rem, 1.25rem + 0vw, 1.25rem);
 $font-size-lg: clamp(1.5rem, 1.4458rem + 0.2709vw, 1.7675rem);
 $font-size-xl: clamp(1.8rem, 1.6584rem + 0.7081vw, 2.4992rem);
@@ -26,10 +27,14 @@ $font-size-4xl: clamp(3.1104rem, 2.3093rem + 4.0054vw, 7.0657rem);
 *{
     box-sizing: border-box;
     transition: .2s all;
+    @apply font-text;
 }
 
 
 body{
     @apply bg-dark text-light font-title m-0 p-0 flex flex-col min-h-[100vh]
 }
+
+
+
 

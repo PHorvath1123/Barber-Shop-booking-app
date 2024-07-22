@@ -5,6 +5,7 @@
 * {
   box-sizing: border-box;
   transition: 0.2s all;
+  @apply font-text;
 }
 
 body {
