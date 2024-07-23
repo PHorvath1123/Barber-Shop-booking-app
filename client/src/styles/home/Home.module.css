@@ -1,0 +1,7 @@
+.heroContainer {
+  background-image: url(../../../public/background.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  @apply h-[100vh];
+}/*# sourceMappingURL=Home.module.css.map */

@@ -73,14 +73,14 @@ export default function Navbar(){
 
     return(
         <header>
-            <nav className="flex justify-end gap-4 font-text uppercase text-xs mt-5">
+            <nav className="flex justify-end gap-4 font-text uppercase text-sm mt-5">
                 {isMobile 
                     ?  <IconButton 
                             onClick={handleDrawerToggle} 
                             sx={{color: '#D9D9D9',':hover': {color: '#EF6950'}}}>
                             <MenuIcon/>
                         </IconButton>
-                    :   <div className="flex gap-5 mr-6">
+                    :   <div className="flex gap-4 mr-[1rem] mt-[1rem] md:mr-[5rem] md:gap-8 md:font-bold">
                             {['Home', 'Appointment', 'Pricing'].map(menuItem =>{
                                 return(
                                     <Link 
@@ -92,7 +92,6 @@ export default function Navbar(){
                                     </Link>
                                 )
                             })}
-
                             {['Services', 'Barbers', 'Contact'].map(menuItem =>{
                                 return(
                                     <Link 
