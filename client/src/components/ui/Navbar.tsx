@@ -73,14 +73,14 @@ export default function Navbar(){
 
     return(
         <header>
-            <nav className="flex justify-end gap-4 font-text uppercase text-sm mt-5">
+            <nav className="flex justify-end gap-4 font-text uppercase text-sm pt-5 mb-[5rem]">
                 {isMobile 
                     ?  <IconButton 
                             onClick={handleDrawerToggle} 
                             sx={{color: '#D9D9D9',':hover': {color: '#EF6950'}}}>
                             <MenuIcon/>
                         </IconButton>
-                    :   <div className="flex gap-4 mr-[1rem] mt-[1rem] md:mr-[5rem] md:gap-8 md:font-bold">
+                    :   <div className="flex gap-4 pr-[1rem] pt-[1rem] md:pr-[5rem] md:gap-8 md:font-bold">
                             {['Home', 'Appointment', 'Pricing'].map(menuItem =>{
                                 return(
                                     <Link 

@@ -1,7 +1,41 @@
+// Hero
+
 .heroContainer{
-    background-image: url(../../../public/background.png);
+    background-image: url(/background.png);
     background-position: center;
     background-repeat: no-repeat;
-    background-size: cover;
-    @apply h-[100vh]
+    background-size: auto;
+    background-attachment: fixed;
+    @apply h-[100vh] 
 }
+
+.heroInner{
+    @apply flex flex-col items-center mx-[1rem] relative top-[-70px] sm:top-[-40px] 
+}
+
+
+.logo{
+    @apply w-[50vw] sm:w-[300px] md:w-[320px] 
+}
+
+.titleContainer{
+   @apply  flex gap-[4rem] justify-between items-center my-3 xl:w-[63vw]
+}
+
+
+.redLabels{
+    @apply hidden;
+
+    @screen md{
+        @apply  h-[40px] w-[100px] px-[.6rem] py-[.1rem];
+        @apply bg-action  flex justify-center items-center;
+        @apply tracking-[.5rem] uppercase text-xs;
+    }
+
+    @screen lg{
+        @apply w-[150px]
+    }
+}
+
+// Service
+
