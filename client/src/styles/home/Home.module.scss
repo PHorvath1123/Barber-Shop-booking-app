@@ -6,7 +6,7 @@
     background-repeat: no-repeat;
     background-size: auto;
     background-attachment: fixed;
-    @apply h-[100vh] 
+    @apply max-h-[110vh]
 }
 
 .heroInner{
@@ -28,7 +28,7 @@
 
     @screen md{
         @apply  h-[40px] w-[100px] px-[.6rem] py-[.1rem];
-        @apply bg-action  flex justify-center items-center;
+        @apply bg-action flex justify-center items-center;
         @apply tracking-[.5rem] uppercase text-xs;
     }
 
@@ -38,4 +38,55 @@
 }
 
 // Service
+
+.serviceContainer{
+    @apply flex flex-col items-center justify-center mt-5
+}
+
+.bg{
+    @apply w-[60vw] h-auto;
+    
+    @screen md{
+        @apply max-w-[50vw] mr-10
+    }
+}
+
+.serviceTitle{
+    @apply bg-action text-center flex items-center justify-center relative top-[-30px];
+    @apply min-w-[30vw] h-[5vh] px-10;
+    @apply font-title text-sm uppercase font-bold;
+
+    @screen md{
+        @apply text-lg
+    }
+}
+
+.serviceOptionsContainer{
+    @apply flex flex-wrap flex-auto w-[90vw] gap-8 justify-center mt-[2rem] mb-[10rem];
+
+    @screen md{
+        @apply max-w-[70vw] gap-[3rem] mt-[5rem]
+    }
+
+    .serviceCard{
+        @apply w-[40vw] flex flex-col;
+        
+        @screen md{
+            @apply max-w-[200px]
+        }
+    }
+    
+    .serviceNumber{
+        @apply bg-action w-[5ch] h-[5ch] flex justify-center items-center mb-4 text-md
+    }
+    
+    .serviceName{
+        @apply uppercase font-bold text-xs mb-4;
+
+        @screen md{
+            @apply text-md
+        }
+    }
+}
+
 
