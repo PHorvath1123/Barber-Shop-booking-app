@@ -4,11 +4,11 @@ import ServiceBackground from '/barber_shop_scene.png'
 export default function Services(){
     
     return(
-        <div className={HomeStyle.serviceContainer}>
+        <section id='Services' className={HomeStyle.serviceContainer}>
             <div className='flex justify-end w-[100vw]'>
                 <img src={ServiceBackground} alt="Service title background" className={HomeStyle.bg}/>
             </div>
-            <section id='Services' className={HomeStyle.serviceTitle}>Barber Services</section>
+            <div className={HomeStyle.serviceTitle}>Barber Services</div>
             <div className={HomeStyle.serviceOptionsContainer}>
                 <div className={HomeStyle.serviceCard}>
                     <div className={HomeStyle.serviceNumber}>1</div>
@@ -30,9 +30,7 @@ export default function Services(){
                     <div className={HomeStyle.serviceName}>Kids' Haircut</div>
                     <p>Our barbers are great with kids, providing fun and stylish haircuts in a comfortable environment. Perfect for children of all ages.</p>
                 </div>
-                
             </div>
-        </div>
-        
+        </section>
     );
 };

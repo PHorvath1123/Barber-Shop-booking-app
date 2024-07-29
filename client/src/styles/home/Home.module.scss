@@ -62,7 +62,7 @@
 }
 
 .serviceOptionsContainer{
-    @apply flex flex-wrap flex-auto w-[90vw] gap-8 justify-center mt-[2rem] mb-[10rem];
+    @apply flex flex-wrap flex-auto w-[90vw] gap-8 justify-center mt-[2rem] mb-[7rem];
 
     @screen md{
         @apply max-w-[70vw] gap-[3rem] mt-[5rem]
@@ -89,4 +89,38 @@
     }
 }
 
+// Meet our Barbers
 
+.titleLogo{
+    @apply w-[35vw];
+    
+    @screen sm{
+        @apply max-w-[30vw]
+    }
+
+    @screen md{
+        @apply max-w-[200px]
+    }
+}
+
+.barberTitle{
+    @apply absolute text-md font-title uppercase font-bold text-center w-[100vw];
+
+    @screen md{
+        @apply text-lg
+    }
+}
+
+.BarbersCt{
+    @apply flex flex-wrap gap-10 justify-center mt-[3rem] w-[85vw] relative;
+
+    @screen md{
+        @apply w-[65vw];
+    }
+
+    .barberInnerCt{
+        @apply flex flex-col items-center py-3 gap-1
+    }
+ }
+
+ 
