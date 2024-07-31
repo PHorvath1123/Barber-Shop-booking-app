@@ -8,7 +8,7 @@ type Barber = {
 
 export const useFetchBarbersToHome = () => {
     
-    const [barbers, setBarbers] = useState<[]>([]);
+    const [barbers, setBarbers] = useState<Barber[]>([]);
     
     const getBarbers = async () => {
         try{
@@ -17,7 +17,7 @@ export const useFetchBarbersToHome = () => {
             setBarbers(data);
         }
         catch(err: any){
-            console.error(err);
+            console.error('Failed to fetch barbers:', err);
         }
      };
 
