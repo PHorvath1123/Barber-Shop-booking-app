@@ -28,6 +28,7 @@ export const getBarbersFromDB = async (req: Request, res: Response) => {
     });
 
     res.json(barbers);
+    
   }
   catch(error){
     console.error('Error getting barbers:', error);

@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 
 type Barber = {
-    photo: string,
     name: string,
-    title: string
+    title: string,
+    photo: string
 };
 
 export const useFetchBarbersToHome = () => {
@@ -12,11 +12,15 @@ export const useFetchBarbersToHome = () => {
     
     const getBarbers = async () => {
         try{
-            const request = await fetch('/getBarbersToHome');
-            const data = await request.json();
+            const response = await fetch('/api/getBarbersToHome');
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            const data = await response.json();
             setBarbers(data);
         }
-        catch(err: any){
+        catch(err){
             console.error('Failed to fetch barbers:', err);
         }
      };
