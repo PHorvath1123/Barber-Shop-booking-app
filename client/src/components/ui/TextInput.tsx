@@ -1,7 +1,8 @@
 import TextField from '@mui/material/TextField';
 
 type TextFieldProps  = {
-    label: string
+    label: string,
+    name: string,
 };
 
 export default function TextInput(props: TextFieldProps){
@@ -12,6 +13,7 @@ export default function TextInput(props: TextFieldProps){
           label={props.label}
           multiline
           required
+          name={props.name}
           type='text'
           maxRows={4}
           variant="standard"
