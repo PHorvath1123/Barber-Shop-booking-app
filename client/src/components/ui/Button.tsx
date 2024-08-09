@@ -1,7 +1,8 @@
 import Button from '@mui/material/Button';
 
 type ButtonProps = {
-    text: string | number
+    text: string | number,
+    type?: 'submit' | 'reset' | 'button'
 };
 
 export default function CustomButton(props: ButtonProps){
@@ -17,8 +18,14 @@ export default function CustomButton(props: ButtonProps){
                 ":hover":{
                     backgroundColor: '#c9371d',
                 },
+                '@media (min-width:768px)':{
+                    height: '6ch',
+                    width: '25ch'
+                },
             }} 
-            variant='contained'>
+            variant='contained'
+            type={props.type}
+        >
             {props.text}
         </Button>
     );
