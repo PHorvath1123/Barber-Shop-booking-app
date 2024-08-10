@@ -21,7 +21,8 @@
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.24.1",
     "react-router-hash-link": "^2.4.3",
-    "styled-components": "^6.1.12"
+    "styled-components": "^6.1.12",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@types/react": "^18.3.3",
