@@ -3,7 +3,8 @@ import TextField from '@mui/material/TextField';
 type TextFieldProps  = {
     label: string,
     name: string,
-    onChange: React.ChangeEventHandler<HTMLInputElement>
+    onChange: React.ChangeEventHandler<HTMLInputElement>,
+    value: string | number
 };
 
 export default function TextInput(props: TextFieldProps){
@@ -17,6 +18,7 @@ export default function TextInput(props: TextFieldProps){
           onChange={props.onChange}
           name={props.name}
           type='text'
+          value={props.value}
           maxRows={4}
           variant="standard"
           sx={{
