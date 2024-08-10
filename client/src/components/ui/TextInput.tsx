@@ -3,6 +3,7 @@ import TextField from '@mui/material/TextField';
 type TextFieldProps  = {
     label: string,
     name: string,
+    onChange: React.ChangeEventHandler<HTMLInputElement>
 };
 
 export default function TextInput(props: TextFieldProps){
@@ -13,11 +14,13 @@ export default function TextInput(props: TextFieldProps){
           label={props.label}
           multiline
           required
+          onChange={props.onChange}
           name={props.name}
           type='text'
           maxRows={4}
           variant="standard"
           sx={{
+            width: '100%',
             fontFamily: 'Roboto',
             '.MuiInput-underline:before': {
               borderBottomColor: '#D9D9D9', 
