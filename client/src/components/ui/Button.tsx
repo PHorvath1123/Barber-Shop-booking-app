@@ -2,7 +2,8 @@ import Button from '@mui/material/Button';
 
 type ButtonProps = {
     text: string | number,
-    type?: 'submit' | 'reset' | 'button'
+    type?: 'submit' | 'reset' | 'button',
+    onClick: React.MouseEventHandler<HTMLButtonElement> 
 };
 
 export default function CustomButton(props: ButtonProps){
@@ -25,6 +26,7 @@ export default function CustomButton(props: ButtonProps){
             }} 
             variant='contained'
             type={props.type}
+            onClick={props.onClick}
         >
             {props.text}
         </Button>
