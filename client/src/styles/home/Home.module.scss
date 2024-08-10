@@ -1,3 +1,19 @@
+@mixin title{
+    @apply text-md font-title uppercase font-bold text-center w-[100vw];
+
+    @screen md{
+        @apply text-lg
+    }
+}
+
+@mixin smallText{
+    @apply text-center w-[80vw] mt-[3rem] italic text-sm;
+
+    @screen md{
+        @apply w-[65ch]
+    }
+}
+
 // Hero
 
 .heroContainer{
@@ -104,11 +120,12 @@
 }
 
 .barberTitle{
-    @apply absolute text-md font-title uppercase font-bold text-center w-[100vw];
+    @include title;
+    @apply absolute
+}
 
-    @screen md{
-        @apply text-lg
-    }
+.barberText{
+    @include smallText
 }
 
 .BarbersCt{
@@ -123,4 +140,73 @@
     }
  }
 
- 
+//Contact Information
+
+.contactTitleCt{
+    @apply flex flex-col items-center justify-center;
+
+    .contactTitle{
+        @include title
+    }
+    
+    .contactText{
+        @include smallText;
+        @apply mb-[2rem];
+        @screen md{
+            @apply w-[40ch]
+        }
+        
+    }
+}
+
+.contactBg{
+    @apply hidden;
+
+    @screen lg{
+        @apply absolute ml-[1rem] left-0 top-[30px] w-[25vw] inline -z-10
+    }
+}
+
+.circle{
+    clip-path: circle(50% at 50% 50%);
+    @apply min-w-[40px] min-h-[40px] flex items-center justify-center bg-action
+}
+
+.formAndInfoOuterCt{
+    @apply flex flex-col items-center gap-5;
+
+    @screen lg{
+        @apply flex flex-row justify-between relative;
+        @apply w-[55vw] right-[-100px] gap-[8rem];
+
+    }
+
+    .form{
+        @apply flex flex-col gap-[2.3rem] w-[80vw] items-center mb-[3rem];
+        
+        @screen md{
+            @apply max-w-[30vw]
+        }
+    };
+
+    .infoList{
+        @apply flex flex-col w-[80vw] gap-[2rem] ;
+
+        @screen sm{
+            @apply ml-[50vw]
+        };
+
+        @screen md{
+            @apply ml-[50vw]
+        }
+
+        @screen lg{
+            @apply h-[100%] gap-[4rem] max-w-[30vw] ml-0
+        }
+    }
+}
+
+.error{
+    @apply text-xs text-red-700 relative top-[-30px]
+}
+

@@ -102,11 +102,21 @@
 }
 
 .barberTitle {
-  @apply absolute text-md font-title uppercase font-bold text-center w-[100vw];
+  @apply text-md font-title uppercase font-bold text-center w-[100vw];
+  @apply absolute;
 }
 @screen md {
   .barberTitle {
     @apply text-lg;
+  }
+}
+
+.barberText {
+  @apply text-center w-[80vw] mt-[3rem] italic text-sm;
+}
+@screen md {
+  .barberText {
+    @apply w-[65ch];
   }
 }
 
@@ -120,4 +130,85 @@
 }
 .BarbersCt .barberInnerCt {
   @apply flex flex-col items-center py-3 gap-1;
+}
+
+.contactTitleCt {
+  @apply flex flex-col items-center justify-center;
+}
+.contactTitleCt .contactTitle {
+  @apply text-md font-title uppercase font-bold text-center w-[100vw];
+}
+@screen md {
+  .contactTitleCt .contactTitle {
+    @apply text-lg;
+  }
+}
+.contactTitleCt .contactText {
+  @apply text-center w-[80vw] mt-[3rem] italic text-sm;
+  @apply mb-[2rem];
+}
+@screen md {
+  .contactTitleCt .contactText {
+    @apply w-[65ch];
+  }
+}
+@screen md {
+  .contactTitleCt .contactText {
+    @apply w-[40ch];
+  }
+}
+
+.contactBg {
+  @apply hidden;
+}
+@screen lg {
+  .contactBg {
+    @apply absolute ml-[1rem] left-0 top-[30px] w-[25vw] inline -z-10;
+  }
+}
+
+.circle {
+  -webkit-clip-path: circle(50% at 50% 50%);
+          clip-path: circle(50% at 50% 50%);
+  @apply min-w-[40px] min-h-[40px] flex items-center justify-center bg-action;
+}
+
+.formAndInfoOuterCt {
+  @apply flex flex-col items-center gap-5;
+}
+@screen lg {
+  .formAndInfoOuterCt {
+    @apply flex flex-row justify-between relative;
+    @apply w-[55vw] right-[-100px] gap-[8rem];
+  }
+}
+.formAndInfoOuterCt .form {
+  @apply flex flex-col gap-[2.3rem] w-[80vw] items-center mb-[3rem];
+}
+@screen md {
+  .formAndInfoOuterCt .form {
+    @apply max-w-[30vw];
+  }
+}
+.formAndInfoOuterCt .infoList {
+  @apply flex flex-col w-[80vw] gap-[2rem];
+}
+@screen sm {
+  .formAndInfoOuterCt .infoList {
+    @apply ml-[50vw];
+  }
+}
+@screen md {
+  .formAndInfoOuterCt .infoList {
+    @apply ml-[50vw];
+  }
+}
+@screen lg {
+  .formAndInfoOuterCt .infoList {
+    @apply h-[100%] gap-[4rem] max-w-[30vw] ml-0;
+  }
+}
+
+.error {
+  @apply text-xs text-red-700 relative top-[-30px];
 }/*# sourceMappingURL=Home.module.css.map */
