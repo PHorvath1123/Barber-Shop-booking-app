@@ -10,6 +10,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import QueryBuilderIcon from '@mui/icons-material/QueryBuilder';
 import { useState } from 'react';
 import { z } from "zod";
+import { usePostMessage } from '../hook/usePostMessage';
 
 
 const schema = z.object({
@@ -19,7 +20,7 @@ const schema = z.object({
     isChecked: z.boolean()
 });
 
-type formData = z.infer<typeof schema>;
+export type formData = z.infer<typeof schema>;
 
 type ValidationError = {
     _errors: string[],
@@ -35,6 +36,9 @@ export default function Contact(){
         isChecked:false});
 
     const [validationError, setValidationError] = useState<ValidationError>();
+    
+    const {sendMessage, isSuccessful} = usePostMessage();
+   
 
     const handleSubmit =(e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -46,9 +50,7 @@ export default function Contact(){
             setValidationError(errors);
         }
         else {
-            result.data
-            //!!:
-            console.log(result.data);
+            sendMessage(result.data)
             setMessageFormData({name:'', email:'', message:'', isChecked:false});
             setValidationError({_errors:[]})
         }
