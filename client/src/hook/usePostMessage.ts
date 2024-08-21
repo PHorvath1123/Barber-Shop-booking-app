@@ -1,27 +1,34 @@
-import {useState} from 'react'
-import type {formData} from '../components/Contact'
+import { useState } from "react";
+import type { formData } from "../components/Contact";
 
-export const usePostMessage = () =>{
+export const usePostMessage = () => {
+  const [isSuccessful, setIsSuccessful] = useState<boolean>(false);
 
-    const [isSuccessful, setIsSuccessful] = useState<boolean>(false);
-
-    const sendMessage = async({name, email, message}: formData) =>{
-
-        try{
-            const response = await fetch('/api/postMessage', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json'},
-                body: JSON.stringify({name, message, email})
-            });
-
-            if(response.ok){
-                setIsSuccessful(true);
-            }
-           
-        }catch(error){
-            console.error(`Error message: ${error}`);
-        };
+  const sendMessage = async ({name, email, message}: formData) => {
+    const object = {
+      name,
+      email,
+      message,
+      access_key: "2a31ac37-fd2d-440d-abf3-234d231629fd",
     };
+    const json = JSON.stringify(object);
 
-    return {isSuccessful, sendMessage};       
+    const res = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: json,
+    }).then((res) => res.json());
+
+    if (res.success) {
+      setIsSuccessful(true);
+    }
+    else{
+      console.error('Failed to send message')
+    }
+  };
+
+  return { isSuccessful, sendMessage };
 };

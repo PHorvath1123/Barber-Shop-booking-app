@@ -37,10 +37,10 @@ export default function Contact(){
 
     const [validationError, setValidationError] = useState<ValidationError>();
     
-    const {sendMessage, isSuccessful} = usePostMessage();
+    const {sendMessage} = usePostMessage();
    
 
-    const handleSubmit =(e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit =(e: React.SyntheticEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         const result = schema.safeParse(messageFormData);
@@ -84,6 +84,7 @@ export default function Contact(){
                         minRows={3}
                         placeholder="Your message..."
                         variant="outlined"
+                        name='message'
                         required
                         onChange={(e) => setMessageFormData((f) => ({...f, message: e.target.value}))}
                         value={messageFormData.message}
