@@ -94,13 +94,13 @@ export default function Navbar(){
                             })}
                             {['Services', 'Barbers', 'Contact'].map(menuItem =>{
                                 return(
-                                    <Link 
-                                        key={menuItem} 
+                                    <HashLink 
                                         to={`/#${menuItem}`} 
+                                        key={menuItem} 
                                         onClick={handleDrawerClose} 
                                         className=  'hover:text-action'>
                                             {menuItem}
-                                    </Link>
+                                    </HashLink>
                                 )
                             })}
                         </div>
