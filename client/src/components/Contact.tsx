@@ -8,9 +8,10 @@ import PhoneAndroidIcon from '@mui/icons-material/PhoneAndroid';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import HomeIcon from '@mui/icons-material/Home';
 import QueryBuilderIcon from '@mui/icons-material/QueryBuilder';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { z } from "zod";
 import { usePostMessage } from '../hook/usePostMessage';
+import ContactModal from './ui/Modal';
 
 
 const schema = z.object({
@@ -36,14 +37,21 @@ export default function Contact(){
         isChecked:false});
 
     const [validationError, setValidationError] = useState<ValidationError>();
-    
-    const {sendMessage} = usePostMessage();
+    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+    const {sendMessage, isSuccessful, setIsSuccessful} = usePostMessage();
+
+    useEffect(() =>{
+        if(isSuccessful){
+            setIsModalOpen(true); // open the modal
+            setIsSuccessful(false); // reset the success boolean to trigger the side effect for the next messages.
+        };
+    },[isSuccessful]);
    
 
-    const handleSubmit =(e: React.SyntheticEvent<HTMLFormElement>) => {
+    const handleSubmit =(e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        const result = schema.safeParse(messageFormData);
+        const result = schema.safeParse(messageFormData); // return with an object with the successfully parsed data
 
         if(!result.success) {
             const errors = result.error.format();
@@ -51,13 +59,15 @@ export default function Contact(){
         }
         else {
             sendMessage(result.data)
-            setMessageFormData({name:'', email:'', message:'', isChecked:false});
-            setValidationError({_errors:[]})
+            setMessageFormData({name:'', email:'', message:'', isChecked:false}); // reset the form field values after the message sending
+            setValidationError({_errors:[]}) // reset the optionally error messages under the form fields
+            setIsModalOpen(false); // reset the modalOpen state to allow the modal to open for the next messages.
         }
     };
 
     return(
         <section className='relative flex flex-col items-center' id="Contact">
+            {isModalOpen && <ContactModal/>}
             <div className={HomeStyle.contactTitleCt}>
                 <div className={HomeStyle.contactTitle}><span className='text-action font-title'>Contact</span> Information</div>
                 <p className={HomeStyle.contactText}>Whether you have a question about our services, want to book an appointment, or just want to say hello, feel free to reach out to us.</p>
