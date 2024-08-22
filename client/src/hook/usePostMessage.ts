@@ -30,5 +30,5 @@ export const usePostMessage = () => {
     }
   };
 
-  return { isSuccessful, sendMessage };
+  return { isSuccessful, sendMessage, setIsSuccessful };
 };
