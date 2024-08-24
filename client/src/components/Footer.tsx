@@ -34,7 +34,6 @@ export default function Footer(){
                             <Link to='/Appointment'>Book appointment</Link>
                         </div>
                     </div>
-
                     <div id='footer-content-ct' className='mb-5'>
                         <div id='content-title'>Contact</div>
                         <ul>
@@ -43,11 +42,9 @@ export default function Footer(){
                             <li>123 Anywhere ST., Any City, ST 12345</li>
                         </ul>
                     </div>
-
                     <div className='footer-img'>
                         <img src={Logo} alt="Logo" className='w-[100px]' />
                     </div>
-
                     <div id='footer-content-ct' className='mb-5'>
                         <div id='content-title'>Follow us</div>
                         <ul className='footer-icons'>
@@ -68,7 +65,6 @@ export default function Footer(){
                             </li>
                         </ul>
                     </div>
-
                     <div id='footer-content-ct' className='mb-5'>
                         <div id='content-title'>Legal Information</div>
                         <ul className='cursor-pointer'>
@@ -88,7 +84,6 @@ export default function Footer(){
                         <img src={BarberIcon} alt="Barber icon" className='w-[200px]'/>
                     </div>
                 </div>
-                
             </div>
             <div>PH Design / Prestige Cuts 2023 &copy; All rights reserved</div>
         </footer>
