@@ -4,11 +4,11 @@
   background-repeat: no-repeat;
   background-size: auto;
   background-attachment: fixed;
-  @apply max-h-[110vh];
+  @apply max-h-[110vh] overflow-x-hidden;
 }
 
 .heroInner {
-  @apply flex flex-col items-center mx-[1rem] relative top-[-70px] sm:top-[-40px];
+  @apply flex flex-col items-center mx-[1rem] relative top-[-70px] sm:top-[-40px] overflow-x-hidden;
 }
 
 .logo {
@@ -36,7 +36,7 @@
 }
 
 .serviceContainer {
-  @apply flex flex-col items-center justify-center mt-5;
+  @apply flex flex-col items-center justify-center mt-5 overflow-x-hidden;
 }
 
 .bg {

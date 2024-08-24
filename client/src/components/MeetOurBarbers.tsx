@@ -7,7 +7,7 @@ export default function MeetOurBarbers(){
     const barbers = useFetchBarbersToHome();
     
     return(
-        <section id='Barbers' className='flex flex-col items-center mb-[3rem]'>
+        <section id='Barbers' className='flex flex-col items-center mb-[3rem] overflow-x-hidden '>
             <div className='flex flex-col justify-center items-center relative'>
                 <img className={HomeStyle.titleLogo} src={BarbersTitleLogo} alt="Meet our barbers title logo"/>
                 <div className={HomeStyle.barberTitle}>Meet Our <span className='text-action font-title'>Barbers</span></div>

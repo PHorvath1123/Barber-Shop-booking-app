@@ -66,7 +66,7 @@ export default function Contact(){
     };
 
     return(
-        <section className='relative flex flex-col items-center' id="Contact">
+        <section className='relative flex flex-col items-center overflow-hidden ' id="Contact">
             {isModalOpen && <ContactModal/>}
             <div className={HomeStyle.contactTitleCt}>
                 <div className={HomeStyle.contactTitle}><span className='text-action font-title'>Contact</span> Information</div>
