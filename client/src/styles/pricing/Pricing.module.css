@@ -1,0 +1,29 @@
+.outerCt {
+  @apply flex flex-col items-center mx-[2rem] gap-[3rem];
+}
+
+.categoryCt {
+  @apply flex flex-col gap-2 w-[85vw];
+}
+@screen md {
+  .categoryCt {
+    @apply w-[40vw];
+  }
+}
+
+.categoryTitle {
+  @apply text-md font-title mb-[2rem] w-fit relative font-title;
+}
+
+.categoryTitle::after {
+  content: "";
+  @apply border border-action border-dashed w-[100%] absolute left-[20px] top-[30px];
+}
+
+.priceList {
+  @apply flex flex-col;
+}
+
+.listItem {
+  @apply flex flex-row justify-between border-b border-dashed mb-[1rem];
+}/*# sourceMappingURL=Pricing.module.css.map */
