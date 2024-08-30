@@ -1,5 +1,6 @@
 import PricingStyle from '../styles/pricing/Pricing.module.css';
 import {useQuery} from '@tanstack/react-query';
+import Skeleton from '@mui/material/Skeleton';
 
 type PriceType = {
     title: string;
@@ -19,9 +20,9 @@ export default function PriceList(){
         return data;
     };
 
-    const {data, isError} = useQuery<PriceListType[]>({ 
+    const {data, isError, isLoading} = useQuery<PriceListType[]>({ 
         queryKey: ['priceList'], 
-        queryFn: () => fetchPrice(),
+        queryFn: () => fetchPrice()
     });
 
     {(isError) && <div>An error has occured.</div>}
@@ -30,6 +31,18 @@ export default function PriceList(){
         <div>
             <h1 className='text-center text-lg font-title uppercase mb-[4rem]'>Pricing List</h1>
             <div className={PricingStyle.outerCt}>
+                {isLoading 
+                && Array.from({length: 10}).map((__,i) => {
+                    return(
+                        <Skeleton 
+                            sx={{
+                                width: '40vw',
+                                height: '30px',
+                                backgroundColor: 'rgba(239, 105, 80, .05)'
+                            }} 
+                            key={i} 
+                            animation="pulse">
+                        </Skeleton>)})}
                 {data?.map((category: PriceListType) => {
                     return(
                         <div key={category.category} className={PricingStyle.categoryCt}>
