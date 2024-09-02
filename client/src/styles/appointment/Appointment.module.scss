@@ -1,0 +1,53 @@
+@mixin title{
+    @apply text-md font-title uppercase font-bold text-center w-[100vw];
+
+    @screen md{
+        @apply text-lg
+    }
+}
+
+@mixin smallText{
+    @apply text-center w-[80vw] mt-[3rem] italic text-sm;
+
+    @screen md{
+        @apply w-[65ch]
+    }
+}
+
+body{
+    background-image: url(../../../public/background_2.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-attachment: fixed;
+}
+
+.barberTitle{
+    @include title
+}
+
+.barberInnerCt{
+    @apply flex justify-center h-fit gap-[2rem] mx-[.7rem] mt-[3rem];
+
+
+    .photoCt{
+       @apply flex flex-col items-center justify-between h-fit gap-[1.5rem];
+
+       img{
+        @apply w-[26vw] sm:max-w-[18vw] md:max-w-[130px]
+       }
+    }
+
+    .introductionCt{
+        @apply flex flex-col items-start justify-between w-[50%] md:w-fit gap-[1.5rem];
+    
+        .ratingCt{
+            @apply flex flex-col 
+        }
+
+        .introduction{
+            @apply text-justify hyphens-auto text-xs md:w-[55ch] md:text-sm tracking-widest sm:leading-[1.7rem]
+        }
+    }
+}
+
