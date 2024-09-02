@@ -1,12 +1,14 @@
-import { Link } from "react-router-dom";
+import Footer from "../components/Footer";
+import Navbar from "../components/ui/Navbar";
+import BarberSelector from "../components/BarberSelector";
 
-export default function Appointment(){
-
-    return(
+export default function Appointment() {
+  
+    return (
         <>
-            <div>Appointment, HI</div>
-            <Link to={'/'}>Back to home</Link>
+        <Navbar></Navbar>
+        <BarberSelector></BarberSelector>
+        <Footer></Footer>
         </>
-        
     );
-};
+}
