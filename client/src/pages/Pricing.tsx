@@ -13,7 +13,6 @@ export default function Pricing(){
                 <PriceList></PriceList>
             </QueryClientProvider>
             <Footer></Footer>
-           
         </>
     );
 };
