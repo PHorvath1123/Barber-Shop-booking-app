@@ -3,7 +3,9 @@ import { useEffect, useState } from "react";
 type Barber = {
     name: string,
     title: string,
-    photo: string
+    photo: string,
+    rating: number,
+    introduction: string
 };
 
 export const useFetchBarbersToHome = () => {

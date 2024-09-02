@@ -4,7 +4,9 @@ import { Request, Response } from 'express';
 type BarberResponse = {
   name: string,
   title: string,
-  photo: string
+  photo: string,
+  rating: number,
+  introduction: string
 };
 
 export const getBarbersFromDB = async (req: Request, res: Response) => {
@@ -18,13 +20,7 @@ export const getBarbersFromDB = async (req: Request, res: Response) => {
     barbersSnapshot.forEach((doc: any) => {
 
       const data = doc.data();
-      const barber: BarberResponse = {
-        name: data.name,
-        title: data.title,
-        photo: data.photo
-      }
-
-      barbers.push(barber);
+      barbers.push(data);
     });
 
     res.json(barbers);
@@ -34,5 +30,4 @@ export const getBarbersFromDB = async (req: Request, res: Response) => {
     console.error('Error getting barbers:', error);
     res.status(500).send('Internal Server Error');
   };
-   
 };
