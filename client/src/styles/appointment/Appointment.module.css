@@ -1,4 +1,4 @@
-body {
+.bg {
   background-image: url(../../../public/background_2.png);
   background-position: center;
   background-repeat: no-repeat;
@@ -32,4 +32,4 @@ body {
 }
 .barberInnerCt .introductionCt .introduction {
   @apply text-justify hyphens-auto text-xs md:w-[55ch] md:text-sm tracking-widest sm:leading-[1.7rem];
-}/*# sourceMappingURL=Appointment.Module.css.map */
+}/*# sourceMappingURL=Appointment.module.css.map */
