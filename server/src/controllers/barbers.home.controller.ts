@@ -6,7 +6,8 @@ type BarberResponse = {
   title: string,
   photo: string,
   rating: number,
-  introduction: string
+  introduction: string,
+  id: string
 };
 
 export const getBarbersFromDB = async (req: Request, res: Response) => {
@@ -20,7 +21,11 @@ export const getBarbersFromDB = async (req: Request, res: Response) => {
     barbersSnapshot.forEach((doc: any) => {
 
       const data = doc.data();
-      barbers.push(data);
+      const barber = {
+        ...data,
+        id: doc.id,
+      }
+      barbers.push(barber);
     });
 
     res.json(barbers);

@@ -5,7 +5,8 @@ type Barber = {
     title: string,
     photo: string,
     rating: number,
-    introduction: string
+    introduction: string,
+    id: string
 };
 
 export const useFetchBarbersToHome = () => {
@@ -20,7 +21,7 @@ export const useFetchBarbersToHome = () => {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
             const data = await response.json();
-            setBarbers(data);
+            setBarbers(data);  
         }
         catch(err){
             console.error('Failed to fetch barbers:', err);
