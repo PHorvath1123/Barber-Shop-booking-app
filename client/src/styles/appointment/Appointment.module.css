@@ -32,4 +32,9 @@
 }
 .barberInnerCt .introductionCt .introduction {
   @apply text-justify hyphens-auto text-xs md:w-[55ch] md:text-sm tracking-widest sm:leading-[1.7rem];
+}
+
+.choosedBarberImg {
+  box-shadow: 2px 1px 13px -1px rgba(239, 105, 80, 0.5);
+  @apply w-[26vw] sm:max-w-[18vw] md:max-w-[130px];
 }/*# sourceMappingURL=Appointment.module.css.map */
