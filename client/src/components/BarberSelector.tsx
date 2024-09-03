@@ -4,15 +4,19 @@ import Rating from "@mui/material/Rating";
 import Button from "../components/ui/Button";
 import { useState } from "react";
 
-export default function BarberSelector() {
+type SelectorPropsType = {
+  selectedOption: string,
+  setSelectedOption: React.Dispatch<React.SetStateAction<string>>
+}
+
+export default function BarberSelector({selectedOption, setSelectedOption}:SelectorPropsType) {
   const [choosedBarber, setChoosedBarber] = useState<boolean>(false);
-  const [barberId, setBarberId] = useState<string>("");
 
   const barbers = useFetchBarbersToHome();
 
-  const renderCalendarForSelectedBarber = (id: string) => {
+  const renderCalendarAndSelectedBarber = (id: string) => {
     setChoosedBarber(true);
-    setBarberId(id);
+    setSelectedOption(id);
   };
 
   const renderBarberList = () => {
@@ -49,7 +53,7 @@ export default function BarberSelector() {
               />
             </div>
             <Button
-              onClick={() => renderCalendarForSelectedBarber(barber.id)}
+              onClick={() => renderCalendarAndSelectedBarber(barber.id)}
               text={"View Availability"}
             />
           </div>
@@ -84,7 +88,7 @@ export default function BarberSelector() {
         Choose a <span className="text-action font-title">barber</span>
       </h1>
       <div className="flex flex-col items-center justify-center gap-5">
-        {!choosedBarber ? renderBarberList() : renderChoosedBarber(barberId)}
+        {!choosedBarber ? renderBarberList() : renderChoosedBarber(selectedOption)}
       </div>
     </section>
   );
