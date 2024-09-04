@@ -5,6 +5,8 @@ import { DayCalendarSkeleton } from "@mui/x-date-pickers/DayCalendarSkeleton";
 import dayjs, { Dayjs } from "dayjs";
 import { useState } from "react";
 import updateLocale from "dayjs/plugin/updateLocale";
+import {useGetWorkingTime} from "../../hook/useGetWorkingTime";
+
 
 const pickersDayStyle = {
   sx: {
@@ -37,6 +39,11 @@ export default function Calendar() {
   console.log(value);
   
   const highlightedDays = ["Monday", "Friday", "Wednesday"];
+
+  const {data: days, error, isLoading, isError} = useGetWorkingTime(barberId);
+
+  console.log(days);
+  
 
   // set to Monday for the first day of the week
   dayjs.extend(updateLocale);
