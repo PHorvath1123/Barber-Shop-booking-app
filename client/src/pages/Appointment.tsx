@@ -18,7 +18,7 @@ export default function Appointment() {
         selectedOption={barberId}
         setSelectedOption={setBarberId}
       />
-      {!!barberId && (
+      {barberId && (
         <QueryClientProvider client={queryClient}>
           <Calendar selectedBarberId={barberId} />
         </QueryClientProvider>
