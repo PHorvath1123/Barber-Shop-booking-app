@@ -1,10 +1,10 @@
 import '../styles/main/index.css';
-import Logo from '../../public/logo.png';
+import Logo from '/logo.png';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import TwitterIcon from '@mui/icons-material/Twitter';
-import BarberIcon from '../../public/barber_icon.png';
-import QuoteBox from '../../public/quote_box.png'
+import BarberIcon from '/barber_icon.png';
+import QuoteBox from '/quote_box.png'
 import { HashLink } from "react-router-hash-link";
 import { Link } from "react-router-dom";
 
