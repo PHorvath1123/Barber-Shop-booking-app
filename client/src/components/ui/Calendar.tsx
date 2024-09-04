@@ -3,7 +3,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
 import { DayCalendarSkeleton } from "@mui/x-date-pickers/DayCalendarSkeleton";
 import dayjs, { Dayjs } from "dayjs";
-import { useState } from "react";
+import { useRef } from "react";
 import updateLocale from "dayjs/plugin/updateLocale";
 import {useGetWorkingTime} from "../../hook/useGetWorkingTime";
 
@@ -37,28 +37,25 @@ const commonColor = {
 };
 
 export default function Calendar({selectedBarberId}: CalendarProps) {
-  const [value, setValue] = useState<string>("")
-
-  console.log(value);
+  const pickedDateRef = useRef('');
+ 
+  // Fetch the working time from the database
+  const {data: availability, error, isLoading, isError} = useGetWorkingTime(selectedBarberId);
+  console.log(availability);
   
-  const highlightedDays = ["Monday", "Friday", "Wednesday"];
-
-  const {data: workingDays, error, isLoading, isError} = useGetWorkingTime(selectedBarberId);
-
-  console.log(workingDays);
-  
+  const workingDays: string[] = [];
+  availability?.map(days => {workingDays.push(days.day)})
 
   // set to Monday for the first day of the week
   dayjs.extend(updateLocale);
   dayjs.updateLocale("en", {
     weekStart: 1,
   });
-
   
  //Disables dates in the calendar that are not in the highlightedDays array.
   const shouldDisableDate = (date: Dayjs) => {
     const dayName = dayjs(date).format('dddd');
-    return !highlightedDays.includes(dayName);
+    return !workingDays.includes(dayName);
   };
 
   return (
@@ -72,7 +69,7 @@ export default function Calendar({selectedBarberId}: CalendarProps) {
             const dd = String(date.getDate()).padStart(2, "0");
             const mm = String(date.getMonth() + 1).padStart(2, "0");
             const yyyy = date.getFullYear();
-            setValue(`${yyyy}-${mm}-${dd}`);
+            pickedDateRef.current = `${yyyy}-${mm}-${dd}`
           }}
         renderLoading={() => <DayCalendarSkeleton />}
         shouldDisableDate={shouldDisableDate}
