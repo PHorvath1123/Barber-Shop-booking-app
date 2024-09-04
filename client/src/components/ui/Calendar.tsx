@@ -41,7 +41,6 @@ export default function Calendar({selectedBarberId}: CalendarProps) {
  
   // Fetch the working time from the database
   const {data: availability, error, isLoading, isError} = useGetWorkingTime(selectedBarberId);
-  console.log(availability);
   
   const workingDays: string[] = [];
   availability?.map(days => {workingDays.push(days.day)})
