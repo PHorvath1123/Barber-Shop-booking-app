@@ -1,5 +1,5 @@
 @mixin title{
-    @apply text-md font-title uppercase font-bold text-center w-[100vw];
+    @apply text-md font-title uppercase font-bold text-center w-[100vw] mt-[3rem] mb-[1rem];
 
     @screen md{
         @apply text-lg
@@ -26,7 +26,7 @@
     background-attachment: fixed;
 }
 
-.barberTitle{
+.title{
     @include title
 }
 
@@ -59,4 +59,3 @@
     box-shadow: 2px 1px 13px -1px rgba(239, 105, 80, 0.5);
     @include imageSize
 }
-

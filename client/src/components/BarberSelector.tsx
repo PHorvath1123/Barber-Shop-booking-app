@@ -68,7 +68,7 @@ export default function BarberSelector({selectedOption, setSelectedOption}:Selec
 
     return pickedBarber.map(barber => {
       return(
-        <div key={barber.id} className="flex flex-col items-center gap-3 mt-[3rem]">
+        <div key={barber.id} className="flex flex-col items-center gap-3 mt-[1rem]">
           <img 
             src={barber.photo} 
             alt={`Photo of ${barber.name}`} 
@@ -84,9 +84,9 @@ export default function BarberSelector({selectedOption, setSelectedOption}:Selec
 
   return (
     <section>
-      <h1 className={AppointmentStyle.barberTitle}>
+      <h2 className={AppointmentStyle.title}>
         Choose a <span className="text-action font-title">barber</span>
-      </h1>
+      </h2>
       <div className="flex flex-col items-center justify-center gap-5">
         {!choosedBarber ? renderBarberList() : renderChoosedBarber(selectedOption)}
       </div>

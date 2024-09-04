@@ -6,11 +6,11 @@
   background-attachment: fixed;
 }
 
-.barberTitle {
-  @apply text-md font-title uppercase font-bold text-center w-[100vw];
+.title {
+  @apply text-md font-title uppercase font-bold text-center w-[100vw] mt-[3rem] mb-[1rem];
 }
 @screen md {
-  .barberTitle {
+  .title {
     @apply text-lg;
   }
 }
