@@ -6,6 +6,7 @@ import dayjs, { Dayjs } from "dayjs";
 import { useRef } from "react";
 import updateLocale from "dayjs/plugin/updateLocale";
 import { useGetWorkingTime } from "../../hook/useGetWorkingTime";
+import AppointmentStyle from "../../styles/appointment/Appointment.module.css";
 
 type CalendarProps = {
   selectedBarberId: string;
@@ -69,42 +70,58 @@ export default function Calendar({ selectedBarberId }: CalendarProps) {
       {isError ? (
         <span>An error has occured: {error.message}</span>
       ) : (
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <DateCalendar
-            disablePast
-            loading={isLoading}
-            dayOfWeekFormatter={(weekday) => `${weekday.format("dd")}`}
-            onChange={(pickedDate) => {
-              const date = new Date(pickedDate);
-              const dd = String(date.getDate()).padStart(2, "0");
-              const mm = String(date.getMonth() + 1).padStart(2, "0");
-              const yyyy = date.getFullYear();
-              pickedDateRef.current = `${yyyy}-${mm}-${dd}`;
-            }}
-            renderLoading={() => <DayCalendarSkeleton />}
-            shouldDisableDate={shouldDisableDate}
-            sx={{
-              ".css-rhmlg1-MuiTypography-root-MuiDayCalendar-weekDayLabel": {
-                color: "#D9D9D9",
-              },
-            }}
-            slotProps={{
-              day: pickersDayStyle,
-              calendarHeader: {
-                sx: commonColor,
-              },
-              leftArrowIcon: {
-                sx: commonColor,
-              },
-              rightArrowIcon: {
-                sx: commonColor,
-              },
-              switchViewButton: {
-                sx: commonColor,
-              },
-            }}
-          ></DateCalendar>
-        </LocalizationProvider>
+        <>
+          <h2 className={AppointmentStyle.title}>
+            Choose a <span className="text-action font-title">day</span>
+          </h2>
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DateCalendar
+              disablePast
+              loading={isLoading}
+              dayOfWeekFormatter={(weekday) => `${weekday.format("dd")}`}
+              onChange={(pickedDate) => {
+                const date = new Date(pickedDate);
+                const dd = String(date.getDate()).padStart(2, "0");
+                const mm = String(date.getMonth() + 1).padStart(2, "0");
+                const yyyy = date.getFullYear();
+                pickedDateRef.current = `${yyyy}-${mm}-${dd}`;
+              }}
+              renderLoading={() => <DayCalendarSkeleton />}
+              shouldDisableDate={shouldDisableDate}
+              sx={{
+                ".css-rhmlg1-MuiTypography-root-MuiDayCalendar-weekDayLabel": {
+                  color: "#D9D9D9",
+                },
+                "&.MuiDateCalendar-root":{
+                  border: '1px solid #D9D9D9',
+                  borderRadius: '25px',
+                },
+              }}
+              slotProps={{
+                day: pickersDayStyle,
+                calendarHeader: {
+                  sx: commonColor,
+                },
+                leftArrowIcon: {
+                  sx: commonColor,
+                },
+                rightArrowIcon: {
+                  sx: commonColor,
+                },
+                switchViewButton: {
+                  sx: commonColor,
+                },
+                yearButton:{
+                  sx:{
+                    '&.MuiPickersYear-yearButton.Mui-selected':{
+                      backgroundColor: "#EF6950"
+                    }
+                  }
+                }
+              }}
+            ></DateCalendar>
+          </LocalizationProvider>
+        </>
       )}
     </>
   );
