@@ -7,6 +7,9 @@ import { useState } from "react";
 import updateLocale from "dayjs/plugin/updateLocale";
 import {useGetWorkingTime} from "../../hook/useGetWorkingTime";
 
+type CalendarProps = {
+  selectedBarberId: string
+};
 
 const pickersDayStyle = {
   sx: {
@@ -33,16 +36,16 @@ const commonColor = {
   color: "#D9D9D9"
 };
 
-export default function Calendar() {
+export default function Calendar({selectedBarberId}: CalendarProps) {
   const [value, setValue] = useState<string>("")
 
   console.log(value);
   
   const highlightedDays = ["Monday", "Friday", "Wednesday"];
 
-  const {data: days, error, isLoading, isError} = useGetWorkingTime(barberId);
+  const {data: workingDays, error, isLoading, isError} = useGetWorkingTime(selectedBarberId);
 
-  console.log(days);
+  console.log(workingDays);
   
 
   // set to Monday for the first day of the week
