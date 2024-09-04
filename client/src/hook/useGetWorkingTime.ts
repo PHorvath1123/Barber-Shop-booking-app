@@ -7,13 +7,14 @@ type daysType = {
 };
 
 const getDays = async (barberId: string): Promise<daysType[]> => {
-  const request = await fetch(`/api/getAvailabilities?barberId=${barberId}`);
+  const request = await fetch(`/api/getAvailabilities/${barberId}`);
   const result = await request.json();
 
   return result;
 };
 
 export const useGetWorkingTime = (barberId: string) => {
+    
   return useQuery({
     queryKey: ["availableDays", barberId],
     queryFn: () => getDays(barberId),
