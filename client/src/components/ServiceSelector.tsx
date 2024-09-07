@@ -1,21 +1,23 @@
 import AppointmentStyle from "../styles/appointment/Appointment.module.css";
 import { useState } from "react";
-
-import Button from "./ui/Button"
-
+import Button from "./ui/Button";
+import Modal from "./ui/Modal";
+import { useFetchServices } from "../hook/useFetchServices";
 
 export default function ServiceSelector() {
   const [service, setService] = useState<string>("");
-  const [open, setOpen] = useState<boolean>(false);
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [serviceCategory, setServiceCategory] = useState<string>("");
 
-  const handleClickOpen = ()=> {
-    setOpen(true);
+  const { data } = useFetchServices();
+
+  const handleClickOpen = (category: string) => {
+    setModalOpen(true);
+    setServiceCategory(category);
   };
 
-  const handleClose = (event: React.SyntheticEvent<unknown>, reason?: string) => {
-    if (reason !== "backdropClick") {
-      setOpen(false);
-    }
+  const handleClose = () => {
+    setModalOpen(false);
   };
 
   return (
@@ -24,7 +26,24 @@ export default function ServiceSelector() {
         Choose a <span className="text-action font-title">Service</span>
       </h2>
       <div className="flex flex-row justify-evenly">
-        <Button variant={"outlined"} onClick={handleClickOpen}>Extras</Button>
+        {data?.map((categories) => {
+          return (
+            <Button
+              key={categories.category}
+              variant={"outlined"}
+              onClick={() => handleClickOpen(categories.category)}
+            >
+              {categories.category}
+            </Button>
+          );
+        })}
+        <Modal
+          serviceCategory={serviceCategory}
+          onClose={handleClose}
+          open={modalOpen}
+          content={data}
+          type={"service"}
+        ></Modal>
       </div>
     </>
   );
