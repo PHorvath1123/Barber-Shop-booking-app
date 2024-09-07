@@ -11,7 +11,7 @@ import QueryBuilderIcon from '@mui/icons-material/QueryBuilder';
 import { useEffect, useState } from 'react';
 import { z } from "zod";
 import { usePostMessage } from '../hook/usePostMessage';
-import ContactModal from './ui/Modal';
+import Modal from './ui/Modal';
 import {colorPalette as color} from '../utils/colorPalette'
 
 
@@ -62,13 +62,12 @@ export default function Contact(){
             sendMessage(result.data)
             setMessageFormData({name:'', email:'', message:'', isChecked:false}); // reset the form field values after the message sending
             setValidationError({_errors:[]}) // reset the optionally error messages under the form fields
-            setIsModalOpen(false); // reset the modalOpen state to allow the modal to open for the next messages.
         }
     };
 
     return(
         <section className='relative flex flex-col items-center overflow-hidden ' id="Contact">
-            {isModalOpen && <ContactModal/>}
+            {isModalOpen && <Modal open={isModalOpen} onClose={() => setIsModalOpen(false)} type='message'></Modal>}
             <div className={HomeStyle.contactTitleCt}>
                 <div className={HomeStyle.contactTitle}><span className='text-action font-title'>Contact</span> Information</div>
                 <p className={HomeStyle.contactText}>Whether you have a question about our services, want to book an appointment, or just want to say hello, feel free to reach out to us.</p>
