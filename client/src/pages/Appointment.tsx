@@ -14,7 +14,7 @@ export default function Appointment() {
   const queryClient = new QueryClient();
 
   console.log(selectedDay);
-  
+
   return (
     <div className={AppointmentStyle.bg}>
       <Navbar />
@@ -24,11 +24,16 @@ export default function Appointment() {
       />
       {barberId && (
         <QueryClientProvider client={queryClient}>
-          <Calendar selectedBarberId={barberId} setSelectedDay = {setSelectedDay} />
+          <Calendar
+            selectedBarberId={barberId}
+            setSelectedDay={setSelectedDay}
+          />
         </QueryClientProvider>
       )}
+      <QueryClientProvider client={queryClient}>
+        <ServiceSelector></ServiceSelector>
+      </QueryClientProvider>
 
-      <ServiceSelector></ServiceSelector>
       <Footer />
     </div>
   );
