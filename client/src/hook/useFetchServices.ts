@@ -1,11 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 
-type PriceType = {
+  export type PriceType = {
     title: string;
     price: number;
   };
   
-  type PriceListType = {
+  export type PriceListType = {
     category: string,
     services: PriceType[]
   };
