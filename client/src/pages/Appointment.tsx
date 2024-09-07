@@ -8,9 +8,12 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 export default function Appointment() {
   const [barberId, setBarberId] = useState<string>("");
+  const [selectedDay, setSelectedDay] = useState<string>("");
 
   const queryClient = new QueryClient();
 
+  console.log(selectedDay);
+  
   return (
     <div className={AppointmentStyle.bg}>
       <Navbar />
@@ -20,7 +23,7 @@ export default function Appointment() {
       />
       {barberId && (
         <QueryClientProvider client={queryClient}>
-          <Calendar selectedBarberId={barberId} />
+          <Calendar selectedBarberId={barberId} setSelectedDay = {setSelectedDay} />
         </QueryClientProvider>
       )}
       <Footer />
