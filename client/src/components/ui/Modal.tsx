@@ -10,7 +10,7 @@ type ModalProps = {
   content?: PriceListType[];
   open: boolean;
   onClose?: () => void;
-  serviceCategory: string;
+  serviceCategory?: string;
 };
 
 const style = {
@@ -38,7 +38,7 @@ const messageResponseContent = (
   </>
 );
 
-const serviceContent = (serviceCategory: string, data?: PriceListType[]) => {
+const serviceContent = (serviceCategory?: string, data?: PriceListType[]) => {
   return (
     <div className="flex flex-col items-center gap-2 h-fit">
       {data?.map((category) => {
