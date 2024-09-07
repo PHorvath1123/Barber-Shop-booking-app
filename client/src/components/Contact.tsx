@@ -72,7 +72,7 @@ export default function Contact(){
             <div className={HomeStyle.contactTitleCt}>
                 <div className={HomeStyle.contactTitle}><span className='text-action font-title'>Contact</span> Information</div>
                 <p className={HomeStyle.contactText}>Whether you have a question about our services, want to book an appointment, or just want to say hello, feel free to reach out to us.</p>
-                <Button text="Book now"></Button>
+                <Button>Book now</Button>
                 <div className='font-title text-xl mt-[3.4rem] mb-[2rem]'>OR</div>
             </div>
             <img className={HomeStyle.contactBg} src={ContactBackground} alt="contact background"/>
@@ -129,7 +129,7 @@ export default function Contact(){
                         }
                     }}
                     />
-                    <Button type='submit' text='Send'/>
+                    <Button type='submit'>Send</Button>
                 </form>
                 <ul className={HomeStyle.infoList}>
                     <li className='flex items-center gap-3'>

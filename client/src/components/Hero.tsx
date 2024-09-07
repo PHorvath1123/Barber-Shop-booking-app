@@ -15,7 +15,7 @@ export default function Hero(){
             </div>
             <h1 className='font-title uppercase mb-5 mt-3 text-sm text-center md:text-md'>"Where Tradition Meets Modern Style - Prestige Cuts"</h1>
             <p className='text-center text-xs w-[80vw] md:w-[40vw] mt-[1rem] mb-[4rem]'>Prestige Cuts offers a sanctuary for the modern gentleman. Our skilled barbers combine timeless techniques with the latest trends to ensure every client receives a personalized and exceptional grooming experience."</p>
-            <Link to='/Appointment'><Button text={'Book now'}></Button></Link>
+            <Link to='/Appointment'><Button>Book now</Button></Link>
         </div>
         
     );

@@ -54,8 +54,8 @@ export default function BarberSelector({selectedOption, setSelectedOption}:Selec
             </div>
             <Button
               onClick={() => renderCalendarAndSelectedBarber(barber.id)}
-              text={"View Availability"}
-            />
+            >View Availability
+            </Button>
           </div>
         </div>
       );
