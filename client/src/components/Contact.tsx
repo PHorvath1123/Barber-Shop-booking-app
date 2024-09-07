@@ -12,6 +12,7 @@ import { useEffect, useState } from 'react';
 import { z } from "zod";
 import { usePostMessage } from '../hook/usePostMessage';
 import ContactModal from './ui/Modal';
+import {colorPalette as color} from '../utils/colorPalette'
 
 
 const schema = z.object({
@@ -100,16 +101,16 @@ export default function Contact(){
                         value={messageFormData.message}
                         sx={{
                             background: 'transparent',
-                            border: '1px solid #D9D9D9',
-                            color: '#D9D9D9',
+                            border: `1px solid ${color.light}`,
+                            color: color.light,
                             width: '100%',
                             '.MuiTextarea-textarea::placeholder':{
                                 opacity: 1
                             },
                             '--Textarea-focusedThickness': '0rem',
-                            '--Textarea-focusedHighlight': '#EF6950',
+                            '--Textarea-focusedHighlight': color.action,
                             '&:focus-within': {
-                                borderColor: '#EF6950',
+                                borderColor: color.action,
                             },
                         }}
                     />
@@ -120,11 +121,11 @@ export default function Contact(){
                     checked={messageFormData.isChecked}
                     sx={{
                         '.MuiCheckbox-checkbox.Mui-checked':{
-                            backgroundColor:'#EF6950',
-                            color: '#D9D9D9',
+                            backgroundColor: color.action,
+                            color: color.light,
                         },
                         '.MuiCheckbox-label':{
-                            color: '#D9D9D9'
+                            color: color.light
                         }
                     }}
                     />

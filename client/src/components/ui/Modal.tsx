@@ -2,6 +2,7 @@ import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import { useState } from 'react';
+import {colorPalette as color} from '../../utils/colorPalette'
 
 const style = {
     position: 'absolute' as 'absolute',
@@ -10,9 +11,9 @@ const style = {
     transform: 'translate(-50%, -50%)',
     width: 400,
     bgcolor: '#1E1A17',
-    border: '2px solid #D9D9D9',
+    border: `2px solid ${color.light}`,
     boxShadow: 24,
-    color: '#D9D9D9',
+    color: color.light,
     textAlign: 'center',
     p: 4,
   };

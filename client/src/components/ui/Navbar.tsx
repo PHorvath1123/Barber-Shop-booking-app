@@ -9,6 +9,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import Drawer from '@mui/material/Drawer'
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
+import {colorPalette as color} from '../../utils/colorPalette'
 
 export default function Navbar(){
 
@@ -77,7 +78,7 @@ export default function Navbar(){
                 {isMobile 
                     ?  <IconButton 
                             onClick={handleDrawerToggle} 
-                            sx={{color: '#D9D9D9',':hover': {color: '#EF6950'}}}>
+                            sx={{color: color.light,':hover': {color: color.action}}}>
                             <MenuIcon/>
                         </IconButton>
                     :   <div className="flex gap-4 pr-[1rem] pt-[1rem] md:pr-[5rem] md:gap-8 md:font-bold">
@@ -117,7 +118,7 @@ export default function Navbar(){
                         '& .MuiDrawer-paper': { 
                             boxSizing: 'border-box', 
                             width: '45vw',
-                            backgroundColor: '#D9D9D9',
+                            backgroundColor: color.light,
                             textTransform:'uppercase'
                         }
                       }}>

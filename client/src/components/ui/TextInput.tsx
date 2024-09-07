@@ -1,4 +1,5 @@
 import TextField from '@mui/material/TextField';
+import {colorPalette as color} from '../../utils/colorPalette'
 
 type TextFieldProps  = {
     label: string,
@@ -25,27 +26,27 @@ export default function TextInput(props: TextFieldProps){
             width: '100%',
             fontFamily: 'Roboto',
             '.MuiInput-underline:before': {
-              borderBottomColor: '#D9D9D9', 
+              borderBottomColor: color.light, 
             },
             '.MuiInput-underline:hover:before': {
-              borderBottomColor: '#D9D9D9 !important', 
+              borderBottomColor: `${color.light} !important`, 
             },
             '.MuiInput-underline:after': {
-              borderBottomColor: '#EF6950',
+              borderBottomColor: color.action,
             },
             '.MuiInputLabel-root': {
-              color: '#D9D9D9',
+              color: color.light,
                
             },
             '.MuiInputLabel-root.Mui-focused': {
-              color: '#D9D9D9', 
+              color: color.light, 
             },
             '.MuiInputBase-input': {
-              color: '#D9D9D9', 
+              color: color.light, 
               fontSize:'clamp(0.884rem, 1.0736rem + 0.1596vw, 1.0417rem)',
             },
             '.MuiInputBase-input:focus': {
-              color: '#D9D9D9', 
+              color: color.light, 
             },
           }}
         />

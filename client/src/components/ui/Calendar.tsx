@@ -6,6 +6,7 @@ import dayjs, { Dayjs } from "dayjs";
 import updateLocale from "dayjs/plugin/updateLocale";
 import { useGetWorkingTime } from "../../hook/useGetWorkingTime";
 import AppointmentStyle from "../../styles/appointment/Appointment.module.css";
+import {colorPalette as color} from '../../utils/colorPalette'
 
 type CalendarProps = {
   selectedBarberId: string,
@@ -14,7 +15,7 @@ type CalendarProps = {
 
 const pickersDayStyle = {
   sx: {
-    color: "#D9D9D9",
+    color: color.light,
     "&:focus": {
       backgroundColor: "transparent",
     },
@@ -22,10 +23,10 @@ const pickersDayStyle = {
       backgroundColor: "transparent",
     },
     "&.Mui-selected.MuiPickersDay-root": {
-      backgroundColor: "#EF6950",
+      backgroundColor: color.action,
     },
     "&.MuiPickersDay-root:not(.Mui-selected)": {
-      borderColor: "#EF6950",
+      borderColor: color.action,
     },
     "&.Mui-disabled.MuiPickersDay-root": {
       color: "rgba(255, 255, 255, 0.5)",
@@ -34,7 +35,7 @@ const pickersDayStyle = {
 };
 
 const commonColor = {
-  color: "#D9D9D9",
+  color: color.light,
 };
 
 export default function Calendar({ selectedBarberId, setSelectedDay }: CalendarProps) {
@@ -89,10 +90,10 @@ export default function Calendar({ selectedBarberId, setSelectedDay }: CalendarP
               shouldDisableDate={shouldDisableDate}
               sx={{
                 ".css-rhmlg1-MuiTypography-root-MuiDayCalendar-weekDayLabel": {
-                  color: "#D9D9D9",
+                  color: color.light,
                 },
                 "&.MuiDateCalendar-root":{
-                  border: '1px solid #D9D9D9',
+                  border: `1px solid ${color.light}`,
                   borderRadius: '25px',
                 },
               }}
@@ -113,7 +114,7 @@ export default function Calendar({ selectedBarberId, setSelectedDay }: CalendarP
                 yearButton:{
                   sx:{
                     '&.MuiPickersYear-yearButton.Mui-selected':{
-                      backgroundColor: "#EF6950"
+                      backgroundColor: color.action
                     }
                   }
                 }
