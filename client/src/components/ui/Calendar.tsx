@@ -3,13 +3,13 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
 import { DayCalendarSkeleton } from "@mui/x-date-pickers/DayCalendarSkeleton";
 import dayjs, { Dayjs } from "dayjs";
-import { useRef } from "react";
 import updateLocale from "dayjs/plugin/updateLocale";
 import { useGetWorkingTime } from "../../hook/useGetWorkingTime";
 import AppointmentStyle from "../../styles/appointment/Appointment.module.css";
 
 type CalendarProps = {
-  selectedBarberId: string;
+  selectedBarberId: string,
+  setSelectedDay: React.Dispatch<React.SetStateAction<string>>
 };
 
 const pickersDayStyle = {
@@ -37,8 +37,7 @@ const commonColor = {
   color: "#D9D9D9",
 };
 
-export default function Calendar({ selectedBarberId }: CalendarProps) {
-  const pickedDateRef = useRef("");
+export default function Calendar({ selectedBarberId, setSelectedDay }: CalendarProps) {
 
   // Fetch the working time from the database
   const {
@@ -59,12 +58,12 @@ export default function Calendar({ selectedBarberId }: CalendarProps) {
     weekStart: 1,
   });
 
-  //Disables dates in the calendar that are not in the highlightedDays array.
+  //Disables dates in the calendar that are not in the workingDays array.
   const shouldDisableDate = (date: Dayjs) => {
     const dayName = dayjs(date).format("dddd");
     return !workingDays.includes(dayName);
   };
-
+  
   return (
     <>
       {isError ? (
@@ -81,10 +80,10 @@ export default function Calendar({ selectedBarberId }: CalendarProps) {
               dayOfWeekFormatter={(weekday) => `${weekday.format("dd")}`}
               onChange={(pickedDate) => {
                 const date = new Date(pickedDate);
-                const dd = String(date.getDate()).padStart(2, "0");
-                const mm = String(date.getMonth() + 1).padStart(2, "0");
-                const yyyy = date.getFullYear();
-                pickedDateRef.current = `${yyyy}-${mm}-${dd}`;
+                const day = String(date.getDate()).padStart(2, "0");
+                const month = String(date.getMonth() + 1).padStart(2, "0");
+                const year = date.getFullYear();
+                setSelectedDay(`${year}-${month}-${day}`)
               }}
               renderLoading={() => <DayCalendarSkeleton />}
               shouldDisableDate={shouldDisableDate}
