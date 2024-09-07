@@ -4,6 +4,7 @@ import BarberSelector from "../components/BarberSelector";
 import AppointmentStyle from "../styles/appointment/Appointment.module.css";
 import { useState } from "react";
 import Calendar from "../components/ui/Calendar";
+import ServiceSelector from "../components/ServiceSelector";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 export default function Appointment() {
@@ -26,6 +27,8 @@ export default function Appointment() {
           <Calendar selectedBarberId={barberId} setSelectedDay = {setSelectedDay} />
         </QueryClientProvider>
       )}
+
+      <ServiceSelector></ServiceSelector>
       <Footer />
     </div>
   );
