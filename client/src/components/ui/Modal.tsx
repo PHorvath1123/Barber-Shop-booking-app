@@ -82,7 +82,7 @@ export default function ContactModal({
   serviceCategory,
 }: ModalProps) {
   return (
-    <Modal open={open} onClose={onClose}>
+    <Modal open={open} onClose={onClose} disableScrollLock={true}>
       <Box sx={style}>
         {type === "message"
           ? messageResponseContent
