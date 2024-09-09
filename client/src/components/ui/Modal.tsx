@@ -26,7 +26,6 @@ const style = {
     'sm': '500px',
     'md': '800px'
   }, 
-  padding: '0px',
   bgcolor: "#1E1A17",
   border: `2px solid ${color.light}`,
   boxShadow: 24,
@@ -62,11 +61,11 @@ const serviceContent = (serviceCategory?: string, content?: PriceListType[]) => 
                 <div key={service.title} className={PricingStyle.priceList}>
                   <div className={AppointmentStyle.serviceListItem}>
                     <div className={AppointmentStyle.priceAndService}>
-                      <span className="text-sm">{service.title}</span>
+                      <span className="text-xs sm:text-sm">{service.title}</span>
                       <span className="text-xs">{service.price} $</span>
                     </div>
                     <div className="mb-[.3rem]">
-                      <Button>Select</Button>
+                      <Button variant="outlined" size="sm">Select</Button>
                     </div>
                   </div>
                 </div>
