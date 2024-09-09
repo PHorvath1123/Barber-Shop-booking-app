@@ -25,7 +25,7 @@ export default function ServiceSelector() {
       <h2 className={AppointmentStyle.title}>
         Choose a <span className="text-action font-title">Service</span>
       </h2>
-      <div className="flex flex-row justify-evenly">
+      <div className={AppointmentStyle.serviceButtons}>
         {data?.map((categories) => {
           return (
             <Button

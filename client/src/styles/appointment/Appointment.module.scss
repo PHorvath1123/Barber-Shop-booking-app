@@ -59,3 +59,26 @@
     box-shadow: 2px 1px 13px -1px rgba(239, 105, 80, 0.5);
     @include imageSize
 }
+
+// ServiceSelector
+
+.serviceButtons{
+    @apply flex flex-col items-center gap-[2rem] mx-[.5rem] mt-[3rem];
+
+    @screen sm{
+        @apply flex flex-row justify-between gap-[1rem] mt-[3rem];
+    }
+
+    @screen lg{
+        @apply max-w-[70vw] 2xl:max-w-[45vw] my-0 mx-auto mt-[3rem]
+    }
+
+}
+
+.serviceListItem{
+    @apply flex flex-row justify-between items-center border-b border-dotted mb-[1rem]
+}
+
+.priceAndService{
+    @apply flex flex-col items-start
+}

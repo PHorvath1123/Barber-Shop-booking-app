@@ -37,4 +37,26 @@
 .choosedBarberImg {
   box-shadow: 2px 1px 13px -1px rgba(239, 105, 80, 0.5);
   @apply w-[26vw] sm:max-w-[18vw] md:max-w-[130px];
+}
+
+.serviceButtons {
+  @apply flex flex-col items-center gap-[2rem] mx-[.5rem] mt-[3rem];
+}
+@screen sm {
+  .serviceButtons {
+    @apply flex flex-row justify-between gap-[1rem] mt-[3rem];
+  }
+}
+@screen lg {
+  .serviceButtons {
+    @apply max-w-[70vw] 2xl:max-w-[45vw] my-0 mx-auto mt-[3rem];
+  }
+}
+
+.serviceListItem {
+  @apply flex flex-row justify-between items-center border-b border-dotted mb-[1rem];
+}
+
+.priceAndService {
+  @apply flex flex-col items-start;
 }/*# sourceMappingURL=Appointment.module.css.map */
