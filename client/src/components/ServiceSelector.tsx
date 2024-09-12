@@ -5,7 +5,6 @@ import Modal from "./ui/Modal";
 import { useFetchServices } from "../hook/useFetchServices";
 
 export default function ServiceSelector() {
-  const [service, setService] = useState<string>("");
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [serviceCategory, setServiceCategory] = useState<string>("");
 
@@ -39,7 +38,7 @@ export default function ServiceSelector() {
         })}
         <Modal
           serviceCategory={serviceCategory}
-          onClose={handleClose}
+          modalClose={handleClose}
           open={modalOpen}
           content={data}
           type={"service"}
