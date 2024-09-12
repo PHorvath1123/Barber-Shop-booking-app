@@ -11,7 +11,7 @@ type ModalProps = {
   type: "message" | "service" | "booking";
   content?: PriceListType[];
   open: boolean;
-  onClose?: () => void;
+  modalClose?: () => void;
   serviceCategory?: string;
 };
 
@@ -44,40 +44,6 @@ const messageResponseContent = (
   </>
 );
 
-const serviceContent = (serviceCategory?: string, content?: PriceListType[]) => {
-  return (
-    <div className="flex flex-col items-center gap-2 h-fit w-[100%]">
-      {content?.map((category) => {
-        if (category.category === serviceCategory) {
-          return (
-            <div key={category.category} className="w-[100%]">
-              <h2
-                key={category.category}
-                className="mb-3 font-bold text-lg text-action"
-              >
-                {category.category}
-              </h2>
-              {category.services.map((service) => (
-                <div key={service.title} className={PricingStyle.priceList}>
-                  <div className={AppointmentStyle.serviceListItem}>
-                    <div className={AppointmentStyle.priceAndService}>
-                      <span className="text-xs sm:text-sm">{service.title}</span>
-                      <span className="text-xs">{service.price} $</span>
-                    </div>
-                    <div className="mb-[.3rem]">
-                      <Button variant="outlined" size="sm">Select</Button>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          );
-        }
-      })}
-    </div>
-  );
-};
-
 const bookingContent = (
   <div className="flex flex-row justify-center gap-2">
     <CheckCircleOutlineIcon sx={{ color: "#EF6950" }} fontSize="large" />
@@ -89,11 +55,53 @@ export default function ContactModal({
   type,
   content,
   open,
-  onClose,
+  modalClose,
   serviceCategory,
 }: ModalProps) {
+
+
+  const handleSelectService =(selectedService: string) => {
+    modalClose?.();
+    console.log(selectedService);
+    
+  };
+
+  const serviceContent = (serviceCategory?: string, content?: PriceListType[]) => {
+    return (
+      <div className="flex flex-col items-center gap-2 h-fit w-[100%]">
+        {content?.map((category) => {
+          if (category.category === serviceCategory) {
+            return (
+              <div key={category.category} className="w-[100%]">
+                <h2
+                  key={category.category}
+                  className="mb-3 font-bold text-lg text-action"
+                >
+                  {category.category}
+                </h2>
+                {category.services.map((service) => (
+                  <div key={service.title} className={PricingStyle.priceList}>
+                    <div className={AppointmentStyle.serviceListItem}>
+                      <div className={AppointmentStyle.priceAndService}>
+                        <span className="text-xs sm:text-sm">{service.title}</span>
+                        <span className="text-xs">{service.price} $</span>
+                      </div>
+                      <div className="mb-[.3rem]">
+                        <Button onClick={() => handleSelectService(service.title)} variant="outlined" size="sm">Select</Button> 
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            );
+          }
+        })}
+      </div>
+    );
+  };
+
   return (
-    <Modal open={open} onClose={onClose} disableScrollLock={true}>
+    <Modal open={open} onClose={modalClose} disableScrollLock={true}>
       <Box sx={style}>
         {type === "message"
           ? messageResponseContent

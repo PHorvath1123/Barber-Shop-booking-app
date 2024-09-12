@@ -10,6 +10,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 export default function Appointment() {
   const [barberId, setBarberId] = useState<string>("");
   const [selectedDay, setSelectedDay] = useState<string>("");
+  const [service, setService] = useState<string>("");
 
   const queryClient = new QueryClient();
 
