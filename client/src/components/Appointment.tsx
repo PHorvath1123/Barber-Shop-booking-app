@@ -1,5 +1,5 @@
 import { useGetAppointments } from '../hook/useGetAppointments';
-import generateTimeSlots from '../utils/generateTimeSlots';
+import {generateTimeSlots} from '../utils/generateTimeSlots';
 import { selectedDateType } from '../pages/Booking';
 
 type AppointmentProps = {
@@ -16,11 +16,13 @@ export default function Appointment({selectedBarberId, selectedDay}: Appointment
         error,
       } = useGetAppointments(selectedBarberId, selectedDay?.dayName);
 
-    generateTimeSlots(availability)
+    console.log(availability);
+    
+    const timeSlots = availability ? generateTimeSlots(availability) : [];
 
     return(
         <div>
-         Appointment
+         {timeSlots}
         </div>
     );
 };

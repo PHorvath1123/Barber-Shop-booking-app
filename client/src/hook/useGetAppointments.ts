@@ -1,12 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 
-type appointmentType = {
+export type appointmentType = {
   open: string;
   close: string;
 };
 
 
-const getAppointments = async (barberId: string, selectedDay?: string): Promise<appointmentType[]> => {
+const getAppointments = async (barberId: string, selectedDay?: string): Promise<appointmentType> => {
   const request = await fetch(`/api/getAvailabilities/${barberId}/${selectedDay}`);
   const result = await request.json();
   return result;
