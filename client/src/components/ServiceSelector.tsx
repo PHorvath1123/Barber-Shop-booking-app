@@ -3,12 +3,14 @@ import { useState } from "react";
 import Button from "./ui/Button";
 import Modal from "./ui/Modal";
 import { useFetchServices } from "../hook/useFetchServices";
+import { useServiceContext } from "../hook/useServiceContext";
 
 export default function ServiceSelector() {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [serviceCategory, setServiceCategory] = useState<string>("");
 
   const { data } = useFetchServices();
+  const {service} = useServiceContext();
 
   const handleClickOpen = (category: string) => {
     setModalOpen(true);
@@ -19,11 +21,8 @@ export default function ServiceSelector() {
     setModalOpen(false);
   };
 
-  return (
-    <>
-      <h2 className={AppointmentStyle.title}>
-        Choose a <span className="text-action font-title">Service</span>
-      </h2>
+  const serviceList = () =>{
+    return(
       <div className={AppointmentStyle.serviceButtons}>
         {data?.map((categories) => {
           return (
@@ -44,6 +43,21 @@ export default function ServiceSelector() {
           type={"service"}
         ></Modal>
       </div>
+    );
+  };
+
+  const selectedService = (test: string) =>{
+    return(
+      <p className={AppointmentStyle.selectedService}>{test}</p>
+    )
+  };
+    
+  return (
+    <>
+      <h2 className={AppointmentStyle.title}>
+        Choose a <span className="text-action font-title">Service</span>
+      </h2>
+      {!service ? serviceList() : selectedService(service)}
     </>
   );
 }
