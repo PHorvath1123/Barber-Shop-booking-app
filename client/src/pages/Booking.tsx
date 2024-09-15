@@ -8,7 +8,6 @@ import ServiceSelector from "../components/ServiceSelector";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {useServiceContext} from '../hook/useServiceContext'
 import Appointment from "../components/Appointment";
-import CustomerForm from '../components/CustomerForm'
 
 export type selectedDateType = {
   date: string,
@@ -19,8 +18,6 @@ export default function Booking() {
   const [barberId, setBarberId] = useState<string>("");
   const [selectedDay, setSelectedDay] = useState<selectedDateType | null>(null);
   const {service} = useServiceContext();
-  
-  console.log(selectedDay?.date, selectedDay?.dayName);
   
   const queryClient = new QueryClient();
 
@@ -41,11 +38,13 @@ export default function Booking() {
         {selectedDay &&(
           <ServiceSelector/>
         )}
-        <Appointment selectedBarberId={barberId}></Appointment>
+        {service && (
+          <Appointment 
+            selectedBarberId={barberId}
+            selectedDay={selectedDay}
+          />
+        )}
       </QueryClientProvider>
-
-
-      {/*<CustomerForm barberId={barberId} selectedDay={selectedDay} service={service}></CustomerForm> //! Test component*/}
       <Footer />
     </div>
   );
