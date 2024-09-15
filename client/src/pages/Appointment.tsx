@@ -2,19 +2,19 @@ import Footer from "../components/Footer";
 import Navbar from "../components/ui/Navbar";
 import BarberSelector from "../components/BarberSelector";
 import AppointmentStyle from "../styles/appointment/Appointment.module.css";
-import { useState } from "react";
+import { useState} from "react";
 import Calendar from "../components/ui/Calendar";
 import ServiceSelector from "../components/ServiceSelector";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import {useServiceContext} from '../hook/useServiceContext'
+import CustomerForm from '../components/CustomerForm'
 
 export default function Appointment() {
   const [barberId, setBarberId] = useState<string>("");
   const [selectedDay, setSelectedDay] = useState<string>("");
-  const [service, setService] = useState<string>("");
-
+  const {service} = useServiceContext();
+  
   const queryClient = new QueryClient();
-
-  console.log(selectedDay);
 
   return (
     <div className={AppointmentStyle.bg}>
@@ -35,6 +35,7 @@ export default function Appointment() {
         <ServiceSelector></ServiceSelector>
       </QueryClientProvider>
 
+      <CustomerForm barberId={barberId} selectedDay={selectedDay} service={service}></CustomerForm> //! Test component
       <Footer />
     </div>
   );

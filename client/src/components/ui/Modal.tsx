@@ -5,7 +5,8 @@ import { colorPalette as color } from "../../utils/colorPalette";
 import PricingStyle from "../../styles/pricing/Pricing.module.css";
 import type { PriceListType } from "../../hook/useFetchServices";
 import AppointmentStyle from '../../styles/appointment/Appointment.module.css';
-import Button from '../ui/Button'
+import Button from '../ui/Button';
+import { useServiceContext } from "../../hook/useServiceContext";
 
 type ModalProps = {
   type: "message" | "service" | "booking";
@@ -59,11 +60,11 @@ export default function ContactModal({
   serviceCategory,
 }: ModalProps) {
 
+  const {setService} = useServiceContext();
 
   const handleSelectService =(selectedService: string) => {
+    setService(selectedService);
     modalClose?.();
-    console.log(selectedService);
-    
   };
 
   const serviceContent = (serviceCategory?: string, content?: PriceListType[]) => {
