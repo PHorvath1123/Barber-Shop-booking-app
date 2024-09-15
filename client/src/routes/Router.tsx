@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
-import Appointment from "../pages/Appointment";
+import Booking from "../pages/Booking";
 import Home from "../pages/Home";
 import App from "../App";
 import Pricing from "../pages/Pricing";
@@ -15,7 +15,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/appointment',
-                element: <Appointment/>,
+                element: <Booking/>,
                 errorElement: <div>404 Not Found</div>
             },
             {

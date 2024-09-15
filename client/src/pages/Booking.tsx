@@ -36,6 +36,7 @@ export default function Appointment() {
           <ServiceSelector></ServiceSelector>
         </QueryClientProvider>
       )}
+      
     
       {/*<CustomerForm barberId={barberId} selectedDay={selectedDay} service={service}></CustomerForm> //! Test component*/}
       <Footer />
