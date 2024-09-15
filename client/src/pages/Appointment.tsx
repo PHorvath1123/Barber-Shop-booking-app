@@ -31,11 +31,13 @@ export default function Appointment() {
           />
         </QueryClientProvider>
       )}
-      <QueryClientProvider client={queryClient}>
-        <ServiceSelector></ServiceSelector>
-      </QueryClientProvider>
-
-      <CustomerForm barberId={barberId} selectedDay={selectedDay} service={service}></CustomerForm> //! Test component
+      {selectedDay &&(
+        <QueryClientProvider client={queryClient}>
+          <ServiceSelector></ServiceSelector>
+        </QueryClientProvider>
+      )}
+    
+      {/*<CustomerForm barberId={barberId} selectedDay={selectedDay} service={service}></CustomerForm> //! Test component*/}
       <Footer />
     </div>
   );
