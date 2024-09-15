@@ -82,3 +82,8 @@
 .priceAndService{
     @apply flex flex-col items-start
 }
+
+.selectedService{
+    @apply text-center text-lg text-action underline underline-offset-8;
+    
+}
