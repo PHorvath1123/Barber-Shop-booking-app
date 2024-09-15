@@ -7,10 +7,11 @@ import updateLocale from "dayjs/plugin/updateLocale";
 import { useGetWorkingTime } from "../../hook/useGetWorkingTime";
 import AppointmentStyle from "../../styles/appointment/Appointment.module.css";
 import {colorPalette as color} from '../../utils/colorPalette'
+import type {selectedDateType} from '../../pages/Booking'
 
 type CalendarProps = {
   selectedBarberId: string,
-  setSelectedDay: React.Dispatch<React.SetStateAction<string>>
+  setSelectedDay: React.Dispatch<React.SetStateAction<selectedDateType | null>>
 };
 
 const pickersDayStyle = {
@@ -84,7 +85,9 @@ export default function Calendar({ selectedBarberId, setSelectedDay }: CalendarP
                 const day = String(date.getDate()).padStart(2, "0");
                 const month = String(date.getMonth() + 1).padStart(2, "0");
                 const year = date.getFullYear();
-                setSelectedDay(`${year}-${month}-${day}`)
+                const dayFormat = `${year}-${month}-${day}`
+                const dayOfTheWeek = dayjs(pickedDate).format("dddd");
+                setSelectedDay({date:dayFormat, dayName:dayOfTheWeek}); 
               }}
               renderLoading={() => <DayCalendarSkeleton />}
               shouldDisableDate={shouldDisableDate}
