@@ -60,7 +60,7 @@
     @include imageSize
 }
 
-// ServiceSelector
+//* ServiceSelector----------------------------------
 
 .serviceButtons{
     @apply flex flex-col items-center gap-[2rem] mx-[.5rem] mt-[3rem];
@@ -86,4 +86,27 @@
 .selectedService{
     @apply text-center text-lg text-action underline underline-offset-8;
     
+}
+
+//* Appointment--------------
+
+.timeSlotOuterCt{
+   @apply flex flex-col items-center mt-[2.5rem] md:w-[70vw] mx-[1rem];
+
+   @screen md{
+    @apply w-[50vw] my-0 mx-auto mt-[2.5rem]
+   }
+
+   ul{
+    @apply flex flex-wrap justify-center gap-[2rem];
+
+    //!button
+    li{
+        @apply px-[1.7rem] py-[.4rem] border border-action rounded-[30px];
+    }
+
+    li:hover{
+        @apply bg-action
+    }
+   }
 }
