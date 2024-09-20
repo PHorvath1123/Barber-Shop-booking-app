@@ -18,7 +18,7 @@ type CalendarProps = {
 
 const pickersDayStyle = {
   sx: {
-    color: color.light,
+    color: color.green,
     "&:focus": {
       backgroundColor: "transparent",
     },
