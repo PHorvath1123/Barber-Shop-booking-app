@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 
-type daysType = {
-  day: string;
+export type daysType = {
+  day?: string;
   open: string;
   close: string;
 };

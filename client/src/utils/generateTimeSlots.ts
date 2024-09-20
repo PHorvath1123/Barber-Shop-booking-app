@@ -1,6 +1,6 @@
-import {appointmentType} from '../hook/useGetAppointments'
+import {daysType} from '../hook/useGetWorkingTime'
 
-export const generateTimeSlots = (availableDays?: appointmentType) =>{
+export const generateTimeSlots = (availableDays?: daysType) =>{
 
     const timeSlots: string[] = [];
     
