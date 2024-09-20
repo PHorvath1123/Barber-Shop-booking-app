@@ -10,14 +10,8 @@ type AppointmentProps = {
 
 export default function Appointment({selectedBarberId, selectedDay}: AppointmentProps){
 
-    const {
-        data: availability,
-        isLoading,
-        isError,
-        error,
-      } = useGetAppointments(selectedBarberId, selectedDay?.dayName);
+    const {data: availability, error, isError} = useGetAppointments(selectedBarberId, selectedDay?.dayName);
 
-    
     const timeSlots = availability ? generateTimeSlots(availability) : [];
 
     return(

@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-type bookingType = {
+export type bookingType = {
   date: string,
   appointment: string,
   dayName: string

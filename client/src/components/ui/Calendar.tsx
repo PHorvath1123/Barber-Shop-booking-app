@@ -7,7 +7,9 @@ import updateLocale from "dayjs/plugin/updateLocale";
 import { useGetWorkingTime } from "../../hook/useGetWorkingTime";
 import AppointmentStyle from "../../styles/appointment/Appointment.module.css";
 import {colorPalette as color} from '../../utils/colorPalette'
+import {useGetBookedAppointments} from '../../hook/useGetBookedAppointments'
 import type {selectedDateType} from '../../pages/Booking'
+import { isDayAvailable } from "../../utils/availability.utils";
 
 type CalendarProps = {
   selectedBarberId: string,
@@ -49,9 +51,14 @@ export default function Calendar({ selectedBarberId, setSelectedDay }: CalendarP
     error,
   } = useGetWorkingTime(selectedBarberId);
 
+  // Fetch the booked appointments
+  const {data: booking} = useGetBookedAppointments(selectedBarberId);
+
   const workingDays: string[] = [];
   availability?.map((days) => {
-    workingDays.push(days.day);
+    if (days.day){
+      workingDays.push(days.day); // day key is optional
+    }
   });
 
   // set to Monday for the first day of the week
@@ -60,11 +67,32 @@ export default function Calendar({ selectedBarberId, setSelectedDay }: CalendarP
     weekStart: 1,
   });
 
-  //Disables dates in the calendar that are not in the workingDays array.
+  /**
+   * Disables dates in the calendar that are not in the workingDays array and do not have any free appointments.
+   * @param {Dayjs} date - the date in the calendar
+   * @return {boolean}
+   */
   const shouldDisableDate = (date: Dayjs) => {
     const dayName = dayjs(date).format("dddd");
-    return !workingDays.includes(dayName);
-  };
+    const isWorkingDay = workingDays.includes(dayName);
+
+    if(!isWorkingDay){
+      return true;
+    }
+
+    if (!booking || booking.length === 0) {
+      return false;
+    }
+
+    // Check if the booked date matches the current date being checked and if the booked day is unavailable
+    const isDayBooked = booking?.some(bookedDay =>{
+      const bookedDate = dayjs(bookedDay.date).format("YYYY-MM-DD");
+      const calendarDate = dayjs(date).format("YYYY-MM-DD");
+      return bookedDate === calendarDate && (!isDayAvailable(bookedDay.date, bookedDay.dayName, availability, booking))
+    });
+
+    return isDayBooked
+  }
   
   return (
     <>
