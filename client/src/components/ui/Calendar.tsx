@@ -19,6 +19,7 @@ type CalendarProps = {
 const pickersDayStyle = {
   sx: {
     color: color.green,
+    fontSize: "17px",
     "&:focus": {
       backgroundColor: "transparent",
     },
