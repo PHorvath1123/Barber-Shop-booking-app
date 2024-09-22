@@ -9,7 +9,7 @@ import AppointmentStyle from "../../styles/appointment/Appointment.module.css";
 import {colorPalette as color} from '../../utils/colorPalette'
 import {useGetBookedAppointments} from '../../hook/useGetBookedAppointments'
 import type {selectedDateType} from '../../pages/Booking'
-import { isDayAvailable } from "../../utils/availability.utils";
+import { isDayAvailable } from "../../utils/checkAvailability.utils";
 
 type CalendarProps = {
   selectedBarberId: string,

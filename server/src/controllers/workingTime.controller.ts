@@ -2,12 +2,9 @@ import { db } from '../firebase.server.config';
 import { Request, Response } from 'express';
 
 type appointmentsType = {
+    day: string,
     open: string, 
     close: string
-};
-
-type workingTimeType = appointmentsType & {
-    day: string 
 };
 
 export const getWorkingTimeFromDB = async(req: Request, res: Response) => {
@@ -19,7 +16,7 @@ export const getWorkingTimeFromDB = async(req: Request, res: Response) => {
         if(!selectedDay){
             const workingTimeRef = db.collection('barbers').doc(barberId).collection('availability');
             const workingTimeSnapshot = await workingTimeRef.get();
-            const workingTime: workingTimeType[] = [];
+            const workingTime: appointmentsType[] = [];
     
             workingTimeSnapshot.forEach((doc: any) => {
                 const data = doc.data();
@@ -38,11 +35,14 @@ export const getWorkingTimeFromDB = async(req: Request, res: Response) => {
             const appointmentRef = db.collection('barbers').doc(barberId).collection('availability').doc(selectedDay);
             const appointmentSnapshot = await appointmentRef.get();
             const data = appointmentSnapshot.data();
+            const freeAppointments: appointmentsType[] = [];
             const appointment: appointmentsType = {
+                day: appointmentRef.id,
                 open: data.open,
                 close: data.close
             };
-            res.json(appointment)
+            freeAppointments.push(appointment)
+            res.json(freeAppointments)
         }
     }
     catch(error){
