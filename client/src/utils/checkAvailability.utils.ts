@@ -9,24 +9,24 @@ import { bookingType } from "../hook/useGetBookedAppointments";
  * @param dayName 
  * @returns {Array} - Returns an array of available time slots for the given date and day.
  */
-const getAvailableSlots = (date:string, dayName:string, availability: daysType[] | undefined, booking: bookingType[]) => {
+export const getAvailableSlots = (date:string | undefined, dayName:string | undefined, availability: daysType[] | undefined, booking: bookingType[]) => {
 
     //Find the specified day of the availability array
-    const availabilityOnBookedDay: daysType | undefined = availability?.find(workingDay => workingDay.day === dayName);
+    const workTimeOnBookedDay: daysType | undefined = availability?.find(workingDay => workingDay.day === dayName);
 
     /**
      * Generate all possible time slots on the booked day.
      * @type {Array}
     */
-    const allFreeSlotsOnBookedDay = generateTimeSlots(availabilityOnBookedDay)
-    const bookedForDay = booking?.filter(book => book.date === date);
+    const allPossibleSlotsOnBookedDay = generateTimeSlots(workTimeOnBookedDay)
+    const allBookingsOnBookedDay = booking?.filter(book => book.date === date);
 
     /**
      * Retrieves all available slots on the booked day.
      * @type {Array}
     */
-    return allFreeSlotsOnBookedDay.filter(slot => {
-        return !bookedForDay?.some(book => book.appointment === slot)
+    return allPossibleSlotsOnBookedDay.filter(slot => {
+        return !allBookingsOnBookedDay?.some(book => book.appointment === slot)
     })
 };
 
