@@ -1,7 +1,8 @@
 import { useGetAppointments } from '../hook/useGetAppointments';
-import {generateTimeSlots} from '../utils/generateTimeSlots';
 import { selectedDateType } from '../pages/Booking';
-import AppointmentStyle from '../styles/appointment/Appointment.module.css'
+import AppointmentStyle from '../styles/appointment/Appointment.module.css';
+import { getAvailableSlots } from '../utils/checkAvailability.utils';
+import { useGetBookedAppointments } from '../hook/useGetBookedAppointments';
 
 type AppointmentProps = {
     selectedBarberId: string,
@@ -10,9 +11,9 @@ type AppointmentProps = {
 
 export default function Appointment({selectedBarberId, selectedDay}: AppointmentProps){
 
-    const {data: availability, error, isError} = useGetAppointments(selectedBarberId, selectedDay?.dayName);
-
-    const timeSlots = availability ? generateTimeSlots(availability) : [];
+    const {data: availability} = useGetAppointments(selectedBarberId, selectedDay?.dayName);
+    const {data: booking} = useGetBookedAppointments(selectedBarberId);
+    const availableTimeSlots = getAvailableSlots(selectedDay?.date, selectedDay?.dayName, availability, booking ?? []);
 
     return(
         <section>
@@ -21,7 +22,7 @@ export default function Appointment({selectedBarberId, selectedDay}: Appointment
             </h2>
             <div className={AppointmentStyle.timeSlotOuterCt}>
                 <ul>
-                    {timeSlots.map(slot => {
+                    {availableTimeSlots.map(slot => {
                         return(
                             <button key={slot}><li>{slot}</li></button>
                         );
