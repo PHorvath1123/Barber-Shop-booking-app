@@ -18,6 +18,7 @@ export default function Booking() {
   const [barberId, setBarberId] = useState<string>("");
   const [selectedDay, setSelectedDay] = useState<selectedDateType | null>(null);
   const {service} = useServiceContext();
+  const [appointment, setAppointment] = useState<string>("");
   
   const queryClient = new QueryClient();
 
@@ -42,6 +43,7 @@ export default function Booking() {
           <Appointment 
             selectedBarberId={barberId}
             selectedDay={selectedDay}
+            setAppointment={setAppointment}
           />
         )}
       </QueryClientProvider>
