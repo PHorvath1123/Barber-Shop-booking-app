@@ -6,10 +6,11 @@ import { useGetBookedAppointments } from '../hook/useGetBookedAppointments';
 
 type AppointmentProps = {
     selectedBarberId: string,
-    selectedDay: selectedDateType | null
+    selectedDay: selectedDateType | null,
+    setAppointment: React.Dispatch<React.SetStateAction<string>>
 };
 
-export default function Appointment({selectedBarberId, selectedDay}: AppointmentProps){
+export default function Appointment({selectedBarberId, selectedDay, setAppointment}: AppointmentProps){
 
     const {data: availability} = useGetAppointments(selectedBarberId, selectedDay?.dayName);
     const {data: booking} = useGetBookedAppointments(selectedBarberId);
@@ -24,7 +25,7 @@ export default function Appointment({selectedBarberId, selectedDay}: Appointment
                 <ul>
                     {availableTimeSlots.map(slot => {
                         return(
-                            <button key={slot}><li>{slot}</li></button>
+                            <button onClick={() => setAppointment(slot)} key={slot}><li>{slot}</li></button>
                         );
                     })}
                 </ul>
