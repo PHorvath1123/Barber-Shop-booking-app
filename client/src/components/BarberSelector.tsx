@@ -5,11 +5,14 @@ import Button from "../components/ui/Button";
 import { useState } from "react";
 
 type SelectorPropsType = {
-  selectedOption: string,
-  setSelectedOption: React.Dispatch<React.SetStateAction<string>>
-}
+  selectedOption: string;
+  setSelectedOption: React.Dispatch<React.SetStateAction<string>>;
+};
 
-export default function BarberSelector({selectedOption, setSelectedOption}:SelectorPropsType) {
+export default function BarberSelector({
+  selectedOption,
+  setSelectedOption,
+}: SelectorPropsType) {
   const [choosedBarber, setChoosedBarber] = useState<boolean>(false);
 
   const barbers = useFetchBarbersToHome();
@@ -20,11 +23,14 @@ export default function BarberSelector({selectedOption, setSelectedOption}:Selec
   };
 
   const renderBarberList = () => {
-    return barbers.map(barber => {
+    return barbers.map((barber) => {
       return (
         <div key={barber.id} className={AppointmentStyle.barberInnerCt}>
           <div className={AppointmentStyle.photoCt}>
-            <img src={barber.photo} alt={`photo of the barber: ${barber.name}`} />
+            <img
+              src={barber.photo}
+              alt={`photo of the barber: ${barber.name}`}
+            />
             <div className="flex flex-col items-center">
               <div className="text-action mb-[.5rem]">{barber.name}</div>
               <div>{barber.title}</div>
@@ -52,9 +58,8 @@ export default function BarberSelector({selectedOption, setSelectedOption}:Selec
                 }}
               />
             </div>
-            <Button
-              onClick={() => renderCalendarAndSelectedBarber(barber.id)}
-            >View Availability
+            <Button onClick={() => renderCalendarAndSelectedBarber(barber.id)}>
+              View Availability
             </Button>
           </div>
         </div>
@@ -63,16 +68,21 @@ export default function BarberSelector({selectedOption, setSelectedOption}:Selec
   };
 
   const renderChoosedBarber = (id: string) => {
-    
-    const pickedBarber = barbers.filter(barber => {return barber.id === id})
+    const pickedBarber = barbers.filter((barber) => {
+      return barber.id === id;
+    });
 
-    return pickedBarber.map(barber => {
-      return(
-        <div key={barber.id} className="flex flex-col items-center gap-3 mt-[1rem]">
-          <img 
-            src={barber.photo} 
-            alt={`Photo of ${barber.name}`} 
-            className={AppointmentStyle.choosedBarberImg} />
+    return pickedBarber.map((barber) => {
+      return (
+        <div
+          key={barber.id}
+          className="flex flex-col items-center gap-3 mt-[1rem]"
+        >
+          <img
+            src={barber.photo}
+            alt={`Photo of ${barber.name}`}
+            className={AppointmentStyle.choosedBarberImg}
+          />
           <div className="flex flex-col items-center">
             <div className="text-action text-md">{barber.name}</div>
             <div className="text-xs">{barber.title}</div>
@@ -84,11 +94,15 @@ export default function BarberSelector({selectedOption, setSelectedOption}:Selec
 
   return (
     <section>
-      <h2 className={AppointmentStyle.title}>
-        Choose a <span className="text-action font-title">barber</span>
-      </h2>
+      {!choosedBarber && (
+        <h2 className={AppointmentStyle.title}>
+          Select a <span className="text-action font-title">barber</span>
+        </h2>
+      )}
       <div className="flex flex-col items-center justify-center gap-5">
-        {!choosedBarber ? renderBarberList() : renderChoosedBarber(selectedOption)}
+        {!choosedBarber
+          ? renderBarberList()
+          : renderChoosedBarber(selectedOption)}
       </div>
     </section>
   );
