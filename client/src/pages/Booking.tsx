@@ -23,23 +23,23 @@ export default function Booking() {
   const queryClient = new QueryClient();
 
   return (
-    <div className={AppointmentStyle.bg}>
+    <section className={AppointmentStyle.bg}>
       <Navbar />
       <BarberSelector
         selectedOption={barberId}
         setSelectedOption={setBarberId}
       />
       <QueryClientProvider client={queryClient}>
-        {barberId && (
+        {barberId &&(
+          <ServiceSelector/>
+        )}
+        {service &&(
           <Calendar
             selectedBarberId={barberId}
             setSelectedDay={setSelectedDay}
           />
         )}
-        {selectedDay &&(
-          <ServiceSelector/>
-        )}
-        {service && (
+        {selectedDay && (
           <Appointment 
             selectedBarberId={barberId}
             selectedDay={selectedDay}
@@ -48,6 +48,6 @@ export default function Booking() {
         )}
       </QueryClientProvider>
       <Footer />
-    </div>
+    </section>
   );
 }

@@ -1,11 +1,3 @@
-@mixin title{
-    @apply text-md font-title uppercase font-bold text-center w-[100vw] mt-[3rem] mb-[1rem];
-
-    @screen md{
-        @apply text-lg
-    }
-}
-
 @mixin smallText{
     @apply text-center w-[80vw] mt-[3rem] italic text-sm;
 
@@ -27,7 +19,15 @@
 }
 
 .title{
-    @include title
+    @apply text-lg font-title uppercase font-bold text-center w-[100vw] mt-[3rem] mb-[1rem];
+
+    @screen md{
+        @apply text-xl
+    }
+}
+
+.margin{
+    @apply my-[6rem]
 }
 
 .barberInnerCt{
@@ -84,7 +84,7 @@
 }
 
 .selectedService{
-    @apply text-center text-lg text-action underline underline-offset-8;
+    @apply text-center text-md text-action ;
     
 }
 

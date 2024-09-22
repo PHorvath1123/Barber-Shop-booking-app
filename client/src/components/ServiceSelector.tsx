@@ -46,18 +46,25 @@ export default function ServiceSelector() {
     );
   };
 
-  const selectedService = (test: string) =>{
+  const selectedService = (selectedService: string) =>{
     return(
-      <p className={AppointmentStyle.selectedService}>{test}</p>
+      <>
+        <div className="flex flex-col items-center mt-[2rem] gap-[1.1rem] md:flex md:justify-center">
+          <span className="font-text text-xs uppercase underline">Selected service :</span>
+          <p className={AppointmentStyle.selectedService}>{selectedService}</p>
+        </div>
+      </>
     )
   };
     
   return (
-    <>
-      <h2 className={AppointmentStyle.title}>
-        Choose a <span className="text-action font-title">Service</span>
-      </h2>
+    <article className={AppointmentStyle.margin}>
+      {!service &&
+        <h2 className={AppointmentStyle.title}>
+          Select a <span className="text-action font-title">Service</span>
+        </h2> 
+      }
       {!service ? serviceList() : selectedService(service)}
-    </>
+    </article>
   );
 }

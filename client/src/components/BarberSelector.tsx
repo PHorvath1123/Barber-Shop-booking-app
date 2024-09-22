@@ -93,7 +93,7 @@ export default function BarberSelector({
   };
 
   return (
-    <section>
+    <article className={AppointmentStyle.margin}>
       {!choosedBarber && (
         <h2 className={AppointmentStyle.title}>
           Select a <span className="text-action font-title">barber</span>
@@ -104,6 +104,6 @@ export default function BarberSelector({
           ? renderBarberList()
           : renderChoosedBarber(selectedOption)}
       </div>
-    </section>
+    </article>
   );
 }

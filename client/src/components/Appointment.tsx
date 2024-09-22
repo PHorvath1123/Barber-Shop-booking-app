@@ -17,7 +17,7 @@ export default function Appointment({selectedBarberId, selectedDay, setAppointme
     const availableTimeSlots = getAvailableSlots(selectedDay?.date, selectedDay?.dayName, availability, booking ?? []);
 
     return(
-        <section>
+        <article className={AppointmentStyle.margin}>
             <h2 className={AppointmentStyle.title}>
                 Choose an <span className="text-action font-title">appointment</span>
             </h2>
@@ -30,6 +30,6 @@ export default function Appointment({selectedBarberId, selectedDay, setAppointme
                     })}
                 </ul>
             </div>  
-        </section> 
+        </article> 
     );
 };

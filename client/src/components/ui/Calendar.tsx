@@ -100,9 +100,9 @@ export default function Calendar({ selectedBarberId, setSelectedDay }: CalendarP
       {isError ? (
         <span>An error has occured: {error.message}</span>
       ) : (
-        <>
+        <article className={AppointmentStyle.margin}>
           <h2 className={AppointmentStyle.title}>
-            Choose a <span className="text-action font-title">day</span>
+            Select a <span className="text-action font-title">day</span>
           </h2>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DateCalendar
@@ -153,7 +153,7 @@ export default function Calendar({ selectedBarberId, setSelectedDay }: CalendarP
               }}
             ></DateCalendar>
           </LocalizationProvider>
-        </>
+        </article>
       )}
     </>
   );
