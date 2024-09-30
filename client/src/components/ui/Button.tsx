@@ -6,7 +6,8 @@ type ButtonProps = {
     onClick?: React.MouseEventHandler<HTMLButtonElement>,
     variant?: 'contained' | 'outlined',
     children: React.ReactNode,
-    size?: 'sm'
+    size?: 'sm',
+    disabled?: boolean
 };
 
 const containedStyle = {
@@ -18,6 +19,10 @@ const containedStyle = {
     fontSize: 'clamp(0.6252rem, 0.9172rem + 0.2459vw, 0.8681rem)',
     ":hover":{
         backgroundColor: color.hoverAction,
+    },
+    '&.Mui-disabled':{
+        backgroundColor: '#c58d84',
+        color: color.light
     },
     '@media (min-width:768px)':{
         height: '6ch',
@@ -54,6 +59,7 @@ export default function CustomButton({variant = "contained", size, ...props}: Bu
             variant={variant}
             type={props.type}
             onClick={props.onClick}
+            disabled={props.disabled}
         >
             {props.children}
         </Button>
