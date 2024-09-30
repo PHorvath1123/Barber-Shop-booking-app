@@ -9,6 +9,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {useServiceContext} from '../hook/useServiceContext'
 import Appointment from "../components/Appointment";
 import Button from '../components/ui/Button'
+import BookingDetailsForm from '../components/BookingDetailsForm'
 
 export type selectedDateType = {
   date: string,
@@ -60,6 +61,7 @@ export default function Booking() {
           />
         )}
       </QueryClientProvider>
+      <BookingDetailsForm/>
       <Footer />
     </section>
   );

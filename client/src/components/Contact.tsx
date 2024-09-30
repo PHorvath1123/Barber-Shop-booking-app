@@ -67,7 +67,7 @@ export default function Contact(){
 
     return(
         <section className='relative flex flex-col items-center overflow-hidden ' id="Contact">
-            {isModalOpen && <Modal open={isModalOpen} onClose={() => setIsModalOpen(false)} type='message'></Modal>}
+            {isModalOpen && <Modal open={isModalOpen} modalClose={() => setIsModalOpen(false)} type='message'></Modal>}
             <div className={HomeStyle.contactTitleCt}>
                 <div className={HomeStyle.contactTitle}><span className='text-action font-title'>Contact</span> Information</div>
                 <p className={HomeStyle.contactText}>Whether you have a question about our services, want to book an appointment, or just want to say hello, feel free to reach out to us.</p>
