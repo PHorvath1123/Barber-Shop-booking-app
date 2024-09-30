@@ -13,6 +13,7 @@ import { z } from "zod";
 import { usePostMessage } from '../hook/usePostMessage';
 import Modal from './ui/Modal';
 import {colorPalette as color} from '../utils/colorPalette'
+import ReCAPTCHA from "react-google-recaptcha";
 
 
 const schema = z.object({
@@ -39,8 +40,9 @@ export default function Contact(){
 
     const [validationError, setValidationError] = useState<ValidationError>();
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+    const [captchaValue, setCaptchaValue] = useState<string | null>("");
     const {sendMessage, isSuccessful, setIsSuccessful} = usePostMessage();
-
+        
     useEffect(() =>{
         if(isSuccessful){
             setIsModalOpen(true); // open the modal
@@ -64,7 +66,6 @@ export default function Contact(){
             setValidationError({_errors:[]}) // reset the optionally error messages under the form fields
         }
     };
-
     return(
         <section className='relative flex flex-col items-center overflow-hidden ' id="Contact">
             {isModalOpen && <Modal open={isModalOpen} modalClose={() => setIsModalOpen(false)} type='message'></Modal>}
@@ -128,7 +129,11 @@ export default function Contact(){
                         }
                     }}
                     />
-                    <Button type='submit'>Send</Button>
+                    <ReCAPTCHA
+                        sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
+                        onChange={value => setCaptchaValue(value)}
+                    />
+                    <Button disabled={!captchaValue} type='submit'>Send</Button>
                 </form>
                 <ul className={HomeStyle.infoList}>
                     <li className='flex items-center gap-3'>
