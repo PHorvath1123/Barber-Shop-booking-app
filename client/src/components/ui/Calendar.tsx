@@ -5,7 +5,6 @@ import { DayCalendarSkeleton } from "@mui/x-date-pickers/DayCalendarSkeleton";
 import dayjs, { Dayjs } from "dayjs";
 import updateLocale from "dayjs/plugin/updateLocale";
 import { useGetWorkingTime } from "../../hook/useGetWorkingTime";
-import AppointmentStyle from "../../styles/appointment/Appointment.module.css";
 import {colorPalette as color} from '../../utils/colorPalette'
 import {useGetBookedAppointments} from '../../hook/useGetBookedAppointments'
 import type {selectedDateType} from '../../pages/Booking'

@@ -8,6 +8,7 @@ import ServiceSelector from "../components/ServiceSelector";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {useServiceContext} from '../hook/useServiceContext'
 import Appointment from "../components/Appointment";
+import Button from '../components/ui/Button'
 
 export type selectedDateType = {
   date: string,
@@ -35,10 +36,15 @@ export default function Booking() {
         />
         <QueryClientProvider client={queryClient}>
           {barberId &&(
-            <Calendar
-              selectedBarberId={barberId}
-              setSelectedDay={setSelectedDay}
-            />
+            <>
+              <Calendar
+                selectedBarberId={barberId}
+                setSelectedDay={setSelectedDay}
+              />
+              <div className="fixed z-10 right-[30px] bottom-[20px]">
+                <Button variant="contained" size="sm" onClick={() => window.location.reload()}>Reset booking</Button>
+              </div>
+            </>
           )}
         </QueryClientProvider>
       </div> 
