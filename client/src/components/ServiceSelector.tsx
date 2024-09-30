@@ -49,8 +49,8 @@ export default function ServiceSelector() {
   const selectedService = (selectedService: string) =>{
     return(
       <>
-        <div className="flex flex-col items-center mt-[2rem] gap-[1.1rem] md:flex md:justify-center">
-          <span className="font-text text-xs uppercase underline">Selected service :</span>
+        <div className={AppointmentStyle.serviceOuterCt}>
+          <span className="font-title text-xl mb-[1rem] border-b-[1px] border-action">Service</span>
           <p className={AppointmentStyle.selectedService}>{selectedService}</p>
         </div>
       </>
@@ -61,7 +61,7 @@ export default function ServiceSelector() {
     <article className={AppointmentStyle.margin}>
       {!service &&
         <h2 className={AppointmentStyle.title}>
-          Select a <span className="text-action font-title">Service</span>
+          Service 
         </h2> 
       }
       {!service ? serviceList() : selectedService(service)}

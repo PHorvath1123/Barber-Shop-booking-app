@@ -18,10 +18,8 @@ export default function Appointment({selectedBarberId, selectedDay, setAppointme
 
     return(
         <article className={AppointmentStyle.margin}>
-            <h2 className={AppointmentStyle.title}>
-                Choose an <span className="text-action font-title">appointment</span>
-            </h2>
             <div className={AppointmentStyle.timeSlotOuterCt}>
+                <h2 className='font-title text-lg border-b-[1px] mb-[2rem] relative top-[-20px] border-action'>Availabilities</h2>
                 <ul>
                     {availableTimeSlots.map(slot => {
                         return(

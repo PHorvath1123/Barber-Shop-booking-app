@@ -76,16 +76,16 @@ export default function BarberSelector({
       return (
         <div
           key={barber.id}
-          className="flex flex-col items-center gap-3 mt-[1rem]"
+          className="flex flex-col justify-center items-center gap-3"
         >
           <img
             src={barber.photo}
             alt={`Photo of ${barber.name}`}
             className={AppointmentStyle.choosedBarberImg}
           />
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col items-center relative top-[-55px]">
             <div className="text-action text-md">{barber.name}</div>
-            <div className="text-xs">{barber.title}</div>
+            <div className="text-[.9rem]">{barber.title}</div>
           </div>
         </div>
       );
@@ -93,13 +93,8 @@ export default function BarberSelector({
   };
 
   return (
-    <article className={AppointmentStyle.margin}>
-      {!choosedBarber && (
-        <h2 className={AppointmentStyle.title}>
-          Select a <span className="text-action font-title">barber</span>
-        </h2>
-      )}
-      <div className="flex flex-col items-center justify-center gap-5">
+    <article>
+      <div className="flex flex-col items-center justify-center">
         {!choosedBarber
           ? renderBarberList()
           : renderChoosedBarber(selectedOption)}

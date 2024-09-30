@@ -25,21 +25,28 @@ export default function Booking() {
   return (
     <section className={AppointmentStyle.bg}>
       <Navbar />
-      <BarberSelector
-        selectedOption={barberId}
-        setSelectedOption={setBarberId}
-      />
+      <h1 className={AppointmentStyle.title}>Book an 
+        <span className="text-action font-title"> appointment</span>
+      </h1>
+      <div className={AppointmentStyle.barberAndCalendarSelectorCt}>
+        <BarberSelector
+          selectedOption={barberId}
+          setSelectedOption={setBarberId}
+        />
+        <QueryClientProvider client={queryClient}>
+          {barberId &&(
+            <Calendar
+              selectedBarberId={barberId}
+              setSelectedDay={setSelectedDay}
+            />
+          )}
+        </QueryClientProvider>
+      </div> 
       <QueryClientProvider client={queryClient}>
-        {barberId &&(
+        {selectedDay &&(
           <ServiceSelector/>
         )}
-        {service &&(
-          <Calendar
-            selectedBarberId={barberId}
-            setSelectedDay={setSelectedDay}
-          />
-        )}
-        {selectedDay && (
+        {service && (
           <Appointment 
             selectedBarberId={barberId}
             selectedDay={selectedDay}

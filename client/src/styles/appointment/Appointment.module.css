@@ -16,7 +16,14 @@
 }
 
 .margin {
-  @apply my-[6rem];
+  @apply mb-[6rem];
+}
+
+@screen lg {
+  .barberAndCalendarSelectorCt {
+    @apply flex flex-row justify-evenly items-center w-[70vw] my-0 mx-auto mt-[5rem] border-[1px] rounded-[30px] py-[6rem];
+    box-shadow: 0px 3px 14px -2px rgb(2, 2, 2);
+  }
 }
 
 .barberInnerCt {
@@ -39,8 +46,9 @@
 }
 
 .choosedBarberImg {
-  box-shadow: 2px 1px 13px -1px rgba(239, 105, 80, 0.5);
-  @apply w-[26vw] sm:max-w-[18vw] md:max-w-[130px];
+  @apply w-[32vw] sm:max-w-[18vw] md:max-w-[170px];
+  -webkit-clip-path: circle(34% at 50% 40%);
+          clip-path: circle(34% at 50% 40%);
 }
 
 .serviceButtons {
@@ -57,6 +65,10 @@
   }
 }
 
+.serviceOuterCt {
+  @apply flex flex-col items-center mt-[2rem] gap-[1.1rem] md:flex md:justify-center py-[2rem];
+}
+
 .serviceListItem {
   @apply flex flex-row justify-between items-center border-b border-dotted mb-[1rem];
 }
@@ -70,11 +82,12 @@
 }
 
 .timeSlotOuterCt {
-  @apply flex flex-col items-center mt-[2.5rem] md:w-[70vw] mx-[1rem];
+  @apply flex flex-col items-center justify-evenly gap-5 mt-[2.5rem] md:w-[70vw] mx-[1rem] border-[1px] rounded-[30px] py-[4rem];
+  box-shadow: 0px 3px 14px -2px rgb(2, 2, 2);
 }
 @screen md {
   .timeSlotOuterCt {
-    @apply w-[50vw] my-0 mx-auto mt-[2.5rem];
+    @apply w-[70vw] my-0 mx-auto mt-[2.5rem];
   }
 }
 .timeSlotOuterCt ul {

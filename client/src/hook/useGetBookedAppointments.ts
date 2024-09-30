@@ -6,7 +6,7 @@ export type bookingType = {
   dayName: string
   
 };
-
+//! Kezelni az esetet, amikor egyáltalán nincs még könyvelés. Ilyenkor 404-et ad vissza.
 const getBookings = async (barberId: string): Promise<bookingType[]> => {
     const request = await fetch(`/api/getBookings/${barberId}`);
     const result = await request.json();
