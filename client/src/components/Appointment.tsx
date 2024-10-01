@@ -7,15 +7,17 @@ import { useGetBookedAppointments } from '../hook/useGetBookedAppointments';
 type AppointmentProps = {
     selectedBarberId: string,
     selectedDay: selectedDateType | null,
-    setAppointment: React.Dispatch<React.SetStateAction<string>>
+    setAppointment: React.Dispatch<React.SetStateAction<string>>,
+    selectedAppointment: string
 };
 
-export default function Appointment({selectedBarberId, selectedDay, setAppointment}: AppointmentProps){
+export default function Appointment({selectedBarberId, selectedDay, setAppointment, selectedAppointment}: AppointmentProps){
 
     const {data: availability} = useGetAppointments(selectedBarberId, selectedDay?.dayName);
     const {data: booking} = useGetBookedAppointments(selectedBarberId);
     const availableTimeSlots = getAvailableSlots(selectedDay?.date, selectedDay?.dayName, availability, booking ?? []);
-
+   
+    
     return(
         <article className={AppointmentStyle.margin}>
             <div className={AppointmentStyle.timeSlotOuterCt}>
@@ -23,7 +25,13 @@ export default function Appointment({selectedBarberId, selectedDay, setAppointme
                 <ul>
                     {availableTimeSlots.map(slot => {
                         return(
-                            <button onClick={() => setAppointment(slot)} key={slot}><li>{slot}</li></button>
+                            <button 
+                                onClick={() => setAppointment(slot)} 
+                                key={slot}>
+                                    <li className={selectedAppointment === slot ? 'bg-action text-white' : undefined}>
+                                        {slot}
+                                    </li>
+                            </button>
                         );
                     })}
                 </ul>
