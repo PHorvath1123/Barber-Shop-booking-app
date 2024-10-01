@@ -2,7 +2,6 @@ import { useFetchBarbersToHome } from "../hook/useFetchBarbersToHome";
 import AppointmentStyle from "../styles/appointment/Appointment.module.css";
 import Rating from "@mui/material/Rating";
 import Button from "../components/ui/Button";
-import { useState } from "react";
 
 type SelectorPropsType = {
   selectedOption: string;
@@ -13,14 +12,8 @@ export default function BarberSelector({
   selectedOption,
   setSelectedOption,
 }: SelectorPropsType) {
-  const [choosedBarber, setChoosedBarber] = useState<boolean>(false);
 
   const barbers = useFetchBarbersToHome();
-
-  const renderCalendarAndSelectedBarber = (id: string) => {
-    setChoosedBarber(true);
-    setSelectedOption(id);
-  };
 
   const renderBarberList = () => {
     return barbers.map((barber) => {
@@ -58,7 +51,7 @@ export default function BarberSelector({
                 }}
               />
             </div>
-            <Button onClick={() => renderCalendarAndSelectedBarber(barber.id)}>
+            <Button onClick={() => setSelectedOption(barber.id)}>
               View Availability
             </Button>
           </div>
@@ -95,7 +88,7 @@ export default function BarberSelector({
   return (
     <article>
       <div className="flex flex-col items-center justify-center">
-        {!choosedBarber
+        {!selectedOption
           ? renderBarberList()
           : renderChoosedBarber(selectedOption)}
       </div>
