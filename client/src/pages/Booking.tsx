@@ -2,7 +2,7 @@ import Footer from "../components/Footer";
 import Navbar from "../components/ui/Navbar";
 import BarberSelector from "../components/BarberSelector";
 import AppointmentStyle from "../styles/appointment/Appointment.module.css";
-import { useState} from "react";
+import { useState, useEffect} from "react";
 import Calendar from "../components/ui/Calendar";
 import ServiceSelector from "../components/ServiceSelector";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -19,8 +19,15 @@ export type selectedDateType = {
 export default function Booking() {
   const [barberId, setBarberId] = useState<string>("");
   const [selectedDay, setSelectedDay] = useState<selectedDateType | null>(null);
-  const {service} = useServiceContext();
+  const {service, setService} = useServiceContext();
   const [appointment, setAppointment] = useState<string>("");
+
+  // Resets the service state when the Booking component remounts (e.g., when navigating away from the page).
+  useEffect(() => {
+    return () => {
+      setService(""); 
+    };
+  }, []);
   
   const queryClient = new QueryClient();
 
@@ -37,11 +44,10 @@ export default function Booking() {
         />
         <QueryClientProvider client={queryClient}>
           {barberId &&(
-           
-              <Calendar
-                selectedBarberId={barberId}
-                setSelectedDay={setSelectedDay}
-              />
+            <Calendar
+              selectedBarberId={barberId}
+              setSelectedDay={setSelectedDay}
+            />
           )}
         </QueryClientProvider>
       </div> 
