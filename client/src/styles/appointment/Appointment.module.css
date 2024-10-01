@@ -21,8 +21,9 @@
 
 @screen lg {
   .barberAndCalendarSelectorCt {
-    @apply flex flex-row justify-evenly items-center w-[70vw] my-0 mx-auto mt-[5rem] border-[1px] rounded-[30px] py-[6rem];
-    box-shadow: 0px 3px 14px -2px rgb(2, 2, 2);
+    @apply flex flex-row justify-evenly items-center mt-[5rem] py-[6rem];
+    @apply w-[90vw] md:w-[70vw] my-0 mx-auto border-[1px] rounded-[30px];
+    box-shadow: 0px 0px 21px 5px rgb(0, 0, 0);
   }
 }
 
@@ -82,8 +83,9 @@
 }
 
 .timeSlotOuterCt {
-  @apply flex flex-col items-center justify-evenly gap-5 mt-[2.5rem] md:w-[70vw] mx-[1rem] border-[1px] rounded-[30px] py-[4rem];
-  box-shadow: 0px 3px 14px -2px rgb(2, 2, 2);
+  @apply flex flex-col items-center justify-evenly gap-5 mt-[2.5rem] mx-[1rem] py-[4rem];
+  @apply w-[90vw] md:w-[70vw] my-0 mx-auto border-[1px] rounded-[30px];
+  box-shadow: 0px 0px 21px 5px rgb(0, 0, 0);
 }
 @screen md {
   .timeSlotOuterCt {
@@ -98,4 +100,15 @@
 }
 .timeSlotOuterCt ul li:hover {
   @apply bg-action;
+  color: #c58d84;
+}
+
+.formOuterCt {
+  @apply flex flex-col items-center;
+  @apply w-[90vw] md:w-[70vw] my-0 mx-auto border-[1px] rounded-[30px];
+  box-shadow: 0px 0px 21px 5px rgb(0, 0, 0);
+}
+
+.form {
+  @apply flex flex-col items-center gap-[2rem] w-[80%] md:w-[50vw] lg:w-[30vw] xl:w-[20vw] py-[4rem];
 }/*# sourceMappingURL=Appointment.module.css.map */
