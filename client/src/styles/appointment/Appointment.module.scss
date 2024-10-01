@@ -118,14 +118,12 @@
    ul{
     @apply flex flex-wrap justify-center gap-[2rem];
 
-    //!button
     li{
         @apply px-[1.7rem] py-[.4rem] border border-action rounded-[30px];
     }
-
+  
     li:hover{
-        @apply bg-action;
-        color: #c58d84;
+        @apply bg-action text-white;
     }
    }
 }

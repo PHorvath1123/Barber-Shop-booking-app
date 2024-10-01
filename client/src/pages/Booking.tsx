@@ -37,15 +37,11 @@ export default function Booking() {
         />
         <QueryClientProvider client={queryClient}>
           {barberId &&(
-            <>
+           
               <Calendar
                 selectedBarberId={barberId}
                 setSelectedDay={setSelectedDay}
               />
-              <div className="fixed z-10 right-[30px] bottom-[20px]">
-                <Button variant="contained" size="sm" onClick={() => window.location.reload()}>Reset booking</Button>
-              </div>
-            </>
           )}
         </QueryClientProvider>
       </div> 
@@ -58,10 +54,25 @@ export default function Booking() {
             selectedBarberId={barberId}
             selectedDay={selectedDay}
             setAppointment={setAppointment}
+            selectedAppointment={appointment}
           />
         )}
       </QueryClientProvider>
-      <BookingDetailsForm/>
+      {appointment && (
+        <BookingDetailsForm/>
+      )}
+      {barberId && !appointment && (
+        <div className="fixed z-10 right-[30px] bottom-[20px]">
+          <Button 
+            variant="contained" 
+            size="sm" 
+            onClick={() => {
+              if(window.confirm("Are you sure you want to reset your booking to make a new one?"))
+                {window.location.reload()}}}>
+                  Reset booking
+          </Button>
+        </div>
+      )}
       <Footer />
     </section>
   );

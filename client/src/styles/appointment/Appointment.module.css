@@ -99,8 +99,7 @@
   @apply px-[1.7rem] py-[.4rem] border border-action rounded-[30px];
 }
 .timeSlotOuterCt ul li:hover {
-  @apply bg-action;
-  color: #c58d84;
+  @apply bg-action text-white;
 }
 
 .formOuterCt {
