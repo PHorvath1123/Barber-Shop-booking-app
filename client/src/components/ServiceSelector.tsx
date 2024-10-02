@@ -58,7 +58,7 @@ export default function ServiceSelector() {
   };
     
   return (
-    <article className={AppointmentStyle.margin}>
+    <article className={AppointmentStyle.serviceArticle}>
       {!service &&
         <h2 className={AppointmentStyle.title}>
           Service 

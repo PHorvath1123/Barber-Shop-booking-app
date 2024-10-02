@@ -7,7 +7,7 @@
 }
 
 .title {
-  @apply text-lg font-title uppercase font-bold text-center w-[100vw] mt-[3rem] mb-[1rem];
+  @apply text-lg font-title uppercase font-bold text-center w-[100vw] mt-[3rem] mb-[5rem];
 }
 @screen md {
   .title {
@@ -16,7 +16,7 @@
 }
 
 .margin {
-  @apply mb-[6rem];
+  @apply my-[3rem];
 }
 
 @screen lg {
@@ -52,17 +52,18 @@
           clip-path: circle(34% at 50% 40%);
 }
 
+.serviceArticle {
+  @apply flex flex-col items-center justify-evenly gap-5 mt-[2.5rem] pb-[2rem] mx-[1rem];
+  @apply w-[90vw] md:w-[70vw] my-0 mx-auto border-[1px] rounded-[30px];
+  box-shadow: 0px 0px 21px 5px rgb(0, 0, 0);
+}
+
 .serviceButtons {
   @apply flex flex-col items-center gap-[2rem] mx-[.5rem] mt-[3rem];
 }
-@screen sm {
-  .serviceButtons {
-    @apply flex flex-row justify-between gap-[1rem] mt-[3rem];
-  }
-}
 @screen lg {
   .serviceButtons {
-    @apply max-w-[70vw] 2xl:max-w-[45vw] my-0 mx-auto mt-[3rem];
+    @apply flex flex-row flex-wrap justify-center max-w-[50vw] 2xl:max-w-[45vw] my-0 mx-auto mt-[3rem];
   }
 }
 

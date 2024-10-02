@@ -40,14 +40,14 @@ export default function CustomButton({variant = "contained", size, ...props}: Bu
         fontFamily: 'Roboto',
         height: '5ch',
         width: 'fit-content',
-        minWidth: size === 'sm' ? '10ch' : '16ch',
+        minWidth: size === 'sm' ? '10ch' : '20ch',
         fontSize: 'clamp(0.6252rem, 0.9172rem + 0.2459vw, 0.8681rem)',
         ":hover":{
             backgroundColor: 'transparent',
             color: color.hoverAction,
             border: `1px solid ${color.hoverAction}`
         },
-        '@media (min-width:768px)':{
+        '@media (min-width:600px)':{
             height: size === 'sm' ? '4ch' : '6ch',
             width: size === 'sm' ? '15ch' :'25ch'
         }
