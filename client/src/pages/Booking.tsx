@@ -10,6 +10,7 @@ import {useServiceContext} from '../hook/useServiceContext'
 import Appointment from "../components/Appointment";
 import Button from '../components/ui/Button'
 import BookingDetailsForm from '../components/BookingDetailsForm'
+import type {formData} from '../components/BookingDetailsForm'
 
 export type selectedDateType = {
   date: string,
@@ -21,6 +22,8 @@ export default function Booking() {
   const [selectedDay, setSelectedDay] = useState<selectedDateType | null>(null);
   const {service, setService} = useServiceContext();
   const [appointment, setAppointment] = useState<string>("");
+  const [bookingFormData, setBookingFormData] = useState<formData | null>(null);
+  const [bookingIsSuccessful, setBookingIsSuccessful] = useState<boolean>(false);
 
   const calendarRef = useRef<HTMLDivElement | null>(null);
   const serviceRef = useRef<HTMLDivElement | null>(null);
@@ -29,22 +32,26 @@ export default function Booking() {
 
   // Scrolls the view to the respective section when the associated state is updated and the element is rendered.
   useEffect(() => {
-    if (calendarRef.current && barberId) {
-      calendarRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-    
-    if (serviceRef.current && selectedDay) {
-      serviceRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-    
-    if (appointmentRef.current && service) {
-      appointmentRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-    
-    if (bookingFormRef.current && appointment) {
-      bookingFormRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    if(!barberId || !selectedDay || !service || !appointment){
+      if (calendarRef.current && barberId) {
+        calendarRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+      
+      if (serviceRef.current && selectedDay) {
+        serviceRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+      
+      if (appointmentRef.current && service) {
+        appointmentRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
     }
   }, [barberId, selectedDay, service, appointment]);
+
+  useEffect(() =>{
+    if(bookingFormRef.current){
+      bookingFormRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    }
+  },[appointment])
 
   // Resets the service state when the Booking component remounts (e.g., when navigating away from the page).
   useEffect(() => {
@@ -55,31 +62,33 @@ export default function Booking() {
 
   const queryClient = new QueryClient();
 
+  const handleFormSubmit = (bookingData: formData) => {
+    setBookingFormData(bookingData);
+  };
+
   return (
     <section className={AppointmentStyle.bg}>
       <Navbar />
       <h1 className={AppointmentStyle.title}>Book an 
         <span className="text-action font-title"> appointment</span>
       </h1>
-      <div className={AppointmentStyle.barberAndCalendarSelectorCt}>
-        <BarberSelector
-          selectedOption={barberId}
-          setSelectedOption={setBarberId}
-        />
-        <QueryClientProvider client={queryClient}>
-          {barberId &&(
-            <div ref={calendarRef}>
-              <Calendar
-                selectedBarberId={barberId}
-                setSelectedDay={setSelectedDay}
-              />
-            </div>
-          )}
-        </QueryClientProvider>
-      </div> 
       <QueryClientProvider client={queryClient}>
+        <div className={AppointmentStyle.barberAndCalendarSelectorCt}>
+          <BarberSelector
+            selectedOption={barberId}
+            setSelectedOption={setBarberId}
+          />
+            {barberId &&(
+              <div ref={calendarRef}>
+                <Calendar
+                  selectedBarberId={barberId}
+                  setSelectedDay={setSelectedDay}
+                />
+              </div>
+            )}
+        </div> 
         {selectedDay &&(
-          <div ref={serviceRef}>
+          <div className="my-[3rem]" ref={serviceRef}>
             <ServiceSelector/>
           </div>
         )}
@@ -96,7 +105,10 @@ export default function Booking() {
       </QueryClientProvider>
       {appointment && (
         <div ref={bookingFormRef}>
-          <BookingDetailsForm/>
+          <BookingDetailsForm
+            setBookingState = {setBookingIsSuccessful}
+            onSubmitForm={handleFormSubmit}
+          />  
         </div>
       )}
       {barberId && !appointment && (
