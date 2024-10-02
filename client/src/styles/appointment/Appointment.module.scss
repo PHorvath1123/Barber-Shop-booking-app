@@ -37,14 +37,20 @@
 }
 
 .barberAndCalendarSelectorCt{
-    @screen lg{
-        @apply flex flex-row justify-evenly items-center mt-[5rem] py-[6rem];
+    @apply flex flex-col pb-[2rem];
+    
+    @screen sm{
         @include boxBorder
+    }
+
+    @screen lg{
+        @apply flex flex-row justify-evenly items-center mt-[5rem] py-[3rem];
+       
     }
 }
 
 .barberInnerCt{
-    @apply flex justify-center h-fit gap-[2rem] mx-[.7rem] mt-[3rem];
+    @apply flex justify-center h-fit gap-[2rem] mx-[.7rem] mt-[3rem] sm:w-[80%];
 
 
     .photoCt{
@@ -63,7 +69,7 @@
         }
 
         .introduction{
-            @apply text-justify hyphens-auto text-xs md:w-[55ch] md:text-sm tracking-widest sm:leading-[1.7rem]
+            @apply text-justify hyphens-auto text-xs lg:w-[55ch] lg:text-sm tracking-widest sm:leading-[1.7rem]
         }
     }
 }
@@ -137,4 +143,12 @@
 
 .form{
     @apply flex flex-col items-center gap-[2rem] w-[80%] md:w-[50vw] lg:w-[30vw] xl:w-[20vw] py-[4rem]
+}
+
+.buttonBox{
+    @apply flex flex-row flex-wrap-reverse gap-[3rem] items-center justify-center w-[80%] lg:w-[40vw] mt-[3rem]
+}
+
+.error{
+    @apply text-xs text-red-400 relative top-[-20px]
 }
