@@ -10,27 +10,6 @@ type ButtonProps = {
     disabled?: boolean
 };
 
-const containedStyle = {
-    backgroundColor: color.action,
-    fontFamily: 'Roboto',
-    height: '5ch',
-    width: 'fit-content',
-    minWidth: '16ch',
-    fontSize: 'clamp(0.6252rem, 0.9172rem + 0.2459vw, 0.8681rem)',
-    ":hover":{
-        backgroundColor: color.hoverAction,
-    },
-    '&.Mui-disabled':{
-        backgroundColor: '#c58d84',
-        color: color.light
-    },
-    '@media (min-width:768px)':{
-        height: '6ch',
-        width: '25ch'
-    }
-};
-
-
 export default function CustomButton({variant = "contained", size, ...props}: ButtonProps){
 
     const outlinedStyle = {
@@ -50,6 +29,26 @@ export default function CustomButton({variant = "contained", size, ...props}: Bu
         '@media (min-width:600px)':{
             height: size === 'sm' ? '4ch' : '6ch',
             width: size === 'sm' ? '15ch' :'25ch'
+        }
+    };
+
+    const containedStyle = {
+        backgroundColor: props.type === 'reset' ? '#6e6e6e' : color.action,
+        fontFamily: 'Roboto',
+        height: '5ch',
+        width: 'fit-content',
+        minWidth: '16ch',
+        fontSize: 'clamp(0.6252rem, 0.9172rem + 0.2459vw, 0.8681rem)',
+        ":hover":{
+            backgroundColor: props.type === 'reset' ? "#292929" :color.hoverAction,
+        },
+        '&.Mui-disabled':{
+            backgroundColor: '#c58d84',
+            color: color.light
+        },
+        '@media (min-width:768px)':{
+            height: '6ch',
+            width: '25ch'
         }
     };
     
