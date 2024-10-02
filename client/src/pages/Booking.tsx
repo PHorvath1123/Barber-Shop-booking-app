@@ -2,7 +2,7 @@ import Footer from "../components/Footer";
 import Navbar from "../components/ui/Navbar";
 import BarberSelector from "../components/BarberSelector";
 import AppointmentStyle from "../styles/appointment/Appointment.module.css";
-import { useState, useEffect} from "react";
+import { useState, useEffect, useRef} from "react";
 import Calendar from "../components/ui/Calendar";
 import ServiceSelector from "../components/ServiceSelector";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -22,13 +22,37 @@ export default function Booking() {
   const {service, setService} = useServiceContext();
   const [appointment, setAppointment] = useState<string>("");
 
+  const calendarRef = useRef<HTMLDivElement | null>(null);
+  const serviceRef = useRef<HTMLDivElement | null>(null);
+  const appointmentRef = useRef<HTMLDivElement | null>(null);
+  const bookingFormRef = useRef<HTMLDivElement | null>(null); 
+
+  // Scrolls the view to the respective section when the associated state is updated and the element is rendered.
+  useEffect(() => {
+    if (calendarRef.current && barberId) {
+      calendarRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    
+    if (serviceRef.current && selectedDay) {
+      serviceRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    
+    if (appointmentRef.current && service) {
+      appointmentRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    
+    if (bookingFormRef.current && appointment) {
+      bookingFormRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }, [barberId, selectedDay, service, appointment]);
+
   // Resets the service state when the Booking component remounts (e.g., when navigating away from the page).
   useEffect(() => {
     return () => {
       setService(""); 
     };
   }, []);
-  
+
   const queryClient = new QueryClient();
 
   return (
@@ -44,28 +68,36 @@ export default function Booking() {
         />
         <QueryClientProvider client={queryClient}>
           {barberId &&(
-            <Calendar
-              selectedBarberId={barberId}
-              setSelectedDay={setSelectedDay}
-            />
+            <div ref={calendarRef}>
+              <Calendar
+                selectedBarberId={barberId}
+                setSelectedDay={setSelectedDay}
+              />
+            </div>
           )}
         </QueryClientProvider>
       </div> 
       <QueryClientProvider client={queryClient}>
         {selectedDay &&(
-          <ServiceSelector/>
+          <div ref={serviceRef}>
+            <ServiceSelector/>
+          </div>
         )}
         {service && (
-          <Appointment 
-            selectedBarberId={barberId}
-            selectedDay={selectedDay}
-            setAppointment={setAppointment}
-            selectedAppointment={appointment}
-          />
+          <div ref={appointmentRef}>
+            <Appointment 
+              selectedBarberId={barberId}
+              selectedDay={selectedDay}
+              setAppointment={setAppointment}
+              selectedAppointment={appointment}
+            />
+          </div> 
         )}
       </QueryClientProvider>
       {appointment && (
-        <BookingDetailsForm/>
+        <div ref={bookingFormRef}>
+          <BookingDetailsForm/>
+        </div>
       )}
       {barberId && !appointment && (
         <div className="fixed z-10 right-[30px] bottom-[20px]">
