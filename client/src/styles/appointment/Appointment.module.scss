@@ -152,3 +152,83 @@
 .error{
     @apply text-xs text-red-400 relative top-[-20px]
 }
+
+//* Summary-----------------------------------------
+
+.summaryCt{
+    @apply flex flex-col items-center;
+    @include boxBorder;
+
+    img{
+        @apply w-[150px] mt-[1rem]
+    }
+
+    .selectedOptionsCt{
+        @apply flex flex-col items-center gap-[2rem] w-[80%] border-b-2 border-dotted border-action relative top-[-50px];
+        
+        @screen md{
+            @apply flex-row justify-between items-center top-0;
+        }
+        @screen lg{
+            @apply w-[70%]
+        }
+        @screen xl{
+            @apply w-[50%]
+        }
+
+        .barberSummaryCt{
+            @apply flex flex-col items-center md:h-[100%];
+        }
+
+        .selectedBookingDetailsCt{
+            @apply w-[80%] text-sm sm:text-md md:w-[35ch] mb-[2rem];
+
+            ul{
+                @apply flex flex-col justify-between gap-[3.5rem] md:h-[100%];
+
+                li{
+                    @apply flex justify-between border-b-[2px] border-dotted;
+
+                    p{
+                        @apply font-title font-bold
+                    }
+                    
+                    span{
+                        @apply font-title
+                    }
+                }
+            }
+        } 
+    }
+
+    .customerDetailsCt{
+        @apply flex flex-col w-[80%] mt-[2rem] lg:w-[70%] xl:w-[50%];
+
+        .customerDetails{
+            @apply flex flex-col w-[100%] items-center lg:items-start;
+
+            ul{
+                @apply flex flex-col text-sm sm:text-md gap-[2.5rem];
+
+                
+
+                p{
+                    @apply font-bold font-title
+                }
+
+                li{
+                    @apply flex gap-3 justify-between;
+
+                    span{
+                        @apply font-title
+                    }
+                }
+            }
+        }
+    }
+
+    
+    .endLogoInSummary{
+        @apply w-auto h-[260px] py-[3rem]
+    }
+}

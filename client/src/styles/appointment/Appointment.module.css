@@ -126,4 +126,70 @@
 
 .error {
   @apply text-xs text-red-400 relative top-[-20px];
+}
+
+.summaryCt {
+  @apply flex flex-col items-center;
+  @apply w-[90vw] md:w-[70vw] my-0 mx-auto border-[1px] rounded-[30px];
+  box-shadow: 0px 0px 21px 5px rgb(0, 0, 0);
+}
+.summaryCt img {
+  @apply w-[150px] mt-[1rem];
+}
+.summaryCt .selectedOptionsCt {
+  @apply flex flex-col items-center gap-[2rem] w-[80%] border-b-2 border-dotted border-action relative top-[-50px];
+}
+@screen md {
+  .summaryCt .selectedOptionsCt {
+    @apply flex-row justify-between items-center top-0;
+  }
+}
+@screen lg {
+  .summaryCt .selectedOptionsCt {
+    @apply w-[70%];
+  }
+}
+@screen xl {
+  .summaryCt .selectedOptionsCt {
+    @apply w-[50%];
+  }
+}
+.summaryCt .selectedOptionsCt .barberSummaryCt {
+  @apply flex flex-col items-center md:h-[100%];
+}
+.summaryCt .selectedOptionsCt .selectedBookingDetailsCt {
+  @apply w-[80%] text-sm sm:text-md md:w-[35ch] mb-[2rem];
+}
+.summaryCt .selectedOptionsCt .selectedBookingDetailsCt ul {
+  @apply flex flex-col justify-between gap-[3.5rem] md:h-[100%];
+}
+.summaryCt .selectedOptionsCt .selectedBookingDetailsCt ul li {
+  @apply flex justify-between border-b-[2px] border-dotted;
+}
+.summaryCt .selectedOptionsCt .selectedBookingDetailsCt ul li p {
+  @apply font-title font-bold;
+}
+.summaryCt .selectedOptionsCt .selectedBookingDetailsCt ul li span {
+  @apply font-title;
+}
+.summaryCt .customerDetailsCt {
+  @apply flex flex-col w-[80%] mt-[2rem] lg:w-[70%] xl:w-[50%];
+}
+.summaryCt .customerDetailsCt .customerDetails {
+  @apply flex flex-col w-[100%] items-center lg:items-start;
+}
+.summaryCt .customerDetailsCt .customerDetails ul {
+  @apply flex flex-col text-sm sm:text-md gap-[2.5rem];
+}
+.summaryCt .customerDetailsCt .customerDetails ul p {
+  @apply font-bold font-title;
+}
+.summaryCt .customerDetailsCt .customerDetails ul li {
+  @apply flex gap-3 justify-between;
+}
+.summaryCt .customerDetailsCt .customerDetails ul li span {
+  @apply font-title;
+}
+.summaryCt .endLogoInSummary {
+  @apply w-auto h-[260px] py-[3rem];
 }/*# sourceMappingURL=Appointment.module.css.map */

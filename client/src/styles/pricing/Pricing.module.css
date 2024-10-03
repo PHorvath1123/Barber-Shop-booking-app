@@ -12,7 +12,7 @@
 }
 
 .categoryTitle {
-  @apply text-md font-title mb-[2rem] w-fit relative font-title;
+  @apply text-md font-title mb-[2rem] w-fit relative;
 }
 
 .categoryTitle::after {
