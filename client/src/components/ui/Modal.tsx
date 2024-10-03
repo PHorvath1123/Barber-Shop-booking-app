@@ -62,8 +62,8 @@ export default function ContactModal({
 
   const {setService} = useServiceContext();
 
-  const handleSelectService =(selectedService: string) => {
-    setService(selectedService);
+  const handleSelectService =(selectedService: string, price: number ) => {
+    setService({title: selectedService, price: price});
     modalClose?.();
   };
 
@@ -88,7 +88,7 @@ export default function ContactModal({
                         <span className="text-xs">{service.price} $</span>
                       </div>
                       <div className="mb-[.3rem]">
-                        <Button onClick={() => handleSelectService(service.title)} variant="outlined" size="sm">Select</Button> 
+                        <Button onClick={() => handleSelectService(service.title, service.price)} variant="outlined" size="sm">Select</Button> 
                       </div>
                     </div>
                   </div>

@@ -59,12 +59,12 @@ export default function ServiceSelector() {
     
   return (
     <article className={AppointmentStyle.serviceArticle}>
-      {!service &&
+      {!service?.title &&
         <h2 className={AppointmentStyle.title}>
           Service 
         </h2> 
       }
-      {!service ? serviceList() : selectedService(service)}
+      {!service?.title ? serviceList() : selectedService(service.title)}
     </article>
   );
 }

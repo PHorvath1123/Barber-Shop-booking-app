@@ -63,7 +63,9 @@ export default function Booking() {
   // Resets the service state when the Booking component remounts (e.g., when navigating away from the page).
   useEffect(() => {
     return () => {
-      setService(""); 
+      setService({title: "", price: 0}); 
+      console.log('Az effect lefutott');
+      
     };
   }, []);
 
@@ -101,7 +103,7 @@ export default function Booking() {
             <ServiceSelector/>
           </div>
         )}
-        {service && !bookingIsSuccessful &&(
+        {service?.title && !bookingIsSuccessful &&(
           <div ref={appointmentRef}>
             <Appointment 
               selectedBarber={barber}

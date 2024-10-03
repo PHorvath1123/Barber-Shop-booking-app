@@ -4,15 +4,20 @@ type contextProviderProps = {
   children: React.ReactNode;
 };
 
+type serviceType = {
+  title: string,
+  price: number
+};
+
 type contextType = {
-  service: string;
-  setService: React.Dispatch<React.SetStateAction<string>>;
+  service: serviceType | null;
+  setService: React.Dispatch<React.SetStateAction<serviceType | null>>;
 };
 
 export const serviceContext = createContext<contextType | null>(null);
 
 export default function ServiceContextProvider({children}: contextProviderProps) {
-  const [service, setService] = useState<string>("");
+  const [service, setService] = useState<serviceType | null>(null);
 
   return (
     <serviceContext.Provider
