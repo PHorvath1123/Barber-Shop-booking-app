@@ -33,6 +33,7 @@ export default function BookingConfirmation(){
                     </ul>
                 </div>
             </article>
+            <div className='border-b-2 border-action w-[90%]'></div>
             <article className={AppointmentStyle.customerDetailsCt}>
                 <h3 className='text-md sm:text-lg font-title mb-[3rem]'>Customer Information</h3>
                 <div className={AppointmentStyle.customerDetails}>
@@ -51,16 +52,32 @@ export default function BookingConfirmation(){
                         </li>
                         <li>
                             <p>Comment:</p>
-                            <span className='text-justify hyphens-auto pl-[2rem] overflow-scroll h-[150px]'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur, error deleniti commodi maiores perferendis recusandae.</span>
+                            <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur, error deleniti commodi maiores perferendis recusandae.</span>
                         </li>
                     </ul>
                 </div>
             </article>
             <div className={AppointmentStyle.buttonBox}>
-                <Button type='reset'>Reset Booking</Button>
-                <Button>Confirm booking</Button>
+                <Button 
+                    type='reset'
+                    variant="contained"
+                    size="sm"
+                    onClick={() => {
+                        if (
+                        window.confirm(
+                            "Are you sure you want to cancel your booking?"
+                        )
+                        ) {
+                        window.location.reload();
+                        window.scrollTo(0, 0);
+                        }
+                    }}
+                >
+                    Cancel
+                </Button>
+                <Button type='submit'>Confirm booking</Button>
             </div>
-            <img className={AppointmentStyle.endLogoInSummary} src={summaryLogo} alt="" />
+            <img className={AppointmentStyle.endLogoInSummary} src={summaryLogo} alt="Barber decoration graphic"/>
         </section>
     );
 }
