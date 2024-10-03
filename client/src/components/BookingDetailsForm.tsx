@@ -105,7 +105,6 @@ export default function BookingDetailsForm({setBookingState, onSubmitForm}: Book
             placeholder="Booking comment (optional)"
             variant="outlined"
             name="comment"
-            required
             onChange={(e) =>
               setBookingFormData((f) => ({ ...f, comment: e.target.value }))
             }

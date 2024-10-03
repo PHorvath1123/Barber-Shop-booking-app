@@ -13,10 +13,39 @@ type confirmationProps = {
     service: serviceType | null,
     appointment: string,
     formData: formData | null
+};
+
+type bookingDataType = {
+    barberId?: string,
+    date?: string,
+    dayName?: string,
+    appointment: string,
+    serviceTitle?: string,
+    servicePrice?: number,
+    name?: string,
+    email?: string,
+    phone?: string,
+    comment?: string | null
+}
+
+const handlePostBooking = (bookingData?: bookingDataType) => {
 
 };
 
 export default function BookingConfirmation(props: confirmationProps){
+
+    const bookingData = {
+        barberId: props.barber?.id,
+        date: props.date?.date,
+        dayName: props.date?.dayName,
+        appointment: props.appointment,
+        serviceTitle: props.service?.title,
+        servicePrice: props.service?.price,
+        name: props.formData?.name,
+        email: props.formData?.email,
+        phone: props.formData?.phone,
+        comment: props.formData?.comment,
+      };
 
     return(
         <section className={AppointmentStyle.summaryCt}>
@@ -41,7 +70,7 @@ export default function BookingConfirmation(props: confirmationProps){
                         </li>
                         <li>
                             <p>Price:</p>
-                            <span>{props.service?.price}</span>
+                            <span>{props.service?.price} $</span>
                         </li>
                     </ul>
                 </div>
@@ -88,7 +117,7 @@ export default function BookingConfirmation(props: confirmationProps){
                 >
                     Cancel
                 </Button>
-                <Button type='submit'>Confirm booking</Button>
+                <Button onClick={() => handlePostBooking(bookingData)} type='submit'>Confirm booking</Button>
             </div>
             <img className={AppointmentStyle.endLogoInSummary} src={summaryLogo} alt="Barber decoration graphic"/>
         </section>
