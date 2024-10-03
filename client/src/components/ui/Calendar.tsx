@@ -9,9 +9,10 @@ import {colorPalette as color} from '../../utils/colorPalette'
 import {useGetBookedAppointments} from '../../hook/useGetBookedAppointments'
 import type {selectedDateType} from '../../pages/Booking'
 import { isDayAvailable } from "../../utils/checkAvailability.utils";
+import type {selectedBarberType} from '../../pages/Booking'
 
 type CalendarProps = {
-  selectedBarberId: string,
+  selectedBarber: selectedBarberType | null,
   setSelectedDay: React.Dispatch<React.SetStateAction<selectedDateType | null>>
 };
 
@@ -41,7 +42,7 @@ const commonColor = {
   color: color.light,
 };
 
-export default function Calendar({ selectedBarberId, setSelectedDay }: CalendarProps) {
+export default function Calendar({ selectedBarber, setSelectedDay }: CalendarProps) {
 
   // Fetch the working time from the database
   const {
@@ -49,10 +50,10 @@ export default function Calendar({ selectedBarberId, setSelectedDay }: CalendarP
     isLoading,
     isError,
     error,
-  } = useGetWorkingTime(selectedBarberId);
+  } = useGetWorkingTime(selectedBarber?.id);
 
   // Fetch the booked appointments
-  const {data: booking} = useGetBookedAppointments(selectedBarberId);
+  const {data: booking} = useGetBookedAppointments(selectedBarber?.id);
 
   const workingDays: string[] = [];
   availability?.map((days) => {

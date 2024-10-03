@@ -164,7 +164,7 @@
     }
 
     .selectedOptionsCt{
-        @apply flex flex-col items-center gap-[2rem] w-[80%] border-b-2 border-dotted border-action relative top-[-50px];
+        @apply flex flex-col items-center gap-[2rem] w-[80%] relative top-[-50px];
         
         @screen md{
             @apply flex-row justify-between items-center top-0;
@@ -217,10 +217,18 @@
                 }
 
                 li{
-                    @apply flex gap-3 justify-between;
-
+                    @apply flex gap-3 justify-between border-b-[2px] border-dotted;
+                
                     span{
                         @apply font-title
+                    }
+                }
+
+                li:nth-child(4){
+                    @apply border-b-0;
+
+                    span{
+                        @apply text-justify hyphens-auto pl-[2rem] overflow-scroll h-[150px]
                     }
                 }
             }

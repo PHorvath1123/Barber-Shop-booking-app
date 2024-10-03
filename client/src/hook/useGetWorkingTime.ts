@@ -6,7 +6,7 @@ export type daysType = {
   close: string;
 };
 
-const getDays = async (barberId: string): Promise<daysType[]> => {
+const getDays = async (barberId?: string): Promise<daysType[]> => {
   const request = await fetch(`/api/getAvailabilities/${barberId}`);
   const result = await request.json();
   console.log('A query lefutott');
@@ -14,7 +14,7 @@ const getDays = async (barberId: string): Promise<daysType[]> => {
   return result;
 };
 
-export const useGetWorkingTime = (barberId: string) => {
+export const useGetWorkingTime = (barberId?: string) => {
     
   return useQuery({
     queryKey: ["availableDays", barberId],

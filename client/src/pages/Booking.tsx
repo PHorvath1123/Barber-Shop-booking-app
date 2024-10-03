@@ -18,8 +18,14 @@ export type selectedDateType = {
   dayName: string 
 };
 
+export type selectedBarberType = {
+  id: string,
+  name: string,
+  photo: string
+};
+
 export default function Booking() {
-  const [barberId, setBarberId] = useState<string>("");
+  const [barber, setBarber] = useState<selectedBarberType | null>(null);
   const [selectedDay, setSelectedDay] = useState<selectedDateType | null>(null);
   const {service, setService} = useServiceContext();
   const [appointment, setAppointment] = useState<string>("");
@@ -33,8 +39,8 @@ export default function Booking() {
 
   // Scrolls the view to the respective section when the associated state is updated and the element is rendered.
   useEffect(() => {
-    if(!barberId || !selectedDay || !service || !appointment){
-      if (calendarRef.current && barberId) {
+    if(!barber || !selectedDay || !service || !appointment){
+      if (calendarRef.current && barber) {
         calendarRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
       
@@ -46,7 +52,7 @@ export default function Booking() {
         appointmentRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
     }
-  }, [barberId, selectedDay, service, appointment]);
+  }, [barber, selectedDay, service, appointment]);
 
   useEffect(() =>{
     if(bookingFormRef.current){
@@ -77,13 +83,13 @@ export default function Booking() {
         {!bookingIsSuccessful &&(
           <div className={AppointmentStyle.barberAndCalendarSelectorCt}>
             <BarberSelector
-              selectedOption={barberId}
-              setSelectedOption={setBarberId}
+              selectedOption={barber}
+              setSelectedOption={setBarber}
             />
-            {barberId && !bookingIsSuccessful &&(
+            {barber && !bookingIsSuccessful &&(
               <div ref={calendarRef}>
                 <Calendar
-                  selectedBarberId={barberId}
+                  selectedBarber={barber}
                   setSelectedDay={setSelectedDay}
                 />
               </div>
@@ -98,7 +104,7 @@ export default function Booking() {
         {service && !bookingIsSuccessful &&(
           <div ref={appointmentRef}>
             <Appointment 
-              selectedBarberId={barberId}
+              selectedBarber={barber}
               selectedDay={selectedDay}
               setAppointment={setAppointment}
               selectedAppointment={appointment}
@@ -114,7 +120,7 @@ export default function Booking() {
           />  
         </div>
       )}
-      {barberId && !appointment && (
+      {barber && !appointment && (
         <div className="fixed z-10 right-[30px] bottom-[20px]">
           <Button 
             variant="contained" 
@@ -128,7 +134,7 @@ export default function Booking() {
       )}
       {bookingIsSuccessful && (
         <BookingConfirmation
-          
+
         />
       )}
       <Footer />

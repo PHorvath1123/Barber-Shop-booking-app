@@ -3,18 +3,19 @@ import { selectedDateType } from '../pages/Booking';
 import AppointmentStyle from '../styles/appointment/Appointment.module.css';
 import { getAvailableSlots } from '../utils/checkAvailability.utils';
 import { useGetBookedAppointments } from '../hook/useGetBookedAppointments';
+import {selectedBarberType} from '../pages/Booking'
 
 type AppointmentProps = {
-    selectedBarberId: string,
+    selectedBarber: selectedBarberType | null,
     selectedDay: selectedDateType | null,
     setAppointment: React.Dispatch<React.SetStateAction<string>>,
     selectedAppointment: string
 };
 
-export default function Appointment({selectedBarberId, selectedDay, setAppointment, selectedAppointment}: AppointmentProps){
+export default function Appointment({selectedBarber, selectedDay, setAppointment, selectedAppointment}: AppointmentProps){
 
-    const {data: availability} = useGetAppointments(selectedBarberId, selectedDay?.dayName);
-    const {data: booking} = useGetBookedAppointments(selectedBarberId);
+    const {data: availability} = useGetAppointments(selectedBarber?.id, selectedDay?.dayName);
+    const {data: booking} = useGetBookedAppointments(selectedBarber?.id);
     const availableTimeSlots = getAvailableSlots(selectedDay?.date, selectedDay?.dayName, availability, booking ?? []);
    
     

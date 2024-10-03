@@ -2,10 +2,11 @@ import { useFetchBarbersToHome } from "../hook/useFetchBarbersToHome";
 import AppointmentStyle from "../styles/appointment/Appointment.module.css";
 import Rating from "@mui/material/Rating";
 import Button from "../components/ui/Button";
+import {selectedBarberType} from '../pages/Booking'
 
 type SelectorPropsType = {
-  selectedOption: string;
-  setSelectedOption: React.Dispatch<React.SetStateAction<string>>;
+  selectedOption: selectedBarberType | null;
+  setSelectedOption: React.Dispatch<React.SetStateAction<selectedBarberType | null>>;
 };
 
 export default function BarberSelector({
@@ -51,7 +52,7 @@ export default function BarberSelector({
                 }}
               />
             </div>
-            <Button onClick={() => setSelectedOption(barber.id)}>
+            <Button onClick={() => setSelectedOption({id: barber.id, name: barber.name, photo: barber.photo})}>
               View Availability
             </Button>
           </div>
@@ -60,9 +61,9 @@ export default function BarberSelector({
     });
   };
 
-  const renderChoosedBarber = (id: string) => {
+  const renderChoosedBarber = (selectedBarber: selectedBarberType) => {
     const pickedBarber = barbers.filter((barber) => {
-      return barber.id === id;
+      return barber.id === selectedBarber.id;
     });
 
     return pickedBarber.map((barber) => {
