@@ -208,7 +208,7 @@
             @apply flex flex-col min-w-[100%] items-center lg:items-start;
 
             ul{
-                @apply flex flex-col text-sm sm:text-md gap-[2.5rem] min-w-[100%];
+                @apply flex flex-col text-sm sm:text-md gap-[2.5rem] min-w-[100%] mb-[4rem];
 
                 p{
                     @apply font-bold font-title
@@ -226,7 +226,12 @@
                     @apply border-b-0;
 
                     span{
-                        @apply text-justify hyphens-auto pl-[2rem] overflow-scroll max-h-[150px]
+                        @apply text-justify hyphens-auto pl-[2rem] overflow-y-scroll max-h-[150px];
+                        scrollbar-width: auto;
+                        scrollbar-color: #ef6950 #ffffff00;
+                    }
+                    span::-webkit-scrollbar-thumb{
+                        border-radius: 20px;
                     }
                 }
             }

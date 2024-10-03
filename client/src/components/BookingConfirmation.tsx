@@ -31,7 +31,9 @@ export default function BookingConfirmation(props: confirmationProps){
                     <ul>
                         <li>
                             <p>Date:</p>
-                            <span>{`${props.date?.date} ${props.appointment}`}</span>
+                            <span>{props.date?.date}
+                                <span className='ml-[1rem]'>{props.appointment}</span>
+                            </span>
                         </li>
                         <li>
                             <p>Service:</p>
@@ -59,7 +61,7 @@ export default function BookingConfirmation(props: confirmationProps){
                         </li>
                         <li>
                             <p>Phone:</p>
-                            <span className='tracking-widest'>{props.formData?.phone}</span>
+                            <span className='tracking-[.2rem]'>{props.formData?.phone}</span>
                         </li>
                         <li>
                             <p>Comment:</p>
