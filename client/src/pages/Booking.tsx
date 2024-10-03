@@ -136,7 +136,11 @@ export default function Booking() {
       )}
       {bookingIsSuccessful && (
         <BookingConfirmation
-
+          barber = {barber}
+          date = {selectedDay}
+          service = {service}
+          appointment = {appointment}
+          formData = {bookingFormData}
         />
       )}
       <Footer />
