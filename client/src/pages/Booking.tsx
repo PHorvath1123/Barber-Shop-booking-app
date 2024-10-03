@@ -11,6 +11,7 @@ import Appointment from "../components/Appointment";
 import Button from '../components/ui/Button'
 import BookingDetailsForm from '../components/BookingDetailsForm'
 import type {formData} from '../components/BookingDetailsForm'
+import BookingConfirmation from '../components/BookingConfirmation'
 
 export type selectedDateType = {
   date: string,
@@ -73,12 +74,13 @@ export default function Booking() {
         <span className="text-action font-title"> appointment</span>
       </h1>
       <QueryClientProvider client={queryClient}>
-        <div className={AppointmentStyle.barberAndCalendarSelectorCt}>
-          <BarberSelector
-            selectedOption={barberId}
-            setSelectedOption={setBarberId}
-          />
-            {barberId &&(
+        {!bookingIsSuccessful &&(
+          <div className={AppointmentStyle.barberAndCalendarSelectorCt}>
+            <BarberSelector
+              selectedOption={barberId}
+              setSelectedOption={setBarberId}
+            />
+            {barberId && !bookingIsSuccessful &&(
               <div ref={calendarRef}>
                 <Calendar
                   selectedBarberId={barberId}
@@ -86,13 +88,14 @@ export default function Booking() {
                 />
               </div>
             )}
-        </div> 
-        {selectedDay &&(
+          </div> 
+        )}
+        {selectedDay && !bookingIsSuccessful &&(
           <div className="my-[3rem]" ref={serviceRef}>
             <ServiceSelector/>
           </div>
         )}
-        {service && (
+        {service && !bookingIsSuccessful &&(
           <div ref={appointmentRef}>
             <Appointment 
               selectedBarberId={barberId}
@@ -103,7 +106,7 @@ export default function Booking() {
           </div> 
         )}
       </QueryClientProvider>
-      {appointment && (
+      {appointment && !bookingIsSuccessful &&(
         <div ref={bookingFormRef}>
           <BookingDetailsForm
             setBookingState = {setBookingIsSuccessful}
@@ -122,6 +125,11 @@ export default function Booking() {
                   Reset booking
           </Button>
         </div>
+      )}
+      {bookingIsSuccessful && (
+        <BookingConfirmation
+          
+        />
       )}
       <Footer />
     </section>
