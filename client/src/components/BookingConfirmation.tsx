@@ -2,10 +2,21 @@ import summaryLogo from '/summary_logo.png'
 import Scissor from '/summary_scissor.png'
 import AppointmentStyle  from '../styles/appointment/Appointment.module.css'
 import Button from './ui/Button'
-import Alfredo from '/barbers/alfredo_torres.png'
+import type {selectedBarberType} from '../pages/Booking'
+import type {selectedDateType} from '../pages/Booking'
+import type {serviceType} from '../hook/useServiceContext'
+import type {formData} from '../components/BookingDetailsForm'
 
+type confirmationProps = {
+    barber: selectedBarberType | null,
+    date: selectedDateType | null,
+    service: serviceType | null,
+    appointment: string,
+    formData: formData | null
 
-export default function BookingConfirmation(){
+};
+
+export default function BookingConfirmation(props: confirmationProps){
 
     return(
         <section className={AppointmentStyle.summaryCt}>
@@ -13,22 +24,22 @@ export default function BookingConfirmation(){
             <h2 className={AppointmentStyle.title}>Booking summary</h2>
             <article className={AppointmentStyle.selectedOptionsCt}>
                 <div className={AppointmentStyle.barberSummaryCt} >
-                    <img className={AppointmentStyle.choosedBarberImg} src={Alfredo} alt=""/>
-                    <p className='relative top-[-60px] font-title text-md'>Alfredo Torres</p>
+                    <img className={AppointmentStyle.choosedBarberImg} src={props.barber?.photo} alt={`Photo of the barber: ${props.barber?.name}`}/>
+                    <p className='relative top-[-60px] font-title text-md'>{props.barber?.name}</p>
                 </div>
                 <div className={AppointmentStyle.selectedBookingDetailsCt}>
                     <ul>
                         <li>
                             <p>Date:</p>
-                            <span>2024.10.02 16:00</span>
+                            <span>{`${props.date?.date} ${props.appointment}`}</span>
                         </li>
                         <li>
                             <p>Service:</p>
-                            <span>Senior Cut 65+</span>
+                            <span>{props.service?.title}</span>
                         </li>
                         <li>
                             <p>Price:</p>
-                            <span>25$</span>
+                            <span>{props.service?.price}</span>
                         </li>
                     </ul>
                 </div>
@@ -40,19 +51,19 @@ export default function BookingConfirmation(){
                     <ul>
                         <li>
                             <p>Name:</p>
-                            <span>Kiss Károly</span>
+                            <span>{props.formData?.name}</span>
                         </li>
                         <li>
                             <p>E-mail:</p>
-                            <span>kiss@gmail.com</span>
+                            <span>{props.formData?.email}</span>
                         </li>
                         <li>
                             <p>Phone:</p>
-                            <span className='tracking-widest'>0171417785</span>
+                            <span className='tracking-widest'>{props.formData?.phone}</span>
                         </li>
                         <li>
                             <p>Comment:</p>
-                            <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur, error deleniti commodi maiores perferendis recusandae.</span>
+                            <span>{props.formData?.comment}</span>
                         </li>
                     </ul>
                 </div>

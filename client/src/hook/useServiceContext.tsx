@@ -4,7 +4,7 @@ type contextProviderProps = {
   children: React.ReactNode;
 };
 
-type serviceType = {
+export type serviceType = {
   title: string,
   price: number
 };

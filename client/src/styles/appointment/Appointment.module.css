@@ -176,10 +176,10 @@
   @apply flex flex-col w-[80%] mt-[2rem] lg:w-[70%] xl:w-[50%];
 }
 .summaryCt .customerDetailsCt .customerDetails {
-  @apply flex flex-col w-[100%] items-center lg:items-start;
+  @apply flex flex-col min-w-[100%] items-center lg:items-start;
 }
 .summaryCt .customerDetailsCt .customerDetails ul {
-  @apply flex flex-col text-sm sm:text-md gap-[2.5rem];
+  @apply flex flex-col text-sm sm:text-md gap-[2.5rem] min-w-[100%];
 }
 .summaryCt .customerDetailsCt .customerDetails ul p {
   @apply font-bold font-title;
@@ -194,7 +194,7 @@
   @apply border-b-0;
 }
 .summaryCt .customerDetailsCt .customerDetails ul li:nth-child(4) span {
-  @apply text-justify hyphens-auto pl-[2rem] overflow-scroll h-[150px];
+  @apply text-justify hyphens-auto pl-[2rem] overflow-scroll max-h-[150px];
 }
 .summaryCt .endLogoInSummary {
   @apply w-auto h-[260px] py-[3rem];
