@@ -134,15 +134,17 @@ export default function Booking() {
           </Button>
         </div>
       )}
-      {bookingIsSuccessful && (
-        <BookingConfirmation
-          barber = {barber}
-          date = {selectedDay}
-          service = {service}
-          appointment = {appointment}
-          formData = {bookingFormData}
-        />
-      )}
+      <QueryClientProvider client={queryClient}>
+        {bookingIsSuccessful && (
+          <BookingConfirmation
+            barber = {barber}
+            date = {selectedDay}
+            service = {service}
+            appointment = {appointment}
+            formData = {bookingFormData}
+          />
+        )}
+      </QueryClientProvider>
       <Footer />
     </section>
   );

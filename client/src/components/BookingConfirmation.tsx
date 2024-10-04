@@ -6,6 +6,7 @@ import type {selectedBarberType} from '../pages/Booking'
 import type {selectedDateType} from '../pages/Booking'
 import type {serviceType} from '../hook/useServiceContext'
 import type {formData} from '../components/BookingDetailsForm'
+import {usePostBooking} from '../hook/usePostBooking'
 
 type confirmationProps = {
     barber: selectedBarberType | null,
@@ -15,7 +16,7 @@ type confirmationProps = {
     formData: formData | null
 };
 
-type bookingDataType = {
+export type bookingDataType = {
     barberId?: string,
     date?: string,
     dayName?: string,
@@ -27,10 +28,6 @@ type bookingDataType = {
     phone?: string,
     comment?: string | null
 }
-
-const handlePostBooking = (bookingData?: bookingDataType) => {
-
-};
 
 export default function BookingConfirmation(props: confirmationProps){
 
@@ -46,6 +43,8 @@ export default function BookingConfirmation(props: confirmationProps){
         phone: props.formData?.phone,
         comment: props.formData?.comment,
       };
+
+    const {mutateAsync: postBookingMutation, isError, isSuccess, isPending} = usePostBooking(bookingData)
 
     return(
         <section className={AppointmentStyle.summaryCt}>
@@ -117,7 +116,15 @@ export default function BookingConfirmation(props: confirmationProps){
                 >
                     Cancel
                 </Button>
-                <Button onClick={() => handlePostBooking(bookingData)} type='submit'>Confirm booking</Button>
+                <Button 
+                    onClick={async () => {
+                        try{
+                            postBookingMutation();
+                        }catch (e) {
+                            console.error(e);
+                        }
+                    }} 
+                    type='submit'>Confirm booking</Button>
             </div>
             <img className={AppointmentStyle.endLogoInSummary} src={summaryLogo} alt="Barber decoration graphic"/>
         </section>
