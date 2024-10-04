@@ -78,9 +78,11 @@ export default function Booking() {
   return (
     <section className={AppointmentStyle.bg}>
       <Navbar />
-      <h1 className={AppointmentStyle.title}>Book an 
-        <span className="text-action font-title"> appointment</span>
-      </h1>
+      {!bookingIsSuccessful && (
+        <h1 className={AppointmentStyle.title}>Book an 
+          <span className="text-action font-title"> appointment</span>
+        </h1>
+      )}
       <QueryClientProvider client={queryClient}>
         {!bookingIsSuccessful &&(
           <div className={AppointmentStyle.barberAndCalendarSelectorCt}>
