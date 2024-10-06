@@ -62,10 +62,9 @@ export default function Booking() {
 
   // Resets the service state when the Booking component remounts (e.g., when navigating away from the page).
   useEffect(() => {
+    window.scrollTo(0,0);
     return () => {
       setService({title: "", price: 0}); 
-      console.log('Az effect lefutott');
-      
     };
   }, []);
 
