@@ -10,6 +10,7 @@ import { usePostBooking } from "../hook/usePostBooking";
 import Modal from "./ui/Modal";
 import CircularProgress from "@mui/material/CircularProgress";
 import { colorPalette as color } from "../utils/colorPalette";
+import { useEffect } from "react";
 
 type confirmationProps = {
   barber: selectedBarberType | null;
@@ -33,6 +34,11 @@ export type bookingDataType = {
 };
 
 export default function BookingConfirmation(props: confirmationProps) {
+
+  useEffect(() => {
+    window.scrollTo(0,0);
+  },[])
+
   const bookingData = {
     barberId: props.barber?.id,
     date: props.date?.date,
