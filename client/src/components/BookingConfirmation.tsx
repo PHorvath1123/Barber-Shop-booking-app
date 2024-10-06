@@ -35,10 +35,6 @@ export type bookingDataType = {
 
 export default function BookingConfirmation(props: confirmationProps) {
 
-  useEffect(() => {
-    window.scrollTo(0,0);
-  },[])
-
   const bookingData = {
     barberId: props.barber?.id,
     date: props.date?.date,
@@ -56,19 +52,25 @@ export default function BookingConfirmation(props: confirmationProps) {
     mutateAsync: postBookingMutation,
     data: confirmedBookingResponse,
     isError,
+    error,
     isSuccess,
     isPending,
   } = usePostBooking(bookingData);
 
+  useEffect(() => {
+    window.scrollTo(0,0);
+  }, [isError])
+
   return (
     <>
       {isError && (
-        <div className="flex flex-col items-center gap-5">
+        <div className="flex flex-col items-center gap-5 mb-10">
           <div className=" text-center text-lg text-hoverAction w-[80%] lg:w-[50%] my-0 mx-auto">
-            An error occurred during the booking process. Please refresh the
-            page and try again!
+            {error.message 
+            ?  error.message 
+            : 'An error occurred during the booking process. Please refresh the page and try again!'}
           </div>
-          <Button>Try again</Button>
+          <Button onClick={() => {window.location.reload()}}>Try again</Button>
         </div>
       )}
       {isPending && <CircularProgress sx={{ color: color.action }} />}

@@ -11,7 +11,7 @@ export const deleteOldBookings = async() => {
         const oldBookings = await bookingRef.where('date', '<=', cutOffDate.toISOString().split('T')[0]).get()
 
         if(!oldBookings.empty){
-            const batch = db.batch();
+            const batch = db.batch(); // Create a batch to perform multiple deletes
             oldBookings.forEach((oldBooking : any) => batch.delete(oldBooking.ref))
             batch.commit();
             
