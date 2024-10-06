@@ -90,7 +90,7 @@ export default function ContactModal({
               <div key={category.category} className="w-[100%]">
                 <h2
                   key={category.category}
-                  className="mb-3 font-bold text-lg text-action"
+                  className="mb-[3rem] font-bold text-lg text-action"
                 >
                   {category.category}
                 </h2>

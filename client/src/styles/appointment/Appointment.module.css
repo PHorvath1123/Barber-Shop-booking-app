@@ -79,7 +79,7 @@
 }
 
 .serviceListItem {
-  @apply flex flex-row justify-between items-center border-b border-dotted mb-[1rem];
+  @apply flex flex-row justify-between items-center border-b border-dotted mb-[2rem];
 }
 
 .priceAndService {
@@ -101,7 +101,7 @@
   }
 }
 .timeSlotOuterCt ul {
-  @apply flex flex-wrap justify-center gap-[2rem];
+  @apply flex flex-wrap justify-center gap-[2rem] w-[80%];
 }
 .timeSlotOuterCt ul li {
   @apply px-[1.7rem] py-[.4rem] border border-action rounded-[30px];
