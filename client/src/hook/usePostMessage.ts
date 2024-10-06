@@ -10,6 +10,7 @@ export const usePostMessage = () => {
       email,
       message,
       access_key: "2a31ac37-fd2d-440d-abf3-234d231629fd",
+      subject: 'New message from Prestige Cuts website'
     };
     const json = JSON.stringify(object);
 
