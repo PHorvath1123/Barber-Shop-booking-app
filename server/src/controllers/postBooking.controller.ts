@@ -1,6 +1,7 @@
 import { db} from '../firebase.server.config';
 import { Request, Response } from 'express';
 import { FieldValue } from 'firebase-admin/firestore';
+import xss from 'xss';
 
 
 type bookingDataType = {
@@ -18,7 +19,12 @@ type bookingDataType = {
 
 export const addBookingToDB = async(req: Request, res: Response) => {
     
-    const bookingData: bookingDataType = req.body;
+    const bookingData: bookingDataType = {
+        ...req.body,
+        name: xss(req.body.name),
+        email: xss(req.body.email),
+        comment: xss(req.body.comment)
+    };
 
     try{
         const newBooking = await db.collection('booking').add({
