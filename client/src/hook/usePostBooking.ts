@@ -13,6 +13,15 @@ const postBookingData = async (bookingData?: bookingDataType) => {
         headers: { 'Content-Type': 'application/json'},
         body: JSON.stringify(bookingData)
     });
+
+    if (!request.ok) {
+        const errorData = await request.json();
+        
+        throw { 
+          message: errorData.error
+        };
+      }
+
     const response: BookingResponseType = await request.json();
     return response;
 };
