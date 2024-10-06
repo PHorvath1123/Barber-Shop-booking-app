@@ -9,7 +9,7 @@ type Barber = {
     id: string
 };
 
-export const useFetchBarbersToHome = () => {
+export const useFetchBarbers = () => {
     
     const [barbers, setBarbers] = useState<Barber[]>([]);
     

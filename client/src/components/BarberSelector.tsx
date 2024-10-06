@@ -1,4 +1,4 @@
-import { useFetchBarbersToHome } from "../hook/useFetchBarbersToHome";
+import { useFetchBarbers } from "../hook/useFetchBarbers";
 import AppointmentStyle from "../styles/appointment/Appointment.module.css";
 import Rating from "@mui/material/Rating";
 import Button from "../components/ui/Button";
@@ -14,7 +14,7 @@ export default function BarberSelector({
   setSelectedOption,
 }: SelectorPropsType) {
 
-  const barbers = useFetchBarbersToHome();
+  const barbers = useFetchBarbers();
 
   const renderBarberList = () => {
     return barbers.map((barber) => {

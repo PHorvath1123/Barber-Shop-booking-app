@@ -1,10 +1,10 @@
 import BarbersTitleLogo from '/barbers-title-logo.png';
 import HomeStyle  from '../styles/home/Home.module.css';
-import { useFetchBarbersToHome } from '../hook/useFetchBarbersToHome';
+import { useFetchBarbers } from '../hook/useFetchBarbers';
 
 export default function MeetOurBarbers(){
 
-    const barbers = useFetchBarbersToHome();
+    const barbers = useFetchBarbers();
     
     return(
         <section id='Barbers' className='flex flex-col items-center mb-[3rem] overflow-x-hidden '>
