@@ -12,7 +12,9 @@ const schema = z.object({
       message: "Must be the full name!"}),
   email: z.string().email({ message: "Must be a valid email address!" }),
   phone: z.string().length(11, { message: "Must be a valid phone number!" }),
-  comment: z.string(),
+  comment: z.string().refine(
+    (val) => !/[<>]/.test(val),
+    { message: "Comment contains invalid characters." }),
   isChecked: z.boolean(),
 });
 
@@ -28,6 +30,7 @@ type ValidationError = {
   name?: { _errors: string[] };
   email?: { _errors: string[] };
   phone?: { _errors: string[] };
+  comment?: {_errors: string[] }
 };
 
 export default function BookingDetailsForm({setBookingState, onSubmitForm}: BookingFormType) {
@@ -124,6 +127,7 @@ export default function BookingDetailsForm({setBookingState, onSubmitForm}: Book
               },
             }}
           />
+          {validationError?.comment && <p className={AppointmentStyle.error}>{validationError?.comment._errors[0]}</p>}
           <Checkbox
             label="I agree to the terms of service and privacy policy."
             required
