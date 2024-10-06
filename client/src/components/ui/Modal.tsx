@@ -135,11 +135,11 @@ export default function ContactModal({
         <div className="text-sm md:text-md flex flex-col text-left gap-7 hyphens-auto my-10">
           <p>Thank you for your booking!</p>
           <p>
-            We are pleased to confirm your appointment on
+            We are pleased to confirm your appointment on {" "}
             <strong className="text-action">
               {content?.dayName}, {content?.date}
             </strong>
-            at
+            {" "} at
             <strong className="text-action"> {content?.appointment}</strong>.
           </p>
           <p>We look forward to welcoming you to our salon.</p>
