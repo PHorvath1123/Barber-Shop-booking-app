@@ -14,6 +14,7 @@ import { usePostMessage } from '../hook/usePostMessage';
 import Modal from './ui/Modal';
 import {colorPalette as color} from '../utils/colorPalette'
 import ReCAPTCHA from "react-google-recaptcha";
+import { Link } from "react-router-dom";
 
 
 const schema = z.object({
@@ -72,7 +73,9 @@ export default function Contact(){
             <div className={HomeStyle.contactTitleCt}>
                 <div className={HomeStyle.contactTitle}><span className='text-action font-title'>Contact</span> Information</div>
                 <p className={HomeStyle.contactText}>Whether you have a question about our services, want to book an appointment, or just want to say hello, feel free to reach out to us.</p>
-                <Button>Book now</Button>
+                <Link to={"/Appointment"}>
+                    <Button>Book now</Button>
+                </Link>
                 <div className='font-title text-xl mt-[3.4rem] mb-[2rem]'>OR</div>
             </div>
             <img className={HomeStyle.contactBg} src={ContactBackground} alt="contact background"/>
