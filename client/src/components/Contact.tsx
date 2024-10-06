@@ -18,9 +18,12 @@ import { Link } from "react-router-dom";
 
 
 const schema = z.object({
-    name: z.string(),
+    name: z.string().regex(/^([\wöüóőúéáűí]{3,})+\s+([\wöüóőúéáűí\s]{3,})+$/gim, {
+        message: "Must be the full name!"}),
     email: z.string().email({message: 'must be a valid email address'}),
-    message: z.string(),
+    message: z.string().refine(
+        (val) => !/[<>]/.test(val),
+        { message: "Message contains invalid characters." }),
     isChecked: z.boolean()
 });
 
@@ -28,7 +31,9 @@ export type formData = z.infer<typeof schema>;
 
 type ValidationError = {
     _errors: string[],
-    email?: {_errors: string[]},
+    name?: {_errors: string[]};
+    email?: {_errors: string[]};
+    message?: {_errors: string[]}
 }
 
 export default function Contact(){
@@ -84,9 +89,10 @@ export default function Contact(){
                     <TextInput 
                         onChange={(e) => setMessageFormData((f) => ({...f, name: e.target.value}))} 
                         name='name' 
-                        label='Name'
+                        label='Full Name'
                         value = {messageFormData.name}
-                    />   
+                    />
+                    {validationError?.name && <p className={HomeStyle.error}>{validationError?.name._errors[0]}</p>}   
                     <TextInput 
                         onChange={(e) => setMessageFormData((f) => ({...f, email: e.target.value}))} 
                         name='email' 
@@ -117,6 +123,7 @@ export default function Contact(){
                             },
                         }}
                     />
+                    {validationError?.message && <p className={HomeStyle.error}>{validationError?.message._errors[0]}</p>}
                     <Checkbox 
                     label="I agree to the terms of service and privacy policy." 
                     required
