@@ -9,7 +9,7 @@ export const usePostMessage = () => {
       name,
       email,
       message,
-      access_key: "2a31ac37-fd2d-440d-abf3-234d231629fd",
+      access_key: import.meta.env.VITE_WEB3FORMS_ACCESS_KEY,
       subject: 'New message from Prestige Cuts website'
     };
     const json = JSON.stringify(object);
