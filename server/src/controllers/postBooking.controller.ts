@@ -1,8 +1,8 @@
 import { db} from '../firebase.server.config';
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import { FieldValue } from 'firebase-admin/firestore';
 import xss from 'xss';
-import { bookingCounter } from '../bookingCounter';
+import { bookingCounter } from '../helpers/bookingCounter';
 
 
 type bookingDataType = {
@@ -18,7 +18,7 @@ type bookingDataType = {
     comment?: string | null
 }
 
-export const addBookingToDB = async(req: Request, res: Response) => {
+export const addBookingToDB = async(req: Request, res: Response, next: NextFunction) => {
     
     const bookingData: bookingDataType = {
         ...req.body,
@@ -36,16 +36,18 @@ export const addBookingToDB = async(req: Request, res: Response) => {
                 timestamp: FieldValue.serverTimestamp()
             });
     
-            res.status(201).json({
+            res.json({
                 dayName: bookingData.dayName,
                 date: bookingData.date,
                 appointment: bookingData.appointment
             });
         }else {
-            res.status(429).json({error: 'Daily booking limit reached. Try again later.'})
+            res.status(429).json({message: 'Daily booking limit reached. Try again later.'})
         }
         
-    }catch(err){
-        res.status(500).json({error: `Booking failed: ${err}`});
+    }catch(error){
+        console.error('Error saving booking:', error);
+        res.status(500).json({message: `Booking failed: ${error}`});
+        next(error);
     }
 };

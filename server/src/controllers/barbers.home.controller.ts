@@ -1,5 +1,5 @@
 import { db } from '../firebase.server.config';
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 
 type BarberResponse = {
   name: string,
@@ -10,11 +10,15 @@ type BarberResponse = {
   id: string
 };
 
-export const getBarbersFromDB = async (req: Request, res: Response) => {
+export const getBarbersFromDB = async (req: Request, res: Response, next: NextFunction) => {
 
   try{
     const barbersRef = db.collection('barbers');
     const barbersSnapshot = await barbersRef.get();
+
+    if (barbersSnapshot.empty){
+      throw new Error("No barbers found in database");
+    }
     
     const barbers: BarberResponse[] = [];
 
@@ -33,6 +37,7 @@ export const getBarbersFromDB = async (req: Request, res: Response) => {
   }
   catch(error){
     console.error('Error getting barbers:', error);
-    res.status(500).send('Internal Server Error');
+    res.status(500).json({message: `Error getting barbers: ${error}`});
+    next(error);
   };
 };

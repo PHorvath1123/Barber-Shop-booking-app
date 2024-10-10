@@ -1,5 +1,5 @@
 import { db } from '../firebase.server.config';
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 
 type appointmentsType = {
     day: string,
@@ -7,7 +7,7 @@ type appointmentsType = {
     close: string
 };
 
-export const getWorkingTimeFromDB = async(req: Request, res: Response) => {
+export const getWorkingTimeFromDB = async(req: Request, res: Response, next: NextFunction) => {
 
     try{
         const { barberId, selectedDay } = req.params;
@@ -16,6 +16,11 @@ export const getWorkingTimeFromDB = async(req: Request, res: Response) => {
         if(!selectedDay){
             const workingTimeRef = db.collection('barbers').doc(barberId).collection('availability');
             const workingTimeSnapshot = await workingTimeRef.get();
+
+            if(workingTimeSnapshot.empty){
+                throw new Error("No availability found")
+            }
+
             const workingTime: appointmentsType[] = [];
     
             workingTimeSnapshot.forEach((doc: any) => {
@@ -34,6 +39,11 @@ export const getWorkingTimeFromDB = async(req: Request, res: Response) => {
         else{
             const appointmentRef = db.collection('barbers').doc(barberId).collection('availability').doc(selectedDay);
             const appointmentSnapshot = await appointmentRef.get();
+            
+            if (appointmentSnapshot.empty){
+                throw new Error("No availability found on specified day")
+            }
+
             const data = appointmentSnapshot.data();
             const freeAppointments: appointmentsType[] = [];
             const appointment: appointmentsType = {
@@ -47,6 +57,7 @@ export const getWorkingTimeFromDB = async(req: Request, res: Response) => {
     }
     catch(error){
         console.error('Error getting working time:', error);
-        res.status(500).send('Internal Server Error');
+        res.status(500).json({message:`Error getting working time:${error}`});
+        next(error);
     }
 };

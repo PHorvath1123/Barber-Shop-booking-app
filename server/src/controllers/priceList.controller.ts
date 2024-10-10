@@ -1,5 +1,5 @@
 import { db } from '../firebase.server.config';
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 
 type priceType = {
     title: string,
@@ -12,7 +12,7 @@ type PriceListItem = {
   };
 
 
-export const getPriceListFromDB = async(req: Request, res: Response) =>{
+export const getPriceListFromDB = async(req: Request, res: Response, next: NextFunction) =>{
     
     try {
         const categories = ["Beard & Shave", "Extras", "Haircuts", "Special Services"];
@@ -21,6 +21,10 @@ export const getPriceListFromDB = async(req: Request, res: Response) =>{
         for (const category of categories) {
           const categoryRef = db.collection('pricing').doc('categories').collection(category);
           const categorySnapshot = await categoryRef.get();
+
+          if (categorySnapshot.empty){
+            throw new Error('No services found for category');
+          }
 
           const services: priceType[] = [];
     
@@ -43,7 +47,8 @@ export const getPriceListFromDB = async(req: Request, res: Response) =>{
         res.json(priceList);
     
     } catch (error) {
-        console.error('Error getting prices:', error);
-        res.status(500).send('Internal Server Error');
+        console.error('Error getting services:', error);
+        res.status(500).json({message: 'Failed to retrieve the price list from the database.'});
+        next(error)
     };
 };
