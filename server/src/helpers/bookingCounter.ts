@@ -1,4 +1,4 @@
-import { db } from './firebase.server.config';
+import { db } from '../firebase.server.config';
 import { FieldValue } from 'firebase-admin/firestore';
 
 // Function to count and limit the number of bookings per day

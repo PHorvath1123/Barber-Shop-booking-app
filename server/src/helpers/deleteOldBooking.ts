@@ -1,4 +1,4 @@
-import { db } from './firebase.server.config';
+import { db } from '../firebase.server.config';
 
 export const deleteOldBookings = async() => {
     try{
