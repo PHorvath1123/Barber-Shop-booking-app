@@ -3,6 +3,13 @@ import type {daysType} from './useGetWorkingTime'
 
 const getAppointments = async (barberId?: string, selectedDay?: string): Promise<daysType[]> => {
   const request = await fetch(`/api/getAvailabilities/${barberId}/${selectedDay}`);
+
+  if(!request.ok){
+    const error = await request.json()
+    throw { 
+      message: error.message
+    };
+  }
   const result = await request.json();
   return result;
 };

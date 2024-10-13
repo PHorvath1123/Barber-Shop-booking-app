@@ -13,6 +13,13 @@ import { useQuery } from "@tanstack/react-query";
 const getServices = async (): Promise<PriceListType[]> =>{
     const response = await fetch('/api/getPriceList');
     const data: PriceListType[] = await response.json();
+
+    if(!response.ok){
+      const error = await response.json()
+      throw { 
+        message: error.message
+      };
+    }
     return data;
 };
 

@@ -9,6 +9,14 @@ export type bookingType = {
 
 const getBookings = async (barberId?: string): Promise<bookingType[]> => {
     const request = await fetch(`/api/getBookings/${barberId}`);
+
+    if(!request.ok){
+      const error = await request.json()
+      throw { 
+        message: error.message
+      };
+    }
+    
     const result = await request.json();
     return result;
 };

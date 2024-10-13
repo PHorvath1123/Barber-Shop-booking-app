@@ -18,7 +18,7 @@ const postBookingData = async (bookingData?: bookingDataType) => {
         const errorData = await request.json();
         
         throw { 
-          message: errorData.error
+          message: errorData.message
         };
       }
 

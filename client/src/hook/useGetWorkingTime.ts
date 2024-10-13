@@ -8,6 +8,14 @@ export type daysType = {
 
 const getDays = async (barberId?: string): Promise<daysType[]> => {
   const request = await fetch(`/api/getAvailabilities/${barberId}`);
+
+  if(!request.ok){
+    const error = await request.json()
+    throw { 
+      message: error.message
+    };
+  }
+
   const result = await request.json();
   return result;
 };
