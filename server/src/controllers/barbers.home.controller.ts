@@ -37,7 +37,7 @@ export const getBarbersFromDB = async (req: Request, res: Response, next: NextFu
   }
   catch(error){
     console.error('Error getting barbers:', error);
-    res.status(500).json({message: `Error getting barbers: ${error}`});
+    res.status(500).json({message: `Error getting barbers. ${error}`});
     next(error);
   };
 };

@@ -48,7 +48,7 @@ export const getPriceListFromDB = async(req: Request, res: Response, next: NextF
     
     } catch (error) {
         console.error('Error getting services:', error);
-        res.status(500).json({message: 'Failed to retrieve the price list from the database.'});
+        res.status(500).json({message: `Failed to retrieve the price list from the database. ${error}`});
         next(error)
     };
 };

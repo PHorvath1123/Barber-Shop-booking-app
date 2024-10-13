@@ -47,7 +47,7 @@ export const addBookingToDB = async(req: Request, res: Response, next: NextFunct
         
     }catch(error){
         console.error('Error saving booking:', error);
-        res.status(500).json({message: `Booking failed: ${error}`});
+        res.status(500).json({message: `Booking failed. ${error}`});
         next(error);
     }
 };

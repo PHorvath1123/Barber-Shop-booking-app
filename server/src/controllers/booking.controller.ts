@@ -32,7 +32,7 @@ export const getBookingFromDB = async(req: Request, res: Response, next: NextFun
     }
     catch(error){
         console.error('Error getting bookings:', error);
-        res.status(500).json({message: `Error getting bookings: ${error}`});
+        res.status(500).json({message: `Error getting bookings. ${error}`});
         next(error);
     }
 };

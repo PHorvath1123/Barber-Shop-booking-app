@@ -57,7 +57,7 @@ export const getWorkingTimeFromDB = async(req: Request, res: Response, next: Nex
     }
     catch(error){
         console.error('Error getting working time:', error);
-        res.status(500).json({message:`Error getting working time:${error}`});
+        res.status(500).json({message:`Error getting working time. ${error}`});
         next(error);
     }
 };
