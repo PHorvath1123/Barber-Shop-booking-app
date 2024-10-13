@@ -1,3 +1,7 @@
+.errorMessage {
+  @apply text-center text-lg text-hoverAction w-[80%] lg:w-[50%] my-0 mx-auto;
+}
+
 .heroContainer {
   background-image: url(/background.png);
   background-position: center;

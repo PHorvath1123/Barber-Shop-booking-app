@@ -1,3 +1,7 @@
+.errorMessage{
+    @apply text-center text-lg text-hoverAction w-[80%] lg:w-[50%] my-0 mx-auto
+}
+
 .outerCt{
     @apply flex flex-col items-center mx-[2rem] gap-[3rem];
 

@@ -36,6 +36,10 @@
     @apply my-[3rem]
 }
 
+.errorMessage{
+    @apply text-center text-lg text-hoverAction w-[80%] lg:w-[50%] my-0 mx-auto
+}
+
 .barberAndCalendarSelectorCt{
     @apply flex flex-col pb-[2rem];
     
