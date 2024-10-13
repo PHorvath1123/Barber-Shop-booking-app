@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 
 type Barber = {
     name: string,
@@ -9,29 +9,23 @@ type Barber = {
     id: string
 };
 
-export const useFetchBarbers = () => {
-    
-    const [barbers, setBarbers] = useState<Barber[]>([]);
-    
-    const getBarbers = async () => {
-        try{
-            const response = await fetch('/api/getBarbersToHome');
-            
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-            const data = await response.json();
-            setBarbers(data);  
-        }
-        catch(err){
-            console.error('Failed to fetch barbers:', err);
-        }
-     };
+const getBarbers = async():Promise<Barber[]> => {
+    const request = await fetch('/api/getBarbersToHome');
 
-    useEffect(() =>{
-        getBarbers();
-    }, []);
-
-    return barbers;
+    if(!request.ok){
+        const error: Error = await request.json();
+        throw { 
+            message: error.message
+          };
+    } 
+    const data: Barber[] = await request.json();
+    return data
 };
 
+export const useFetchBarbers = () => {
+    return useQuery({
+        queryKey: ['barbers'], 
+        queryFn: () => getBarbers(),
+        staleTime: Infinity
+    });
+};
