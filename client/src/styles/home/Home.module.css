@@ -125,7 +125,7 @@
 }
 
 .BarbersCt {
-  @apply flex flex-wrap gap-10 justify-center mt-[3rem] w-[85vw] relative;
+  @apply flex flex-wrap gap-10 justify-center mt-[3rem] w-[85vw] relative overflow-hidden;
 }
 @screen md {
   .BarbersCt {
