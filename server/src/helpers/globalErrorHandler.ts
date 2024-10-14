@@ -13,7 +13,6 @@ export const globalErrorHandler = async (
   next: NextFunction
 ) => {
   if (!errorEmailSent && lastErrorMessage !== error.message) {
-    
     lastErrorMessage = error.message;
 
     const object = {
@@ -35,19 +34,19 @@ export const globalErrorHandler = async (
         body: json,
       });
 
-      const response = await request.json();
-
-      if (!response.ok) {
-        throw new Error(`Failed to send error message: ${response.statusText}`);
-      } else {
-        errorEmailSent = true;
-
-        setTimeout(() => {
-          errorEmailSent = false;
-        }, 20 * 1000);
+      if (!request.ok) {
+        throw new Error("Failed to send error message");
       }
+
+      errorEmailSent = true;
+
+      setTimeout(() => {
+        errorEmailSent = false;
+      }, 20 * 1000);
+
     } catch (err) {
       console.error(err);
     }
+    
   } else next();
 };
