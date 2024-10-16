@@ -9,7 +9,7 @@
 }
 
 body {
-  @apply bg-dark text-light font-title m-0 p-0 flex flex-col h-fit max-w-[100vw] overflow-x-hidden;
+  @apply bg-dark text-light font-title m-0 p-0 flex flex-col min-h-[100vh] max-w-[100vw] overflow-x-hidden;
 }
 
 footer {
