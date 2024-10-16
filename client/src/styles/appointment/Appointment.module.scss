@@ -36,9 +36,15 @@
     @apply my-[3rem]
 }
 
+.articleTitle{
+    @apply font-title text-lg border-b-[1px] mb-[2rem] relative top-[-20px] border-action
+}
+
 .errorMessage{
     @apply text-center text-lg text-hoverAction w-[80%] lg:w-[50%] my-0 mx-auto
 }
+
+//* Barber selector --------------------------------------------------------------------------------
 
 .barberAndCalendarSelectorCt{
     @apply flex flex-col pb-[2rem];
