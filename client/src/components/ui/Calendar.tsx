@@ -10,6 +10,7 @@ import {useGetBookedAppointments} from '../../hook/useGetBookedAppointments'
 import type {selectedDateType} from '../../pages/Booking'
 import { isDayAvailable } from "../../utils/checkAvailability.utils";
 import type {selectedBarberType} from '../../pages/Booking'
+import AppointmentStyle from '../../styles/appointment/Appointment.module.css'
 
 type CalendarProps = {
   selectedBarber: selectedBarberType | null,
@@ -55,13 +56,6 @@ export default function Calendar({ selectedBarber, setSelectedDay }: CalendarPro
   // Fetch the booked appointments
   const {data: booking} = useGetBookedAppointments(selectedBarber?.id);
 
-  const workingDays: string[] = [];
-  availability?.map((days) => {
-    if (days.day){
-      workingDays.push(days.day); // day key is optional
-    }
-  });
-
   // set to Monday for the first day of the week
   dayjs.extend(updateLocale);
   dayjs.updateLocale("en", {
@@ -74,6 +68,14 @@ export default function Calendar({ selectedBarber, setSelectedDay }: CalendarPro
    * @return {boolean}
    */
   const shouldDisableDate = (date: Dayjs) => {
+
+    const workingDays: string[] = [];
+    availability?.map((days) => {
+      if (days.day){
+        workingDays.push(days.day); // day key is optional
+      }
+    });
+
     const dayName = dayjs(date).format("dddd");
     const isWorkingDay = workingDays.includes(dayName);
 
@@ -98,7 +100,7 @@ export default function Calendar({ selectedBarber, setSelectedDay }: CalendarPro
   return (
     <>
       {isError ? (
-        <span>An error has occured: {error.message}</span>
+        <span className={AppointmentStyle.errorMessage}>{error.message}</span>
       ) : (
         <article>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
