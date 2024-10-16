@@ -8,8 +8,7 @@ import type { serviceType } from "../hook/useServiceContext";
 import type { formData } from "../components/BookingDetailsForm";
 import { usePostBooking } from "../hook/usePostBooking";
 import Modal from "./ui/Modal";
-import CircularProgress from "@mui/material/CircularProgress";
-import { colorPalette as color } from "../utils/colorPalette";
+import CircularProgressSpinner from "./ui/CircularProgressSpinner";
 import { useEffect } from "react";
 
 type confirmationProps = {
@@ -63,9 +62,10 @@ export default function BookingConfirmation(props: confirmationProps) {
 
   return (
     <>
+      {isPending && <CircularProgressSpinner/>}
       {isError && (
         <div className="flex flex-col items-center gap-5 mb-10">
-          <div className=" text-center text-lg text-hoverAction w-[80%] lg:w-[50%] my-0 mx-auto">
+          <div className={AppointmentStyle.errorMessage}>
             {error.message 
             ?  error.message 
             : 'An error occurred during the booking process. Please refresh the page and try again!'}
@@ -73,7 +73,6 @@ export default function BookingConfirmation(props: confirmationProps) {
           <Button onClick={() => {window.location.reload()}}>Try again</Button>
         </div>
       )}
-      {isPending && <CircularProgress sx={{ color: color.action }} />}
       {isSuccess && (
         <Modal
           type="booking"
