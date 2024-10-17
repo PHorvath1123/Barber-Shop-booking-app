@@ -9,9 +9,11 @@ export default function Pricing() {
   return (
     <>
       <Navbar></Navbar>
-      <QueryClientProvider client={queryClient}>
-        <PriceList></PriceList>
-      </QueryClientProvider>
+      <main>
+        <QueryClientProvider client={queryClient}>
+          <PriceList></PriceList>
+        </QueryClientProvider>
+      </main>
       <Footer></Footer>
     </>
   );

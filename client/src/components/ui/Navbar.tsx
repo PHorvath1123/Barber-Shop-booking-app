@@ -9,9 +9,14 @@ import ListItemButton from '@mui/material/ListItemButton';
 import Drawer from '@mui/material/Drawer'
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
-import {colorPalette as color} from '../../utils/colorPalette'
+import {colorPalette as color} from '../../utils/colorPalette';
+import HomeStyle from '../../styles/home/Home.module.css'
 
-export default function Navbar(){
+type NavbarPropsType = {
+    withBackground?: boolean
+};
+
+export default function Navbar({withBackground}: NavbarPropsType){
 
     //Under the breakpoint 'sm' set the drawer and the hamburger menu
     const theme = useTheme();
@@ -73,8 +78,8 @@ export default function Navbar(){
     );
 
     return(
-        <header>
-            <nav className="flex justify-end gap-4 font-text uppercase text-sm pt-5 mb-[5rem]">
+        <header className={withBackground ? HomeStyle.heroContainer : ""}>
+            <nav className="flex justify-end gap-4 font-text uppercase text-sm pt-5 mb-[7rem]">
                 {isMobile 
                     ?  <IconButton 
                             onClick={handleDrawerToggle} 

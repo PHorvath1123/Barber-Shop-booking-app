@@ -11,22 +11,24 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 export default function Home() {
 
   useEffect(() => {
-    window.scrollTo(0,0);
-  }, [])
+    window.scrollTo(0, 0);
+  }, []);
 
   const queryClient = new QueryClient();
 
   return (
     <>
-      <div className={HomeStyle.heroContainer}>
-        <Navbar></Navbar>
+      <Navbar withBackground/>
+      <main>
+        <div className={HomeStyle.heroContainer}>
         <Hero />
-      </div>
-      <Services />
-      <QueryClientProvider client={queryClient}>
-        <MeetOurBarbers />
-      </QueryClientProvider>
-      <Contact />
+        </div>
+        <Services />
+        <QueryClientProvider client={queryClient}>
+          <MeetOurBarbers />
+        </QueryClientProvider>
+        <Contact />
+      </main>
       <Footer />
     </>
   );

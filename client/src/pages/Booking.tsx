@@ -75,78 +75,82 @@ export default function Booking() {
   };
 
   return (
-    <section className={AppointmentStyle.bg}>
-      <Navbar />
-      {!bookingIsSuccessful && (
-        <h1 className={AppointmentStyle.title}>Book an 
-          <span className="text-action font-title"> appointment</span>
-        </h1>
-      )}
-      <QueryClientProvider client={queryClient}>
-        {!bookingIsSuccessful &&(
-          <div className={AppointmentStyle.barberAndCalendarSelectorCt}>
-            <BarberSelector
-              selectedOption={barber}
-              setSelectedOption={setBarber}
-            />
-            {barber && !bookingIsSuccessful &&(
-              <div ref={calendarRef}>
-                <Calendar
-                  selectedBarber={barber}
-                  setSelectedDay={setSelectedDay}
+    <div className={AppointmentStyle.bg}>
+      <Navbar/>
+        <main>
+          <section>
+          {!bookingIsSuccessful && (
+            <h1 className={AppointmentStyle.title}>Book an 
+              <span className="text-action font-title"> appointment</span>
+            </h1>
+          )}
+          <QueryClientProvider client={queryClient}>
+            {!bookingIsSuccessful &&(
+              <div className={AppointmentStyle.barberAndCalendarSelectorCt}>
+                <BarberSelector
+                  selectedOption={barber}
+                  setSelectedOption={setBarber}
                 />
+                {barber && !bookingIsSuccessful &&(
+                  <div ref={calendarRef}>
+                    <Calendar
+                      selectedBarber={barber}
+                      setSelectedDay={setSelectedDay}
+                    />
+                  </div>
+                )}
+              </div> 
+            )}
+            {selectedDay && !bookingIsSuccessful &&(
+              <div className="my-[3rem]" ref={serviceRef}>
+                <ServiceSelector/>
               </div>
             )}
-          </div> 
-        )}
-        {selectedDay && !bookingIsSuccessful &&(
-          <div className="my-[3rem]" ref={serviceRef}>
-            <ServiceSelector/>
-          </div>
-        )}
-        {service?.title && !bookingIsSuccessful &&(
-          <div ref={appointmentRef}>
-            <Appointment 
-              selectedBarber={barber}
-              selectedDay={selectedDay}
-              setAppointment={setAppointment}
-              selectedAppointment={appointment}
-            />
-          </div> 
-        )}
-      </QueryClientProvider>
-      {appointment && !bookingIsSuccessful &&(
-        <div ref={bookingFormRef}>
-          <BookingDetailsForm
-            setBookingState = {setBookingIsSuccessful}
-            onSubmitForm={handleFormSubmit}
-          />  
-        </div>
-      )}
-      {barber && !appointment && (
-        <div className="fixed z-10 right-[30px] bottom-[20px]">
-          <Button 
-            variant="contained" 
-            size="sm" 
-            onClick={() => {
-              if(window.confirm("Are you sure you want to reset your booking to make a new one?"))
-                {window.location.reload()}}}>
-                  Reset booking
-          </Button>
-        </div>
-      )}
-      <QueryClientProvider client={queryClient}>
-        {bookingIsSuccessful && (
-          <BookingConfirmation
-            barber = {barber}
-            date = {selectedDay}
-            service = {service}
-            appointment = {appointment}
-            formData = {bookingFormData}
-          />
-        )}
-      </QueryClientProvider>
-      <Footer />
-    </section>
+            {service?.title && !bookingIsSuccessful &&(
+              <div ref={appointmentRef}>
+                <Appointment 
+                  selectedBarber={barber}
+                  selectedDay={selectedDay}
+                  setAppointment={setAppointment}
+                  selectedAppointment={appointment}
+                />
+              </div> 
+            )}
+          </QueryClientProvider>
+          {appointment && !bookingIsSuccessful &&(
+            <div ref={bookingFormRef}>
+              <BookingDetailsForm
+                setBookingState = {setBookingIsSuccessful}
+                onSubmitForm={handleFormSubmit}
+              />  
+            </div>
+          )}
+          {barber && !appointment && (
+            <div className="fixed z-10 right-[30px] bottom-[20px]">
+              <Button 
+                variant="contained" 
+                size="sm" 
+                onClick={() => {
+                  if(window.confirm("Are you sure you want to reset your booking to make a new one?"))
+                    {window.location.reload()}}}>
+                      Reset booking
+              </Button>
+            </div>
+          )}
+          <QueryClientProvider client={queryClient}>
+            {bookingIsSuccessful && (
+              <BookingConfirmation
+                barber = {barber}
+                date = {selectedDay}
+                service = {service}
+                appointment = {appointment}
+                formData = {bookingFormData}
+              />
+            )}
+          </QueryClientProvider>
+          </section>
+        </main>
+        <Footer/>
+    </div>
   );
 }
