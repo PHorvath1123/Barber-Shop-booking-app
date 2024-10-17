@@ -17,6 +17,7 @@ type ModalProps =
       open: boolean;
       modalClose?: () => void;
       serviceCategory?: string;
+      isError: boolean;
     }
   | {
       type: "service";
@@ -24,6 +25,7 @@ type ModalProps =
       open: boolean;
       modalClose?: () => void;
       serviceCategory?: string;
+      isError?: boolean;
     }
   | {
       type: "booking";
@@ -31,6 +33,7 @@ type ModalProps =
       open: boolean;
       modalClose?: () => void;
       serviceCategory?: string;
+      isError?: boolean;
     };
 
 const style = {
@@ -54,22 +57,13 @@ const style = {
   p: 4,
 };
 
-const messageResponseContent = (
-  <>
-    <div className="flex flex-row justify-center gap-2">
-      <CheckCircleOutlineIcon sx={{ color: "#EF6950" }} fontSize="large" />
-      <h2 className="mb-3 font-bold text-lg">Success!</h2>
-    </div>
-    <div>Message sent successfully!</div>
-  </>
-);
-
 export default function ContactModal({
   type,
   content,
   open,
   modalClose,
   serviceCategory,
+  isError,
 }: ModalProps) {
   const { setService } = useServiceContext();
 
@@ -135,11 +129,11 @@ export default function ContactModal({
         <div className="text-sm md:text-md flex flex-col text-left gap-7 hyphens-auto my-10">
           <p>Thank you for your booking!</p>
           <p>
-            We are pleased to confirm your appointment on {" "}
+            We are pleased to confirm your appointment on{" "}
             <strong className="text-action">
               {content?.dayName}, {content?.date}
-            </strong>
-            {" "} at
+            </strong>{" "}
+            at
             <strong className="text-action"> {content?.appointment}</strong>.
           </p>
           <p>We look forward to welcoming you to our salon.</p>
@@ -159,11 +153,34 @@ export default function ContactModal({
     );
   };
 
+  const messageResponseContent = (isError: boolean) => {
+    return (
+      <>
+        {!isError ? (
+          <>
+            <div className="flex flex-row justify-center gap-2">
+              <CheckCircleOutlineIcon
+                sx={{ color: "#EF6950" }}
+                fontSize="large"
+              />
+              <h2 className="mb-3 font-bold text-lg">Success!</h2>
+            </div>
+            <div>Message sent successfully!</div>
+          </>
+        ) : (
+          <div className={PricingStyle.errorMessage}>
+            "Could not send the message. Please try again!"
+          </div>
+        )}
+      </>
+    );
+  };
+
   return (
     <Modal open={open} onClose={modalClose} disableScrollLock={true}>
       <Box sx={style}>
         {type === "message"
-          ? messageResponseContent
+          ? messageResponseContent(isError)
           : type === "service"
           ? serviceContent(serviceCategory, content)
           : type === "booking"
