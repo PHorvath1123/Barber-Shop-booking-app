@@ -3,6 +3,7 @@ import Booking from "../pages/Booking";
 import Home from "../pages/Home";
 import App from "../App";
 import Pricing from "../pages/Pricing";
+import Policy from '../pages/Policy'
 
 export const router = createBrowserRouter([
     {   path: '/',
@@ -21,7 +22,12 @@ export const router = createBrowserRouter([
             {
                 path: '/pricing',
                 element: <Pricing/>,
-                
+                errorElement: <div>404 Not Found</div>
+            },
+            {
+                path: '/policy',
+                element: <Policy/>,
+                errorElement: <div>404 Not Found</div>
             },
         ],
     },
