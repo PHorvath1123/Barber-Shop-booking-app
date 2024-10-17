@@ -12,8 +12,16 @@ body {
   @apply bg-dark text-light font-title m-0 p-0 flex flex-col min-h-[100vh] max-w-[100vw] overflow-x-hidden;
 }
 
+#root {
+  @apply flex flex-col m-0 p-0 min-h-[100vh];
+}
+
+main {
+  flex: 1;
+}
+
 footer {
-  @apply flex flex-col items-center mt-[4rem] mb-[.5rem] text-xs overflow-x-hidden;
+  @apply flex flex-col items-center mt-[8rem] mb-[.5rem] text-xs overflow-x-hidden;
 }
 footer .footer-outer-ct {
   @apply flex gap-2 justify-between items-center mb-[2rem] w-[80vw];
