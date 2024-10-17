@@ -4,8 +4,11 @@ import type { formData } from "../components/Contact";
 export const usePostMessage = () => {
   const [isSuccessful, setIsSuccessful] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const sendMessage = async ({name, email, message}: formData) => {
+    setIsLoading(true);
+    
     const object = {
       name,
       email,
@@ -26,12 +29,14 @@ export const usePostMessage = () => {
 
     if (res.success) {
       setIsSuccessful(true);
+      setIsLoading(false);
     }
     else{
       setIsError(true);
+      setIsLoading(false);
       console.error('Could not send the message.')
     }
   };
 
-  return { isSuccessful, sendMessage, setIsSuccessful, isError };
+  return { isSuccessful, sendMessage, setIsSuccessful, isError, isLoading };
 };

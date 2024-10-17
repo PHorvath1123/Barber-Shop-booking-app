@@ -10,6 +10,7 @@ import { usePostBooking } from "../hook/usePostBooking";
 import Modal from "./ui/Modal";
 import CircularProgressSpinner from "./ui/CircularProgressSpinner";
 import { useEffect } from "react";
+import Backdrop from '@mui/material/Backdrop';
 
 type confirmationProps = {
   barber: selectedBarberType | null;
@@ -62,7 +63,9 @@ export default function BookingConfirmation(props: confirmationProps) {
 
   return (
     <>
-      {isPending && <CircularProgressSpinner/>}
+      <Backdrop open= {isPending}>
+        <CircularProgressSpinner/>
+      </Backdrop>
       {isError && (
         <div className="flex flex-col items-center gap-5 mb-10">
           <div className={AppointmentStyle.errorMessage}>

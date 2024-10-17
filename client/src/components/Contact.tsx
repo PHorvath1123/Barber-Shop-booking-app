@@ -15,6 +15,8 @@ import Modal from "./ui/Modal";
 import { colorPalette as color } from "../utils/colorPalette";
 import ReCAPTCHA from "react-google-recaptcha";
 import { Link } from "react-router-dom";
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgressSpinner from "./ui/CircularProgressSpinner";
 
 const schema = z.object({
   name: z.string().regex(/^([\wöüóőúéáűí]{3,})+\s+([\wöüóőúéáűí\s]{3,})+$/gim, {
@@ -47,7 +49,7 @@ export default function Contact() {
   const [validationError, setValidationError] = useState<ValidationError>();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [captchaValue, setCaptchaValue] = useState<string | null>("");
-  const { sendMessage, isSuccessful, setIsSuccessful, isError } = usePostMessage();
+  const { sendMessage, isSuccessful, setIsSuccessful, isError, isLoading } = usePostMessage();
 
   useEffect(() => {
     if (isSuccessful) {
@@ -64,7 +66,7 @@ export default function Contact() {
     if (!result.success) {
       const errors = result.error.format();
       setValidationError(errors);
-      
+
     } else {
       sendMessage(result.data);
       setMessageFormData({
@@ -78,7 +80,7 @@ export default function Contact() {
   };
   return (
     <section
-      className="relative flex flex-col items-center overflow-hidden"
+      className="relative flex flex-col items-center overflow-hidden mt-[7rem] md:mt-[10rem]"
       id="Contact"
     >
       {isModalOpen && (
@@ -89,6 +91,9 @@ export default function Contact() {
           isError={isError}
         ></Modal>
       )}
+      <Backdrop open= {isLoading}>
+        <CircularProgressSpinner/>
+      </Backdrop>
       <div className={HomeStyle.contactTitleCt}>
         <div className={HomeStyle.contactTitle}>
           <span className="text-action font-title">Contact</span> Information
