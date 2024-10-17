@@ -6,6 +6,7 @@ import { useState } from "react";
 import AppointmentStyle from "../styles/appointment/Appointment.module.css";
 import { colorPalette as color } from "../utils/colorPalette";
 import Button from "./ui/Button";
+import { Link } from "react-router-dom";
 
 const schema = z.object({
   name: z.string().regex(/^([\wöüóőúéáűí]{3,})+\s+([\wöüóőúéáűí\s]{3,})+$/gim, {
@@ -128,23 +129,28 @@ export default function BookingDetailsForm({setBookingState, onSubmitForm}: Book
             }}
           />
           {validationError?.comment && <p className={AppointmentStyle.error}>{validationError?.comment._errors[0]}</p>}
-          <Checkbox
-            label="I agree to the terms of service and privacy policy."
-            required
-            onChange={(e) =>
-              setBookingFormData((f) => ({ ...f, isChecked: e.target.checked }))
-            }
-            checked={bookingFormData.isChecked}
-            sx={{
-              ".MuiCheckbox-checkbox.Mui-checked": {
-                backgroundColor: color.action,
-                color: color.light,
-              },
-              ".MuiCheckbox-label": {
-                color: color.light,
-              },
-            }}
-          />
+          <div className="flex flex-row items-center gap-4">
+            <Checkbox
+              id = 'policy'
+              required
+              onChange={(e) =>
+                setBookingFormData((f) => ({ ...f, isChecked: e.target.checked }))
+              }
+              checked={bookingFormData.isChecked}
+              sx={{
+                ".MuiCheckbox-checkbox.Mui-checked": {
+                  backgroundColor: color.action,
+                  color: color.light,
+                },
+                ".MuiCheckbox-label": {
+                  color: color.light,
+                },
+              }}
+            />
+            <label htmlFor="policy">I agree to the {" "}
+              <Link className="text-action underline hover:text-hoverAction" to={'/policy'}>Privacy Policy</Link>{" "}.
+            </label>
+          </div>
           <div className={AppointmentStyle.buttonBox}>
             <Button
               type="reset"

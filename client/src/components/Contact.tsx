@@ -170,23 +170,28 @@ export default function Contact() {
               {validationError?.message._errors[0]}
             </p>
           )}
-          <Checkbox
-            label="I agree to the terms of service and privacy policy."
-            required
-            onChange={(e) =>
-              setMessageFormData((f) => ({ ...f, isChecked: e.target.checked }))
-            }
-            checked={messageFormData.isChecked}
-            sx={{
-              ".MuiCheckbox-checkbox.Mui-checked": {
-                backgroundColor: color.action,
-                color: color.light,
-              },
-              ".MuiCheckbox-label": {
-                color: color.light,
-              },
-            }}
-          />
+          <div className="flex flex-row items-center gap-4">
+            <Checkbox
+              id = 'policy'
+              required
+              onChange={(e) =>
+                setMessageFormData((f) => ({ ...f, isChecked: e.target.checked }))
+              }
+              checked={messageFormData.isChecked}
+              sx={{
+                ".MuiCheckbox-checkbox.Mui-checked": {
+                  backgroundColor: color.action,
+                  color: color.light,
+                },
+                ".MuiCheckbox-label": {
+                  color: color.light,
+                },
+              }}
+            />
+            <label htmlFor="policy">I agree to the {' '} 
+              <Link className="text-action underline hover:text-hoverAction" to={'/policy'}>Privacy Policy</Link>{' '}.
+            </label>
+          </div>
           <ReCAPTCHA
             sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
             onChange={(value) => setCaptchaValue(value)}
@@ -206,7 +211,7 @@ export default function Contact() {
             <div className={HomeStyle.circle}>
               <MailOutlineIcon></MailOutlineIcon>
             </div>
-            <span>prestigecuts23@cuts.com</span>
+            <span>prestigecuts96@cuts.com</span>
           </li>
           <li className="flex items-center gap-3">
             <div className={HomeStyle.circle}>
