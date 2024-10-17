@@ -63,7 +63,7 @@ export default function Calendar({ selectedBarber, setSelectedDay }: CalendarPro
   });
 
   /**
-   * Disables dates in the calendar that are not in the workingDays array and do not have any free appointments.
+   * Disables dates in the calendar that are not in the workingDays array or do not have any free appointments.
    * @param {Dayjs} date - the date in the calendar
    * @return {boolean}
    */

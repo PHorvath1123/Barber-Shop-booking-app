@@ -20,6 +20,7 @@ export default function Appointment({
   selectedAppointment,
 }: AppointmentProps) {
 
+  //Fetch the available appointments of the specified barber.
   const {
     data: availability,
     isError,
@@ -27,6 +28,7 @@ export default function Appointment({
     isLoading,
   } = useGetAppointments(selectedBarber?.id, selectedDay?.dayName);
 
+  //Fetch the booked appointments of the selected barber
   const {
     data: booking,
     error: bookingError,

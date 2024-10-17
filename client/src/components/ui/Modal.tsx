@@ -65,6 +65,7 @@ export default function ContactModal({
   serviceCategory,
   isError,
 }: ModalProps) {
+  
   const { setService } = useServiceContext();
 
   const handleSelectService = (selectedService: string, price: number) => {
