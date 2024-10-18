@@ -29,12 +29,7 @@ export default function Appointment({
   } = useGetAppointments(selectedBarber?.id, selectedDay?.dayName);
 
   //Fetch the booked appointments of the selected barber
-  const {
-    data: booking,
-    error: bookingError,
-    isError: bookingIsError,
-    isLoading: bookingIsLoading,
-  } = useGetBookedAppointments(selectedBarber?.id);
+  const {data: booking} = useGetBookedAppointments(selectedBarber?.id);
 
   const availableTimeSlots = getAvailableSlots(
     selectedDay?.date,
@@ -47,14 +42,9 @@ export default function Appointment({
     <article className={AppointmentStyle.margin}>
       <div className={AppointmentStyle.timeSlotOuterCt}>
         <h2 className={AppointmentStyle.articleTitle}>Availabilities</h2>
-        {(isLoading || bookingIsLoading) && <CircularProgressSpinner />}
+        {isLoading  && <CircularProgressSpinner />}
         {isError && (
           <div className={AppointmentStyle.errorMessage}>{error.message}</div>
-        )}
-        {bookingIsError && (
-          <div className={AppointmentStyle.errorMessage}>
-            {bookingError.message}
-          </div>
         )}
         <ul>
           {availableTimeSlots.map((slot) => {
