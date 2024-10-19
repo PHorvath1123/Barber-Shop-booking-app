@@ -17,6 +17,8 @@ import ReCAPTCHA from "react-google-recaptcha";
 import { Link } from "react-router-dom";
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgressSpinner from "./ui/CircularProgressSpinner";
+import {useRef} from 'react'
+import useContactAnimation from "../hook/animation/useContactAnimation";
 
 const schema = z.object({
   name: z.string().regex(/^([\wöüóőúéáűí]{3,})+\s+([\wöüóőúéáűí\s]{3,})+$/gim, {
@@ -51,6 +53,14 @@ export default function Contact() {
   const [captchaValue, setCaptchaValue] = useState<string | null>("");
   const { sendMessage, isSuccessful, setIsSuccessful, isError, isLoading } = usePostMessage();
 
+  const containerRef = useRef(null);
+  const imageRef = useRef(null);
+  const subscriptionRef = useRef(null);
+  const formRef = useRef(null);
+  const contactRef = useRef(null);
+
+  useContactAnimation({containerRef, imageRef, subscriptionRef, formRef, contactRef})
+
   useEffect(() => {
     if (isSuccessful) {
       setIsModalOpen(true); // open the modal
@@ -80,6 +90,7 @@ export default function Contact() {
   };
   return (
     <section
+      ref={containerRef}
       className="relative flex flex-col items-center overflow-hidden mt-[7rem] md:mt-[10rem]"
       id="Contact"
     >
@@ -94,7 +105,7 @@ export default function Contact() {
       <Backdrop open= {isLoading}>
         <CircularProgressSpinner/>
       </Backdrop>
-      <div className={HomeStyle.contactTitleCt}>
+      <div ref={subscriptionRef} className={HomeStyle.contactTitleCt}>
         <div className={HomeStyle.contactTitle}>
           <span className="text-action font-title">Contact</span> Information
         </div>
@@ -108,12 +119,13 @@ export default function Contact() {
         <div className="font-title text-xl mt-[3.4rem] mb-[2rem]">OR</div>
       </div>
       <img
+        ref={imageRef}
         className={HomeStyle.contactBg}
         src={ContactBackground}
         alt="contact background"
       />
       <div className={HomeStyle.formAndInfoOuterCt}>
-        <form className={HomeStyle.form} onSubmit={handleSubmit}>
+        <form ref={formRef} className={HomeStyle.form} onSubmit={handleSubmit}>
           <TextInput
             onChange={(e) =>
               setMessageFormData((f) => ({ ...f, name: e.target.value }))
@@ -200,7 +212,7 @@ export default function Contact() {
             Send
           </Button>
         </form>
-        <ul className={HomeStyle.infoList}>
+        <ul ref={contactRef} className={HomeStyle.infoList}>
           <li className="flex items-center gap-3">
             <div className={HomeStyle.circle}>
               <PhoneAndroidIcon></PhoneAndroidIcon>
