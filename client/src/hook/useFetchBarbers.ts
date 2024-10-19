@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-type Barber = {
+export type Barber = {
     name: string,
     title: string,
     photo: string,
