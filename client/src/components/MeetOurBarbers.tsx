@@ -2,9 +2,15 @@ import BarbersTitleLogo from "/barbers-title-logo.png";
 import HomeStyle from "../styles/home/Home.module.css";
 import { useFetchBarbers } from "../hook/useFetchBarbers";
 import CircularProgressSpinner from "./ui/CircularProgressSpinner";
+import {useRef} from 'react'
+import useBarberAnimation from "../hook/animation/useBarberAnimation";
 
 export default function MeetOurBarbers() {
   const { data: barbers, error, isError, isLoading } = useFetchBarbers();
+
+  const barberRef = useRef<(HTMLDivElement | null)[]>([]);
+
+  useBarberAnimation(barberRef, barbers)
 
   return (
     <section
@@ -32,9 +38,9 @@ export default function MeetOurBarbers() {
         {isError && (
           <div className={HomeStyle.errorMessage}>{error.message}</div>
         )}
-        {barbers?.map((barber) => {
+        {barbers?.map((barber, index) => {
           return (
-            <div key={barber.name} className={HomeStyle.barberInnerCt}>
+            <div key={barber.name} className={HomeStyle.barberInnerCt} ref={(el) => barberRef.current[index] = el}>
               <img
                 src={barber.photo}
                 alt="Barber1"
