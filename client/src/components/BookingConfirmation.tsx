@@ -10,7 +10,7 @@ import { usePostBooking } from "../hook/usePostBooking";
 import Modal from "./ui/Modal";
 import CircularProgressSpinner from "./ui/CircularProgressSpinner";
 import { useEffect } from "react";
-import Backdrop from '@mui/material/Backdrop';
+import Backdrop from "@mui/material/Backdrop";
 
 type confirmationProps = {
   barber: selectedBarberType | null;
@@ -34,7 +34,6 @@ export type bookingDataType = {
 };
 
 export default function BookingConfirmation(props: confirmationProps) {
-
   const bookingData = {
     barberId: props.barber?.id,
     date: props.date?.date,
@@ -58,22 +57,28 @@ export default function BookingConfirmation(props: confirmationProps) {
   } = usePostBooking(bookingData);
 
   useEffect(() => {
-    window.scrollTo(0,0);
-  }, [isError])
+    window.scrollTo(0, 0);
+  }, [isError]);
 
   return (
     <>
-      <Backdrop open= {isPending}>
-        <CircularProgressSpinner/>
+      <Backdrop open={isPending}>
+        <CircularProgressSpinner />
       </Backdrop>
       {isError && (
         <div className="flex flex-col items-center gap-5 mb-10">
           <div className={AppointmentStyle.errorMessage}>
-            {error.message 
-            ?  error.message 
-            : 'An error occurred during the booking process. Please refresh the page and try again!'}
+            {error.message
+              ? error.message
+              : "An error occurred during the booking process. Please refresh the page and try again!"}
           </div>
-          <Button onClick={() => {window.location.reload()}}>Try again</Button>
+          <Button
+            onClick={() => {
+              window.location.reload();
+            }}
+          >
+            Try again
+          </Button>
         </div>
       )}
       {isSuccess && (

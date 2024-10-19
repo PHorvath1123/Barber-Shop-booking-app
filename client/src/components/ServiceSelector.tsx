@@ -11,7 +11,7 @@ export default function ServiceSelector() {
   const [serviceCategory, setServiceCategory] = useState<string>("");
 
   const { data, isLoading, isError, error, isSuccess } = useFetchServices();
-  const {service} = useServiceContext();
+  const { service } = useServiceContext();
 
   const handleClickOpen = (category: string) => {
     setModalOpen(true);
@@ -22,18 +22,19 @@ export default function ServiceSelector() {
     setModalOpen(false);
   };
 
-  const serviceList = () =>{
-
-    if(isLoading){
-      return <CircularProgressSpinner/>
+  const serviceList = () => {
+    if (isLoading) {
+      return <CircularProgressSpinner />;
     }
 
-    if(isError){
-      return <div className={AppointmentStyle.errorMessage}>{error.message}</div>
+    if (isError) {
+      return (
+        <div className={AppointmentStyle.errorMessage}>{error.message}</div>
+      );
     }
 
-    if(isSuccess){
-      return(
+    if (isSuccess) {
+      return (
         <div className={AppointmentStyle.serviceButtons}>
           {data?.map((categories) => {
             return (
@@ -58,24 +59,20 @@ export default function ServiceSelector() {
     }
   };
 
-  const selectedService = (selectedService: string) =>{
-    return(
+  const selectedService = (selectedService: string) => {
+    return (
       <>
         <div className={AppointmentStyle.serviceOuterCt}>
           <span className={AppointmentStyle.articleTitle}>Service</span>
           <p className={AppointmentStyle.selectedService}>{selectedService}</p>
         </div>
       </>
-    )
+    );
   };
-    
+
   return (
     <article className={AppointmentStyle.serviceArticle}>
-      {!service?.title &&
-        <h2 className={AppointmentStyle.title}>
-          Service 
-        </h2> 
-      }
+      {!service?.title && <h2 className={AppointmentStyle.title}>Service</h2>}
       {!service?.title ? serviceList() : selectedService(service.title)}
     </article>
   );
