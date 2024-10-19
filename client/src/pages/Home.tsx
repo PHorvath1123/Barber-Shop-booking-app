@@ -6,27 +6,21 @@ import Footer from "../components/Footer";
 import HomeStyle from "../styles/home/Home.module.css";
 import Navbar from "../components/ui/Navbar";
 import { useEffect } from "react";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 export default function Home() {
-
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  const queryClient = new QueryClient();
-
   return (
     <>
-      <Navbar withBackground/>
+      <Navbar withBackground />
       <main>
         <div className={HomeStyle.heroContainer}>
-        <Hero />
+          <Hero />
         </div>
         <Services />
-        <QueryClientProvider client={queryClient}>
-          <MeetOurBarbers />
-        </QueryClientProvider>
+        <MeetOurBarbers />
         <Contact />
       </main>
       <Footer />
