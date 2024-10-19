@@ -1,12 +1,17 @@
 import Navbar from "../components/ui/Navbar";
 import Footer from "../components/Footer";
-import {useEffect} from 'react'
+import {useEffect, useRef} from 'react'
+import usePolicyAnimation from "../hook/animation/usePolicyAnimation";
 
 export default function Policy() {
 
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    },[])
+  useEffect(() => {
+      window.scrollTo(0, 0);
+  },[])
+
+  const policyRef = useRef(null);
+
+  usePolicyAnimation(policyRef)
 
   return (
     <>
@@ -14,7 +19,7 @@ export default function Policy() {
       <main>
         <section className="flex flex-col items-center">
           <h1 className="text-xl font-title mb-[5rem]">Privacy Policy</h1>
-          <div className="flex flex-col gap-[4rem] items-start text-sm md:text-md w-[80vw] md:w-[65ch] font-text">
+          <div ref={policyRef} className="flex flex-col gap-[4rem] items-start text-sm md:text-md w-[80vw] md:w-[65ch] font-text">
             <article>
               <h2 className="mb-[2rem] text-lg">1. Introduction</h2>
               <p>
