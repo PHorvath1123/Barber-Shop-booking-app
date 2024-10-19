@@ -11,6 +11,9 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 import { colorPalette as color } from "../../utils/colorPalette";
 import HomeStyle from "../../styles/home/Home.module.css";
+import {useRef} from 'react'
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
 
 type NavbarPropsType = {
   withBackground?: boolean;
@@ -26,6 +29,8 @@ export default function Navbar({ withBackground }: NavbarPropsType) {
   const [mobileOpen, setMobileOpen] = useState<boolean>(false);
   const [isClosing, setIsClosing] = useState<boolean>(false);
 
+  const menuItemsRef = useRef<(HTMLAnchorElement | HashLink | null)[]>([]);
+
   const handleDrawerClose = () => {
     setIsClosing(true);
     setMobileOpen(false);
@@ -40,6 +45,16 @@ export default function Navbar({ withBackground }: NavbarPropsType) {
       setMobileOpen(!mobileOpen);
     }
   };
+
+  useGSAP(() => {
+    const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+    tl.fromTo(
+      menuItemsRef.current,
+      { x: 100, opacity: 0 }, 
+      { x: 0, opacity: 1, duration: 0.3, ease: 'power3.out', stagger: 0.2 }, 
+      "=0.2"
+    );
+  }, { scope: menuItemsRef });
 
   const menuItems = (
     <div>
@@ -95,9 +110,10 @@ export default function Navbar({ withBackground }: NavbarPropsType) {
           </IconButton>
         ) : (
           <div className="flex gap-4 pr-[1rem] pt-[1rem] md:pr-[5rem] md:gap-8 md:font-bold">
-            {["Home", "Appointment", "Pricing"].map((menuItem) => {
+            {["Home", "Appointment", "Pricing"].map((menuItem, index) => {
               return (
                 <Link
+                  ref={(el) => (menuItemsRef.current[index] = el)}
                   key={menuItem}
                   to={`/${menuItem == "Home" ? "" : menuItem}`}
                   onClick={handleDrawerClose}
@@ -111,9 +127,10 @@ export default function Navbar({ withBackground }: NavbarPropsType) {
                 </Link>
               );
             })}
-            {["Services", "Barbers", "Contact"].map((menuItem) => {
+            {["Services", "Barbers", "Contact"].map((menuItem, index) => {
               return (
                 <HashLink
+                  ref={(el) => (menuItemsRef.current[index + 3] = el)}
                   to={`/#${menuItem}`}
                   key={menuItem}
                   onClick={handleDrawerClose}
