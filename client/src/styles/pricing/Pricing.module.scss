@@ -1,3 +1,11 @@
+.bg{
+    background-image: url(/background_3.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-attachment: fixed;
+}
+
 .errorMessage{
     @apply text-center text-lg text-hoverAction w-[80%] lg:w-[50%] my-0 mx-auto
 }
