@@ -5,6 +5,7 @@ import getWorkingTimeRoute from "./routes/workingTime.route";
 import getBookingsRoute from "./routes/booking.route";
 import postBookingRoute from "./routes/postBooking.route";
 import { deleteOldBookings } from "./helpers/deleteOldBooking";
+import path from 'path';
 
 import dotenv from "dotenv";
 import { globalErrorHandler } from "./helpers/globalErrorHandler";
@@ -23,6 +24,11 @@ app.use("/api/getAvailabilities", getWorkingTimeRoute);
 app.use("/api/getBookings", getBookingsRoute);
 app.use("/api/postBooking", postBookingRoute);
 
+app.use(express.static(path.join(__dirname, '../../client/dist')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../../client/dist', 'index.html'));
+});
 
 // Global error handling middleware to catch the errors and send them via email for developing.
 app.use(globalErrorHandler);
