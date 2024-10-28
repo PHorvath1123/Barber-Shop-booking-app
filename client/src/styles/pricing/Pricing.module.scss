@@ -2,8 +2,12 @@
     background-image: url(/background_3.png);
     background-position: center;
     background-repeat: no-repeat;
-    background-size: auto;
-    background-attachment: fixed;
+    background-size: cover;
+    background-attachment: scroll;
+
+    @screen lg{
+        background-attachment: fixed;
+    }
 }
 
 .errorMessage{
