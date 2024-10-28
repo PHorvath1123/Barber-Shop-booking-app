@@ -194,7 +194,7 @@
         }
 
         .selectedBookingDetailsCt{
-            @apply w-[80%] text-sm sm:text-md md:w-[35ch] mb-[2rem];
+            @apply w-[100%] text-sm sm:text-md md:w-[35ch] mb-[2rem];
 
             ul{
                 @apply flex flex-col justify-between gap-[3.5rem] md:h-[100%];
@@ -221,17 +221,17 @@
             @apply flex flex-col min-w-[100%] items-center lg:items-start;
 
             ul{
-                @apply flex flex-col text-sm sm:text-md gap-[2.5rem] min-w-[100%] mb-[4rem];
+                @apply flex flex-col text-sm sm:text-md gap-[2.5rem] w-[100%] mb-[4rem];
 
                 p{
-                    @apply font-bold font-title
+                    @apply font-bold font-title whitespace-nowrap
                 }
 
                 li{
                     @apply flex gap-3 justify-between border-b-[2px] border-dotted;
                 
                     span{
-                        @apply font-title
+                        @apply font-title text-ellipsis overflow-hidden
                     }
                 }
 

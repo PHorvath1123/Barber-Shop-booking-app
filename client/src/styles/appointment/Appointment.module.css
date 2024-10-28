@@ -171,7 +171,7 @@
   @apply flex flex-col items-center md:h-[100%];
 }
 .summaryCt .selectedOptionsCt .selectedBookingDetailsCt {
-  @apply w-[80%] text-sm sm:text-md md:w-[35ch] mb-[2rem];
+  @apply w-[100%] text-sm sm:text-md md:w-[35ch] mb-[2rem];
 }
 .summaryCt .selectedOptionsCt .selectedBookingDetailsCt ul {
   @apply flex flex-col justify-between gap-[3.5rem] md:h-[100%];
@@ -192,16 +192,16 @@
   @apply flex flex-col min-w-[100%] items-center lg:items-start;
 }
 .summaryCt .customerDetailsCt .customerDetails ul {
-  @apply flex flex-col text-sm sm:text-md gap-[2.5rem] min-w-[100%] mb-[4rem];
+  @apply flex flex-col text-sm sm:text-md gap-[2.5rem] w-[100%] mb-[4rem];
 }
 .summaryCt .customerDetailsCt .customerDetails ul p {
-  @apply font-bold font-title;
+  @apply font-bold font-title whitespace-nowrap;
 }
 .summaryCt .customerDetailsCt .customerDetails ul li {
   @apply flex gap-3 justify-between border-b-[2px] border-dotted;
 }
 .summaryCt .customerDetailsCt .customerDetails ul li span {
-  @apply font-title;
+  @apply font-title text-ellipsis overflow-hidden;
 }
 .summaryCt .customerDetailsCt .customerDetails ul li:nth-child(4) {
   @apply border-b-0;
