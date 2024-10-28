@@ -40,7 +40,7 @@ schedule.scheduleJob("* 0 0 * * *", async () => {
   await deleteOldBookings();
 });
 
-export const api = onRequest((request, response) => {
+export const api = onRequest({region: 'europe-west3'},(request, response) => {
   logger.info("API Request Received", {structuredData: true});
   app(request, response);
 });
