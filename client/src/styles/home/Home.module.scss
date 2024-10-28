@@ -26,11 +26,11 @@
     background-repeat: no-repeat;
     background-size: auto;
     background-attachment: fixed;
-    @apply max-h-[110vh] overflow-x-hidden 
+    @apply overflow-x-hidden 
 }
 
 .heroInner{
-    @apply flex flex-col items-center mx-[1rem] mb-[3rem] overflow-x-hidden 
+    @apply flex flex-col items-center h-fit mx-[1rem] mb-[3rem] overflow-x-hidden
 }
 
 
@@ -73,11 +73,11 @@
 
 .serviceTitle{
     @apply bg-action text-center flex items-center justify-center relative top-[-30px];
-    @apply min-w-[30vw] h-[5vh] px-10;
+    @apply min-w-[30vw] h-fit px-10 py-[.5rem];
     @apply font-title text-sm uppercase font-bold;
 
     @screen md{
-        @apply text-lg
+        @apply text-lg 
     }
 }
 
