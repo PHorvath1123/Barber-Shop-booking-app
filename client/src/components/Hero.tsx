@@ -33,7 +33,7 @@ export default function Hero() {
         Prestige Cuts offers a sanctuary for the modern gentleman. Our skilled
         barbers combine timeless techniques with the latest trends to ensure
         every client receives a personalized and exceptional grooming
-        experience."
+        experience.
       </p>
       <Link ref={buttonRef} className="box" to="/Appointment">
         <Button>Book now</Button>
