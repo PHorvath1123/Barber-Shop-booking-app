@@ -29,8 +29,7 @@ export default function Booking() {
   const { service, setService } = useServiceContext();
   const [appointment, setAppointment] = useState<string>("");
   const [bookingFormData, setBookingFormData] = useState<formData | null>(null);
-  const [bookingIsSuccessful, setBookingIsSuccessful] =
-    useState<boolean>(false);
+  const [bookingIsSuccessful, setBookingIsSuccessful] = useState<boolean>(false);
 
   const calendarRef = useRef<HTMLDivElement | null>(null);
   const serviceRef = useRef<HTMLDivElement | null>(null);
@@ -43,7 +42,7 @@ export default function Booking() {
       if (calendarRef.current && barber) {
         calendarRef.current?.scrollIntoView({
           behavior: "smooth",
-          block: "center",
+          block: "start",
         });
       }
 
@@ -96,13 +95,13 @@ export default function Booking() {
             </h1>
           )}
           {!bookingIsSuccessful && (
-            <div className={AppointmentStyle.barberAndCalendarSelectorCt}>
+            <div ref={calendarRef} className={AppointmentStyle.barberAndCalendarSelectorCt}>
               <BarberSelector
                 selectedOption={barber}
                 setSelectedOption={setBarber}
               />
               {barber && !bookingIsSuccessful && (
-                <div ref={calendarRef}>
+                <div>
                   <Calendar
                     selectedBarber={barber}
                     setSelectedDay={setSelectedDay}
