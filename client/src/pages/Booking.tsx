@@ -29,7 +29,8 @@ export default function Booking() {
   const { service, setService } = useServiceContext();
   const [appointment, setAppointment] = useState<string>("");
   const [bookingFormData, setBookingFormData] = useState<formData | null>(null);
-  const [bookingIsSuccessful, setBookingIsSuccessful] = useState<boolean>(false);
+  const [bookingIsSuccessful, setBookingIsSuccessful] =
+    useState<boolean>(false);
 
   const calendarRef = useRef<HTMLDivElement | null>(null);
   const serviceRef = useRef<HTMLDivElement | null>(null);
@@ -38,28 +39,30 @@ export default function Booking() {
 
   // Scrolls the view to the respective section when the associated state is updated and the element is rendered.
   useEffect(() => {
-    if (!barber || !selectedDay || !service || !appointment) {
-      if (calendarRef.current && barber) {
-        calendarRef.current?.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
-      }
+    setTimeout(() => {
+      if (!barber || !selectedDay || !service || !appointment) {
+        if (calendarRef.current && barber) {
+          calendarRef.current?.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        }
 
-      if (serviceRef.current && selectedDay) {
-        serviceRef.current?.scrollIntoView({
-          behavior: "smooth",
-          block: "center",
-        });
-      }
+        if (serviceRef.current && selectedDay) {
+          serviceRef.current?.scrollIntoView({
+            behavior: "smooth",
+            block: "center",
+          });
+        }
 
-      if (appointmentRef.current && service) {
-        appointmentRef.current?.scrollIntoView({
-          behavior: "smooth",
-          block: "center",
-        });
+        if (appointmentRef.current && service) {
+          appointmentRef.current?.scrollIntoView({
+            behavior: "smooth",
+            block: "center",
+          });
+        }
       }
-    }
+    }, 200);
   }, [barber, selectedDay, service, appointment]);
 
   useEffect(() => {
@@ -88,78 +91,82 @@ export default function Booking() {
       <Navbar />
       <main>
         <section>
-          {!bookingIsSuccessful && (
-            <h1 className={AppointmentStyle.title}>
-              Book an
-              <span className="text-action font-title"> appointment</span>
-            </h1>
-          )}
-          {!bookingIsSuccessful && (
-            <div ref={calendarRef} className={AppointmentStyle.barberAndCalendarSelectorCt}>
-              <BarberSelector
-                selectedOption={barber}
-                setSelectedOption={setBarber}
-              />
-              {barber && !bookingIsSuccessful && (
-                <div>
-                  <Calendar
+          {!bookingIsSuccessful ? (
+            <>
+              <h1 className={AppointmentStyle.title}>
+                Book an
+                <span className="text-action font-title"> appointment</span>
+              </h1>
+              <div
+                ref={calendarRef}
+                className={AppointmentStyle.barberAndCalendarSelectorCt}
+              >
+                <BarberSelector
+                  selectedOption={barber}
+                  setSelectedOption={setBarber}
+                />
+                {barber && (
+                  <div>
+                    <Calendar
+                      selectedBarber={barber}
+                      setSelectedDay={setSelectedDay}
+                    />
+                  </div>
+                )}
+              </div>
+              {selectedDay && (
+                <div className="my-[3rem]" ref={serviceRef}>
+                  <ServiceSelector />
+                </div>
+              )}
+              {service?.title && (
+                <div ref={appointmentRef}>
+                  <Appointment
                     selectedBarber={barber}
-                    setSelectedDay={setSelectedDay}
+                    selectedDay={selectedDay}
+                    setAppointment={setAppointment}
+                    selectedAppointment={appointment}
                   />
                 </div>
               )}
-            </div>
-          )}
-          {selectedDay && !bookingIsSuccessful && (
-            <div className="my-[3rem]" ref={serviceRef}>
-              <ServiceSelector />
-            </div>
-          )}
-          {service?.title && !bookingIsSuccessful && (
-            <div ref={appointmentRef}>
-              <Appointment
-                selectedBarber={barber}
-                selectedDay={selectedDay}
-                setAppointment={setAppointment}
-                selectedAppointment={appointment}
+              {appointment && (
+                <div ref={bookingFormRef}>
+                  <BookingDetailsForm
+                    setBookingState={setBookingIsSuccessful}
+                    onSubmitForm={handleFormSubmit}
+                  />
+                </div>
+              )}
+              {barber && !appointment && (
+                <div className="fixed z-10 right-[30px] bottom-[20px]">
+                  <Button
+                    variant="contained"
+                    size="sm"
+                    onClick={() => {
+                      if (
+                        window.confirm(
+                          "Are you sure you want to reset your booking to make a new one?"
+                        )
+                      ) {
+                        window.location.reload();
+                      }
+                    }}
+                  >
+                    Reset booking
+                  </Button>
+                </div>
+              )}
+            </>
+          ) : (
+            <>
+              <BookingConfirmation
+                barber={barber}
+                date={selectedDay}
+                service={service}
+                appointment={appointment}
+                formData={bookingFormData}
               />
-            </div>
-          )}
-          {appointment && !bookingIsSuccessful && (
-            <div ref={bookingFormRef}>
-              <BookingDetailsForm
-                setBookingState={setBookingIsSuccessful}
-                onSubmitForm={handleFormSubmit}
-              />
-            </div>
-          )}
-          {barber && !appointment && (
-            <div className="fixed z-10 right-[30px] bottom-[20px]">
-              <Button
-                variant="contained"
-                size="sm"
-                onClick={() => {
-                  if (
-                    window.confirm(
-                      "Are you sure you want to reset your booking to make a new one?"
-                    )
-                  ) {
-                    window.location.reload();
-                  }
-                }}
-              >
-                Reset booking
-              </Button>
-            </div>
-          )}
-          {bookingIsSuccessful && (
-            <BookingConfirmation
-              barber={barber}
-              date={selectedDay}
-              service={service}
-              appointment={appointment}
-              formData={bookingFormData}
-            />
+            </>
           )}
         </section>
       </main>
