@@ -8,7 +8,6 @@ import QuoteBox from "/quote_box.png";
 import { HashLink } from "react-router-hash-link";
 import { Link } from "react-router-dom";
 import {useRef} from 'react'
-import useFooterAnimation from "../hook/animation/useFooterAnimation";
 
 const iconStyle = {
   "&:hover": {
@@ -19,8 +18,6 @@ const iconStyle = {
 export default function Footer() {
 
   const footerRef = useRef(null);
-
-  useFooterAnimation(footerRef)
   
   return (
     <footer ref={footerRef}>
