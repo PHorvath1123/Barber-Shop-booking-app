@@ -40,8 +40,20 @@ schedule.scheduleJob("* 0 0 * * *", async () => {
   await deleteOldBookings();
 });
 
+// Development environment - Local server with app.listen()
+if(process.env.NODE_ENV === "development"){
+
+  const port = process.env.PORT || 3000;
+  app.listen(port);
+}
+
+// Production environment - Firebase Functions export
 export const api = onRequest({region: 'europe-west3'},(request, response) => {
   logger.info("API Request Received", {structuredData: true});
   app(request, response);
 });
+
+
+
+
 
