@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "start": "concurrently \"npm run server\" \"npm run client\"",
-    "server": "cd server && npm run dev",
+    "start": "concurrently \"npm run functions\" \"npm run client\"",
+    "functions": "cd functions && npm run dev",
     "client": "cd client && npm run dev"
   },
   "keywords": [],
