@@ -1,4 +1,4 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { bookingDataType } from "../components/BookingConfirmation";
 
 export type BookingResponseType = {
@@ -27,7 +27,11 @@ const postBookingData = async (bookingData?: bookingDataType) => {
 };
 
 export const usePostBooking = (bookingData?: bookingDataType) => {
+
+  const queryClient = useQueryClient();
+
   return useMutation({
     mutationFn: () => postBookingData(bookingData),
+    onSuccess: () => queryClient.invalidateQueries({queryKey: ["bookings", bookingData?.barberId]}),
   });
 };

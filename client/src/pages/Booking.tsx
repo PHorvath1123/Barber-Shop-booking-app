@@ -29,8 +29,7 @@ export default function Booking() {
   const { service, setService } = useServiceContext();
   const [appointment, setAppointment] = useState<string>("");
   const [bookingFormData, setBookingFormData] = useState<formData | null>(null);
-  const [bookingIsSuccessful, setBookingIsSuccessful] =
-    useState<boolean>(false);
+  const [bookingIsSuccessful, setBookingIsSuccessful] = useState<boolean>(false);
 
   const calendarRef = useRef<HTMLDivElement | null>(null);
   const serviceRef = useRef<HTMLDivElement | null>(null);
