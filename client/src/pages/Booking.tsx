@@ -26,7 +26,7 @@ export type selectedBarberType = {
 export default function Booking() {
   const [barber, setBarber] = useState<selectedBarberType | null>(null);
   const [selectedDay, setSelectedDay] = useState<selectedDateType | null>(null);
-  const { service, setService } = useServiceContext();
+  const {service, setService } = useServiceContext();
   const [appointment, setAppointment] = useState<string>("");
   const [bookingFormData, setBookingFormData] = useState<formData | null>(null);
   const [bookingIsSuccessful, setBookingIsSuccessful] = useState<boolean>(false);
@@ -73,13 +73,14 @@ export default function Booking() {
     }
   }, [appointment]);
 
-  // Resets the service state when the Booking component remounts (e.g., when navigating away from the page).
+  // Resets the service and the appointment state when the Booking component remounts or the selected day is changed.
   useEffect(() => {
     window.scrollTo(0, 0);
     return () => {
       setService({ title: "", price: 0 });
+      setAppointment("");
     };
-  }, []);
+  }, [selectedDay]);
 
   const handleFormSubmit = (bookingData: formData) => {
     setBookingFormData(bookingData);
