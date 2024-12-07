@@ -1,8 +1,8 @@
 import { db } from "../firebase.server.config";
 import { NextFunction, Request, Response } from "express";
 import { FieldValue } from "firebase-admin/firestore";
-import xss from "xss";
 import { bookingCounter } from "../helpers/bookingCounter";
+import { validationResult } from "express-validator";
 
 type bookingDataType = {
   barberId?: string;
@@ -22,36 +22,41 @@ export const addBookingToDB = async (
   res: Response,
   next: NextFunction
 ) => {
-  const bookingData: bookingDataType = {
-    ...req.body,
-    name: xss(req.body.name),
-    email: xss(req.body.email),
-    phone: xss(req.body.phone),
-    comment: xss(req.body.comment),
-  };
-
-  const bookingIsUnderLimit: boolean = await bookingCounter();
 
   try {
+    // Validate incoming request data
+    const validationErrors = validationResult(req);
+
+    if (!validationErrors.isEmpty()) {
+      throw new Error("Invalid input data.");
+    }
+
+    const bookingData: bookingDataType = req.body;
+
+    // Check if the number of bookings is within the daily limit
+    const bookingIsUnderLimit: boolean = await bookingCounter();
+
     if (bookingIsUnderLimit) {
-      const bookingWithDate = await db
+      // Query the database to check for existing bookings with the same date and appointment time
+      const existingBooking = await db
         .collection("booking")
         .where("date", "==", bookingData.date)
         .where("appointment", "==", bookingData.appointment)
         .get();
 
-      if (!bookingWithDate.empty) {
+      if (!existingBooking.empty) {
         throw new Error("This appointment is already booked.");
       }
 
       const bookingRef = db.collection("booking").doc();
-
+      
+      // Use a transaction to safely create the new booking
       await db.runTransaction(async (transaction: any) => {
-        transaction.set(bookingRef, {
+        await transaction.set(bookingRef, {
           ...bookingData,
           timestamp: FieldValue.serverTimestamp(),
         });
-        res.json({
+        res.status(200).json({
           dayName: bookingData.dayName,
           date: bookingData.date,
           appointment: bookingData.appointment,
