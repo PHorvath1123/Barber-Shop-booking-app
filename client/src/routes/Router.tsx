@@ -4,6 +4,8 @@ import Home from "../pages/Home";
 import App from "../App";
 import Pricing from "../pages/Pricing";
 import Policy from "../pages/Policy";
+import SignIn from "../pages/admin/SignIn";
+import ProtectedRoute from "./ProtectedRoute";
 
 export const router = createBrowserRouter([
   {
@@ -30,6 +32,15 @@ export const router = createBrowserRouter([
         element: <Policy />,
         errorElement: <div>404 Not Found</div>,
       },
+      {
+        path: "/admin",
+        element: <SignIn/>,
+       
+      },
+      {
+        path: "/admin/dashboard",
+        element: <ProtectedRoute></ProtectedRoute>
+      }
     ],
   },
 ]);
