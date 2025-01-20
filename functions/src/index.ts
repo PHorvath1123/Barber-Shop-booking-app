@@ -43,7 +43,7 @@ schedule.scheduleJob("* 0 0 * * *", async () => {
 // Development environment - Local server with app.listen()
 if(process.env.NODE_ENV === "development"){
 
-  const port = process.env.PORT || 3000;
+  const port = process.env.CUSTOM_PORT || 3000;
   app.listen(port);
 }
 
@@ -52,8 +52,3 @@ export const api = onRequest({region: 'europe-west3'},(request, response) => {
   logger.info("API Request Received", {structuredData: true});
   app(request, response);
 });
-
-
-
-
-
