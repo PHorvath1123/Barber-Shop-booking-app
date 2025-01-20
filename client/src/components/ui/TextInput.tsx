@@ -6,7 +6,8 @@ type TextFieldProps = {
   name: string;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
   value: string | number;
-  placeholder?: string
+  placeholder?: string;
+  type?: "password" | "email" | "number" | "text";
 };
 
 export default function TextInput(props: TextFieldProps) {
@@ -17,7 +18,7 @@ export default function TextInput(props: TextFieldProps) {
       required
       onChange={props.onChange}
       name={props.name}
-      type="text"
+      type={props.type}
       value={props.value}
       variant="standard"
       placeholder={props.placeholder}
