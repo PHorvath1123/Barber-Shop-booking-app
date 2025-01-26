@@ -35,7 +35,7 @@ type ValidationError = {
 export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [showPassword, setShowPassword] = useState(false);
   const [validationError, setValidationError] = useState<ValidationError>();
   const [authError, setAuthError] = useState("");
 
@@ -53,6 +53,7 @@ export default function SignIn() {
         password
       );
       const user = userCredential.user;
+      localStorage.setItem("user", user.uid)
       setAuthError("");
       navigate("/admin/dashboard");
 
