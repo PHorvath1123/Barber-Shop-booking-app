@@ -6,6 +6,7 @@ import Pricing from "../pages/Pricing";
 import Policy from "../pages/Policy";
 import SignIn from "../pages/admin/SignIn";
 import ProtectedRoute from "./ProtectedRoute";
+import Dashboard from "../pages/admin/Dashboard";
 
 export const router = createBrowserRouter([
   {
@@ -34,13 +35,16 @@ export const router = createBrowserRouter([
       },
       {
         path: "/admin",
-        element: <SignIn/>,
-       
+        element: <SignIn />,
       },
       {
         path: "/admin/dashboard",
-        element: <ProtectedRoute></ProtectedRoute>
-      }
+        element: (
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        ),
+      },
     ],
   },
 ]);
