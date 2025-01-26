@@ -11,6 +11,9 @@ import IconButton from "@mui/material/IconButton";
 import Mustache from "/mustache.png";
 import { z } from "zod";
 import AppointmentStyle from "../../styles/appointment/Appointment.module.css";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../firebase.config";
+import { useNavigate } from "react-router-dom";
 
 const emailSchema = z
   .string()
@@ -18,8 +21,9 @@ const emailSchema = z
 
 const passwordSchema = z
   .string()
-  .regex(/^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z0-9]+$/gm, {
-    message: "Must contain at least one uppercase letter and one number.",
+  .regex(/^(?=.*[a-zA-Z])(?=.*\d)(?=.*[\W_])[a-zA-Z0-9\W_]+$/gm, {
+    message:
+      "Must contain at least one uppercase letter, a special character and one number.",
   });
 
 type ValidationError = {
@@ -33,9 +37,34 @@ export default function SignIn() {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [validationError, setValidationError] = useState<ValidationError>();
+  const [authError, setAuthError] = useState("");
+
+  const navigate = useNavigate();
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
+  };
+
+  const handleSignIn = async () => {
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const user = userCredential.user;
+      setAuthError("");
+      navigate("/admin/dashboard");
+
+    } catch (error: any) {
+      switch(error.code){
+        case "auth/invalid-credential": setAuthError("Invalid email or password");
+        break;
+        case "auth/user-not-found": setAuthError("User not found");
+        break;
+        default: setAuthError("An unknown error occurred");
+      }
+    }
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -58,6 +87,7 @@ export default function SignIn() {
       setEmail("");
       setPassword("");
       setValidationError({ _errors: [] });
+      handleSignIn();
     }
   };
 
@@ -121,6 +151,9 @@ export default function SignIn() {
               <Button type="submit" variant="contained" size="lg">
                 Login
               </Button>
+              {authError && (
+                <p className={AppointmentStyle.error}>{authError}</p>
+              )}
             </form>
           </section>
         </div>
