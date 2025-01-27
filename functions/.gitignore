@@ -10,3 +10,6 @@ node_modules/
 *.local
 
 lib
+
+setRole.js
+checkRole.js
