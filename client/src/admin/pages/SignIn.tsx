@@ -1,18 +1,18 @@
-import Navbar from "../components/ui/Navbar";
+import Navbar from "../../components/ui/Navbar";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import SigninStyle from "../styles/admin/signin/SignIn.module.css";
-import Footer from "../components/Footer";
-import TextInput from "../components/ui/TextInput";
+import SigninStyle from "../style/signin/SignIn.module.css";
+import Footer from "../../components/Footer";
+import TextInput from "../../components/ui/TextInput";
 import { useState } from "react";
-import Button from "../components/ui/Button";
+import Button from "../../components/ui/Button";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import IconButton from "@mui/material/IconButton";
 import Mustache from "/mustache.png";
 import { z } from "zod";
-import AppointmentStyle from "../styles/appointment/Appointment.module.css";
+import AppointmentStyle from "../../styles/appointment/Appointment.module.css";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebase.config";
+import { auth } from "../../firebase.config";
 import { useNavigate } from "react-router-dom";
 
 const emailSchema = z
