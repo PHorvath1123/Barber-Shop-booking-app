@@ -11,7 +11,7 @@ export default function ProtectedRoute({ children }: ProtectedRouterProps) {
 
   useEffect(() => {
     if(user === null && userIsLoggedIn === null){
-      navigate("/admin", {replace: true});
+      navigate("/admin/signin", {replace: true});
     }
   },[navigate, user, userIsLoggedIn])
 

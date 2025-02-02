@@ -4,9 +4,9 @@ import Home from "../pages/Home";
 import App from "../App";
 import Pricing from "../pages/Pricing";
 import Policy from "../pages/Policy";
-import SignIn from "../pages/admin/SignIn";
+import SignIn from "../admin/SignIn";
 import ProtectedRoute from "./ProtectedRoute";
-import Dashboard from "../pages/admin/Dashboard";
+import AdminPanel from "../admin/AdminPanel";
 
 export const router = createBrowserRouter([
   {
@@ -33,15 +33,17 @@ export const router = createBrowserRouter([
         element: <Policy />,
         errorElement: <div>404 Not Found</div>,
       },
+      
+      //Admin Routes
       {
-        path: "/admin",
+        path: "/admin/signin",
         element: <SignIn />,
       },
       {
-        path: "/admin/dashboard",
+        path: "/admin",
         element: (
           <ProtectedRoute>
-            <Dashboard />
+            <AdminPanel />
           </ProtectedRoute>
         ),
       },
