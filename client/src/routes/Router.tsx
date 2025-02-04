@@ -7,6 +7,7 @@ import Policy from "../pages/Policy";
 import SignIn from "../admin/pages/SignIn";
 import ProtectedRoute from "./ProtectedRoute";
 import AdminPanel from "../admin/pages/AdminPanel";
+import Dashboard from "../admin/pages/Dashboard";
 
 export const router = createBrowserRouter([
   {
@@ -46,6 +47,24 @@ export const router = createBrowserRouter([
             <AdminPanel />
           </ProtectedRoute>
         ),
+        children:[
+          {
+            index: true,
+            element: <Dashboard />,
+          },
+          {
+            path: "bookings",
+            element: <Dashboard />,
+          },
+          {
+            path: "customers",
+            element: <Dashboard />,
+          },
+          {
+            path: "employees",
+            element: <Dashboard />,
+          },
+        ]
       },
     ],
   },
