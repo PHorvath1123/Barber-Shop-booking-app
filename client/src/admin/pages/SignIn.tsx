@@ -1,6 +1,5 @@
 import Navbar from "../../components/ui/Navbar";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import SigninStyle from "../style/signin/SignIn.module.css";
 import Footer from "../../components/Footer";
 import TextInput from "../../components/ui/TextInput";
 import { useState } from "react";
@@ -10,7 +9,6 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import IconButton from "@mui/material/IconButton";
 import Mustache from "/mustache.png";
 import { z } from "zod";
-import AppointmentStyle from "../../styles/appointment/Appointment.module.css";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase.config";
 import { useNavigate } from "react-router-dom";
@@ -53,16 +51,18 @@ export default function SignIn() {
         password
       );
       const user = userCredential.user;
-      localStorage.setItem("user", user.uid)
+      localStorage.setItem("user", user.uid);
       navigate("/admin");
-
     } catch (error: any) {
-      switch(error.code){
-        case "auth/invalid-credential": setAuthError("Invalid email or password");
-        break;
-        case "auth/user-not-found": setAuthError("User not found");
-        break;
-        default: setAuthError("An unknown error occurred");
+      switch (error.code) {
+        case "auth/invalid-credential":
+          setAuthError("Invalid email or password");
+          break;
+        case "auth/user-not-found":
+          setAuthError("User not found");
+          break;
+        default:
+          setAuthError("An unknown error occurred");
       }
     }
   };
@@ -95,16 +95,18 @@ export default function SignIn() {
     <>
       <main>
         <div className="relative">
-          <div className={SigninStyle.loginColorCt}></div>
+          <div className="bg-gradient-to-b from-action to-dark absolute w-[100%] h-[60vh] z-[-2] min-[600px]:bg-none"></div>
           <Navbar />
-          <section className={SigninStyle.loginOuterCt}>
-            <div className={SigninStyle.loginBg}>
+          <section className="box-border bg-dark">
+            <div className="flex flex-col items-center gap-5 mt-[1.5rem]">
               <AccountCircleIcon sx={{ fontSize: "50px" }}></AccountCircleIcon>
               <img src={Mustache} alt="Mustache" className="w-[80px]" />
-              <h1 className={SigninStyle.login}>Login</h1>
+              <h1 className="text-2xl font-title uppercase text-center relative mt-4">
+                Login
+              </h1>
             </div>
             <form
-              className={SigninStyle.form}
+              className="flex flex-col items-center justify-center gap-[2rem] my-0 py-[4rem] mx-auto w-[80%] md:w-[50vw] lg:w-[30vw] xl:w-[20vw]"
               onSubmit={(e) => handleSubmit(e)}
             >
               <TextInput
@@ -116,7 +118,7 @@ export default function SignIn() {
                 value={email}
               />
               {validationError?.email && (
-                <p className={AppointmentStyle.error}>
+                <p className="error-message">
                   {validationError?.email._errors[0]}
                 </p>
               )}
@@ -144,7 +146,7 @@ export default function SignIn() {
                 </IconButton>
               </span>
               {validationError?.password && (
-                <p className={AppointmentStyle.error}>
+                <p className="error-message text-center">
                   {validationError?.password._errors[0]}
                 </p>
               )}
@@ -152,7 +154,7 @@ export default function SignIn() {
                 Login
               </Button>
               {authError && (
-                <p className={AppointmentStyle.error}>{authError}</p>
+                <p className="error-message">{authError}</p>
               )}
             </form>
           </section>
