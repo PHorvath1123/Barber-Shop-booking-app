@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@theme{
+    --color-action: #EF6950;
+    --color-dark: #1E1A17;
+}
+
+@layer components{
+    .box-border{
+        box-shadow: 0px 0px 21px 5px rgba(0, 0, 0, 1);
+        @apply w-[90vw] md:w-[70vw] my-0 mx-auto border-[1px] rounded-[30px];
+    }
+    
+}
