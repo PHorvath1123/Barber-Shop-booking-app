@@ -1,4 +1,4 @@
-import "../styles/main/index.css";
+import "../styles/theme.css";
 import Logo from "/logo.png";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
@@ -7,7 +7,7 @@ import BarberIcon from "/barber_icon.png";
 import QuoteBox from "/quote_box.png";
 import { HashLink } from "react-router-hash-link";
 import { Link } from "react-router-dom";
-import {useRef} from 'react'
+import { useRef } from "react";
 
 const iconStyle = {
   "&:hover": {
@@ -16,15 +16,17 @@ const iconStyle = {
 };
 
 export default function Footer() {
-
   const footerRef = useRef(null);
-  
+
   return (
-    <footer ref={footerRef}>
-      <div className="footer-outer-ct">
-        <div className="footer-inner-ct">
-          <div id="footer-content-ct" className="mb-5">
-            <div id="content-title">Quick Links</div>
+    <footer
+      className="mb-[.5rem] mt-[8rem] flex flex-col items-center overflow-x-hidden text-xs"
+      ref={footerRef}
+    >
+      <div className="mb-[2rem] flex w-[80vw] items-center justify-between gap-2">
+        <div className="flex w-fit flex-col items-start gap-2 lg:flex lg:w-[90vw] lg:flex-row lg:justify-between lg:gap-5">
+          <div className="mb-5 flex flex-col gap-2">
+            <div className="text-xs font-bold uppercase">Quick Links</div>
             <div className="flex flex-col">
               <HashLink
                 to="/"
@@ -38,18 +40,22 @@ export default function Footer() {
               <Link to="/Appointment">Book appointment</Link>
             </div>
           </div>
-          <div id="footer-content-ct" className="mb-5">
-            <div id="content-title">Legal Information</div>
+          <div className="mb-5 flex flex-col gap-2">
+            <div className="text-xs font-bold uppercase">Legal Information</div>
             <ul className="cursor-pointer">
-              <Link to={'/policy'}>Privacy Policy</Link>
+              <Link to={"/policy"}>Privacy Policy</Link>
             </ul>
           </div>
-          <div className="footer-img">
-            <img src={Logo} alt="Logo" className="w-[100px]" />
+          <div className="hidden md:hidden lg:order-none lg:inline lg:w-fit">
+            <img
+              src={Logo}
+              alt="Logo"
+              className="w-[100px] min-w-[150px] xl:w-[200px]"
+            />
           </div>
-          <div id="footer-content-ct" className="mb-5">
-            <div id="content-title">Follow us</div>
-            <ul className="footer-icons">
+          <div className="mb-5 flex flex-col gap-2">
+            <div className="text-xs font-bold uppercase">Follow us</div>
+            <ul className="flex gap-5">
               <li>
                 <a href="">
                   <FacebookIcon sx={iconStyle} />
@@ -67,8 +73,8 @@ export default function Footer() {
               </li>
             </ul>
           </div>
-          <div id="footer-content-ct" className="mb-5">
-            <div id="content-title">Contact</div>
+          <div className="mb-5 flex flex-col gap-2">
+            <div className="text-xs font-bold uppercase">Contact</div>
             <ul>
               <li>+49 1751210432</li>
               <li>prestigecuts96@gmail.com</li>
@@ -76,10 +82,10 @@ export default function Footer() {
             </ul>
           </div>
         </div>
-        <div className="footer-img-ct">
+        <div className="hidden sm:flex sm:h-auto sm:flex-col sm:items-center sm:gap-[1rem] lg:hidden">
           <div>
             <img src={QuoteBox} alt="quote box" className="w-[200px]" />
-            <p className="relative bottom-[150px] left-[15px] font-title font-bold text-lg w-[10ch] text-center">
+            <p className="font-title relative bottom-[150px] left-[15px] w-[10ch] text-center text-lg font-bold">
               Where Style Meets Precision.
             </p>
           </div>
