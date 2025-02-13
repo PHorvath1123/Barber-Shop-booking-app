@@ -2,15 +2,44 @@
 @tailwind components;
 @tailwind utilities;
 
-@theme{
-    --color-action: #EF6950;
-    --color-dark: #1E1A17;
+@theme {
+  --color-action: #ef6950;
+  --color-dark: #1e1a17;
 }
 
-@layer components{
-    .box-border{
-        box-shadow: 0px 0px 21px 5px rgba(0, 0, 0, 1);
-        @apply w-[90vw] md:w-[70vw] my-0 mx-auto border-[1px] rounded-[30px];
-    }
-    
+@layer components {
+  .box-border {
+    box-shadow: 0px 0px 21px 5px rgba(0, 0, 0, 1);
+    @apply w-[90vw] md:w-[70vw] my-0 mx-auto border-[1px] rounded-[30px];
+  }
+
+  .error-message {
+    @apply text-xs text-red-400 relative top-[-20px];
+  }
+
+  .red-label {
+    @apply hidden md:h-[40px] md:w-[100px] md:px-[.6rem] md:py-[.1rem] md:bg-action md:flex md:justify-center md:items-center md:tracking-[.5rem] md:uppercase md:text-xs lg:w-[150px];
+  }
+
+  .title{
+    @apply text-md font-title uppercase font-bold text-center w-[100vw] md:text-lg;
+  }
+
+  .circle{
+    clip-path: circle(50% at 50% 50%);
+  }
+
+  .barber-img{
+    clip-path: circle(34% at 50% 40%);
+  }
+
+  .textarea-scrollbar{
+    scrollbar-width: auto;
+    scrollbar-color: #ef6950 #ffffff00
+
+  }
+
+  .textarea-scrollbar::-webkit-scrollbar-thumb{
+    border-radius: 20px;
+  }
 }
