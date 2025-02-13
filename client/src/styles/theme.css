@@ -2,6 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
+
+*{
+  box-sizing: border-box;
+  transition: .2s all;
+  @apply font-text;
+}
+
+
+body{
+  @apply bg-dark text-light font-title m-0 p-0 flex flex-col min-h-[100vh] max-w-[100vw] overflow-x-hidden
+}
+
+#root{
+  @apply flex flex-col m-0 p-0 min-h-[100vh]
+}
+
+main{
+  flex: 1
+}
+
+
 @theme {
   --color-action: #ef6950;
   --color-dark: #1e1a17;
