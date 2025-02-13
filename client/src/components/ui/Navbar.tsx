@@ -10,7 +10,6 @@ import Drawer from "@mui/material/Drawer";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 import { colorPalette as color } from "../../utils/colorPalette";
-import HomeStyle from "../../styles/home/Home.module.css";
 import {useRef} from 'react'
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
@@ -99,7 +98,7 @@ export default function Navbar({ withBackground }: NavbarPropsType) {
   );
 
   return (
-    <header className={withBackground ? HomeStyle.heroContainer : ""}>
+    <header className={withBackground ? "bg-[url(/background.png)] bg-center bg-no-repeat bg-auto bg-fixed overflow-x-hidden" : ""}>
       <nav className="flex justify-end gap-4 font-text uppercase text-sm pt-5 mb-[7rem]">
         {isMobile ? (
           <IconButton

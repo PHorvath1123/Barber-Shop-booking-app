@@ -10,7 +10,6 @@ import {useGetBookedAppointments} from '../../hook/useGetBookedAppointments'
 import type {selectedDateType} from '../../pages/Booking'
 import { isDayAvailable } from "../../utils/checkAvailability.utils";
 import type {selectedBarberType} from '../../pages/Booking'
-import AppointmentStyle from '../../styles/appointment/Appointment.module.css'
 
 type CalendarProps = {
   selectedBarber: selectedBarberType | null,
@@ -100,7 +99,10 @@ export default function Calendar({ selectedBarber, setSelectedDay }: CalendarPro
   return (
     <>
       {isError ? (
-        <span className={AppointmentStyle.errorMessage}>{error.message}</span>
+        <span className="text-center text-lg text-hoverAction w-[80%] lg:w-[50%] my-0 mx-auto"
+        >
+          {error.message}
+        </span>
       ) : (
         <article>
           <LocalizationProvider dateAdapter={AdapterDayjs}>

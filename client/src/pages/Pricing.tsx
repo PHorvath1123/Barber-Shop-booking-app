@@ -1,12 +1,11 @@
 import Navbar from "../components/ui/Navbar";
 import Footer from "../components/Footer";
 import PriceList from "../components/PriceList";
-import PricingStyle from "../styles/pricing/Pricing.module.css";
 
 export default function Pricing() {
 
   return (
-    <div className={PricingStyle.bg}>
+    <div className="bg-[url(/background_3.png)] bg-center bg-no-repeat bg-cover bg-scroll lg:bg-fixed">
       <Navbar></Navbar>
       <main>
         <PriceList></PriceList>

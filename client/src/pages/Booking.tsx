@@ -1,7 +1,6 @@
 import Footer from "../components/Footer";
 import Navbar from "../components/ui/Navbar";
 import BarberSelector from "../components/BarberSelector";
-import AppointmentStyle from "../styles/appointment/Appointment.module.css";
 import { useState, useEffect, useRef } from "react";
 import Calendar from "../components/ui/Calendar";
 import ServiceSelector from "../components/ServiceSelector";
@@ -87,19 +86,19 @@ export default function Booking() {
   };
 
   return (
-    <div className={AppointmentStyle.bg}>
+    <div className="bg-[url(/background_2.png)] bg-center bg-no-repeat bg-cover bg-scroll lg:bg-fixed">
       <Navbar />
       <main>
         <section>
           {!bookingIsSuccessful ? (
             <>
-              <h1 className={AppointmentStyle.title}>
+              <h1 className="text-lg font-title uppercase font-bold text-center w-[100vw] mt-[3rem] mb-[5rem] md:text-xl">
                 Book an
                 <span className="text-action font-title"> appointment</span>
               </h1>
               <div
                 ref={calendarRef}
-                className={AppointmentStyle.barberAndCalendarSelectorCt}
+                className="flex flex-col pb-[2rem] sm:box-border lg:flex lg:flex-row lg:justify-evenly lg:items-center lg:mt-[5rem] lg:py-[3rem]"
               >
                 <BarberSelector
                   selectedOption={barber}
@@ -115,7 +114,7 @@ export default function Booking() {
                 )}
               </div>
               {selectedDay && (
-                <div className="my-[3rem]" ref={serviceRef}>
+                <div className="my-[3rem] flex flex-col items-center" ref={serviceRef}>
                   <ServiceSelector />
                 </div>
               )}

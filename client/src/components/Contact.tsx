@@ -1,4 +1,3 @@
-import HomeStyle from "../styles/home/Home.module.css";
 import Button from "./ui/Button";
 import ContactBackground from "/barber_shop_vertical.png";
 import TextInput from "./ui/TextInput";
@@ -15,9 +14,9 @@ import Modal from "./ui/Modal";
 import { colorPalette as color } from "../utils/colorPalette";
 import ReCAPTCHA from "react-google-recaptcha";
 import { Link } from "react-router-dom";
-import Backdrop from '@mui/material/Backdrop';
+import Backdrop from "@mui/material/Backdrop";
 import CircularProgressSpinner from "./ui/CircularProgressSpinner";
-import {useRef} from 'react'
+import { useRef } from "react";
 import useContactAnimation from "../hook/animation/useContactAnimation";
 
 const schema = z.object({
@@ -26,7 +25,7 @@ const schema = z.object({
   }),
   email: z.string().email({ message: "must be a valid email address" }),
   message: z.string().refine((val) => !/[<>]/.test(val), {
-      message: "Message contains invalid characters.",
+    message: "Message contains invalid characters.",
   }),
   isChecked: z.boolean(),
 });
@@ -51,7 +50,8 @@ export default function Contact() {
   const [validationError, setValidationError] = useState<ValidationError>();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [captchaValue, setCaptchaValue] = useState<string | null>("");
-  const { sendMessage, isSuccessful, setIsSuccessful, isError, isLoading } = usePostMessage();
+  const { sendMessage, isSuccessful, setIsSuccessful, isError, isLoading } =
+    usePostMessage();
 
   const containerRef = useRef(null);
   const imageRef = useRef(null);
@@ -59,7 +59,13 @@ export default function Contact() {
   const formRef = useRef(null);
   const contactRef = useRef(null);
 
-  useContactAnimation({containerRef, imageRef, subscriptionRef, formRef, contactRef})
+  useContactAnimation({
+    containerRef,
+    imageRef,
+    subscriptionRef,
+    formRef,
+    contactRef,
+  });
 
   useEffect(() => {
     if (isSuccessful) {
@@ -76,7 +82,6 @@ export default function Contact() {
     if (!result.success) {
       const errors = result.error.format();
       setValidationError(errors);
-
     } else {
       sendMessage(result.data);
       setMessageFormData({
@@ -91,7 +96,7 @@ export default function Contact() {
   return (
     <section
       ref={containerRef}
-      className="relative flex flex-col items-center overflow-hidden mt-[7rem] md:mt-[10rem]"
+      className="relative mt-[7rem] flex flex-col items-center overflow-hidden md:mt-[10rem]"
       id="Contact"
     >
       {isModalOpen && (
@@ -102,30 +107,37 @@ export default function Contact() {
           isError={isError}
         ></Modal>
       )}
-      <Backdrop open= {isLoading}>
-        <CircularProgressSpinner/>
+      <Backdrop open={isLoading}>
+        <CircularProgressSpinner />
       </Backdrop>
-      <div ref={subscriptionRef} className={HomeStyle.contactTitleCt}>
-        <div className={HomeStyle.contactTitle}>
+      <div
+        ref={subscriptionRef}
+        className="flex flex-col items-center justify-center"
+      >
+        <div className="title">
           <span className="text-action font-title">Contact</span> Information
         </div>
-        <p className={HomeStyle.contactText}>
+        <p className="mb-[2rem] mt-[3rem] w-[80vw] text-center text-sm italic md:w-[40ch]">
           Whether you have a question about our services, want to book an
           appointment, or just want to say hello, feel free to reach out to us.
         </p>
         <Link to={"/Appointment"}>
           <Button>Book now</Button>
         </Link>
-        <div className="font-title text-xl mt-[3.4rem] mb-[2rem]">OR</div>
+        <div className="font-title mb-[2rem] mt-[3.4rem] text-xl">OR</div>
       </div>
       <img
         ref={imageRef}
-        className={HomeStyle.contactBg}
+        className="hidden lg:absolute lg:left-0 lg:top-[30px] lg:-z-10 lg:ml-[1rem] lg:inline lg:w-[25vw]"
         src={ContactBackground}
         alt="contact background"
       />
-      <div className={HomeStyle.formAndInfoOuterCt}>
-        <form ref={formRef} className={HomeStyle.form} onSubmit={handleSubmit}>
+      <div className="flex flex-col items-center gap-5 lg:relative lg:right-[-100px] lg:flex lg:w-[55vw] lg:flex-row lg:justify-between lg:gap-[8rem]">
+        <form
+          ref={formRef}
+          className="mb-[3rem] flex w-[80vw] flex-col items-center gap-[2.3rem] md:max-w-[30vw]"
+          onSubmit={handleSubmit}
+        >
           <TextInput
             onChange={(e) =>
               setMessageFormData((f) => ({ ...f, name: e.target.value }))
@@ -135,7 +147,7 @@ export default function Contact() {
             value={messageFormData.name}
           />
           {validationError?.name && (
-            <p className={HomeStyle.error}>
+            <p className="relative top-[-30px] text-xs text-red-400">
               {validationError?.name._errors[0]}
             </p>
           )}
@@ -148,7 +160,7 @@ export default function Contact() {
             value={messageFormData.email}
           />
           {validationError?.email && (
-            <p className={HomeStyle.error}>
+            <p className="relative top-[-30px] text-xs text-red-400">
               {validationError?.email._errors[0]}
             </p>
           )}
@@ -178,16 +190,19 @@ export default function Contact() {
             }}
           />
           {validationError?.message && (
-            <p className={HomeStyle.error}>
+            <p className="relative top-[-30px] text-xs text-red-400">
               {validationError?.message._errors[0]}
             </p>
           )}
           <div className="flex flex-row items-center gap-4">
             <Checkbox
-              id = 'policy'
+              id="policy"
               required
               onChange={(e) =>
-                setMessageFormData((f) => ({ ...f, isChecked: e.target.checked }))
+                setMessageFormData((f) => ({
+                  ...f,
+                  isChecked: e.target.checked,
+                }))
               }
               checked={messageFormData.isChecked}
               sx={{
@@ -200,8 +215,15 @@ export default function Contact() {
                 },
               }}
             />
-            <label htmlFor="policy">I agree to the {' '} 
-              <Link className="text-action underline hover:text-hoverAction" to={'/policy'}>Privacy Policy</Link>{' '}.
+            <label htmlFor="policy">
+              I agree to the{" "}
+              <Link
+                className="text-action hover:text-hoverAction underline"
+                to={"/policy"}
+              >
+                Privacy Policy
+              </Link>{" "}
+              .
             </label>
           </div>
           <ReCAPTCHA
@@ -212,28 +234,31 @@ export default function Contact() {
             Send
           </Button>
         </form>
-        <ul ref={contactRef} className={HomeStyle.infoList}>
+        <ul
+          ref={contactRef}
+          className="flex w-[80vw] flex-col gap-[2rem] sm:ml-[50vw] lg:ml-0 lg:h-[100%] lg:max-w-[30vw] lg:gap-[4rem]"
+        >
           <li className="flex items-center gap-3">
-            <div className={HomeStyle.circle}>
+            <div className="bg-action circle flex min-h-[40px] min-w-[40px] items-center justify-center">
               <PhoneAndroidIcon></PhoneAndroidIcon>
             </div>
             <span>+49 1751210432</span>
           </li>
           <li className="flex items-center gap-3">
-            <div className={HomeStyle.circle}>
+            <div className="bg-action circle flex min-h-[40px] min-w-[40px] items-center justify-center">
               <MailOutlineIcon></MailOutlineIcon>
             </div>
             <span>prestigecuts96@cuts.com</span>
           </li>
           <li className="flex items-center gap-3">
-            <div className={HomeStyle.circle}>
+            <div className="bg-action circle flex min-h-[40px] min-w-[40px] items-center justify-center">
               <HomeIcon></HomeIcon>
             </div>
             <span>789 Maple Avenue, Rivertown, OH 43001, USA</span>
           </li>
-          <li className="flex gap-3 items-start">
+          <li className="flex items-start gap-3">
             <div className="flex items-center gap-3">
-              <div className={HomeStyle.circle}>
+              <div className="bg-action circle flex min-h-[40px] min-w-[40px] items-center justify-center">
                 <QueryBuilderIcon></QueryBuilderIcon>
               </div>
             </div>

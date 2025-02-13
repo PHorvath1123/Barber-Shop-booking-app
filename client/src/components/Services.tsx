@@ -1,4 +1,3 @@
-import HomeStyle from "../styles/home/Home.module.css";
 import ServiceBackground from "/barber_shop_scene.png";
 import { useRef } from "react";
 import useServiceAnimation from "../hook/animation/useServiceAnimation";
@@ -35,25 +34,34 @@ export default function Services() {
   useServiceAnimation({ serviceRef });
 
   return (
-    <section id="Services" className={HomeStyle.serviceContainer}>
-      <div className="flex justify-end w-[100vw]">
+    <section
+      id="Services"
+      className="mt-5 flex flex-col items-center justify-center overflow-x-hidden"
+    >
+      <div className="flex w-[100vw] justify-end">
         <img
           src={ServiceBackground}
           alt="Service title background"
-          className={HomeStyle.bg}
+          className="h-auto w-[60vw] md:mr-10 md:max-w-[50vw]"
         />
       </div>
-      <div className={HomeStyle.serviceTitle}>Barber Services</div>
-      <div className={HomeStyle.serviceOptionsContainer}>
+      <div className="bg-action font-title relative top-[-30px] flex h-fit min-w-[30vw] items-center justify-center px-10 py-[.5rem] text-center text-sm font-bold uppercase md:text-lg">
+        Barber Services
+      </div>
+      <div className="mb-[7rem] mt-[2rem] flex w-[90vw] flex-auto flex-wrap justify-center gap-8 md:mt-[5rem] md:max-w-[70vw] md:gap-[3rem]">
         {services.map((service, index) => {
           return (
             <div
               ref={(el) => (serviceRef.current[index] = el)}
               key={service.id}
-              className={HomeStyle.serviceCard}
+              className="flex w-[40vw] flex-col md:max-w-[200px]"
             >
-              <div className={HomeStyle.serviceNumber}>{service.id}</div>
-              <div className={HomeStyle.serviceName}>{service.title}</div>
+              <div className="bg-action text-md mb-4 flex h-[5ch] w-[5ch] items-center justify-center">
+                {service.id}
+              </div>
+              <div className="md:text-md mb-4 text-xs font-bold uppercase">
+                {service.title}
+              </div>
               <p>{service.description}</p>
             </div>
           );

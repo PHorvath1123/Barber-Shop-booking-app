@@ -2,9 +2,7 @@ import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import { colorPalette as color } from "../../utils/colorPalette";
-import PricingStyle from "../../styles/pricing/Pricing.module.css";
 import type { PriceListType } from "../../hook/useFetchServices";
-import AppointmentStyle from "../../styles/appointment/Appointment.module.css";
 import Button from "../ui/Button";
 import { useServiceContext } from "../../hook/useServiceContext";
 import type { BookingResponseType } from "../../hook/usePostBooking";
@@ -90,9 +88,9 @@ export default function ContactModal({
                   {category.category}
                 </h2>
                 {category.services.map((service) => (
-                  <div key={service.title} className={PricingStyle.priceList}>
-                    <div className={AppointmentStyle.serviceListItem}>
-                      <div className={AppointmentStyle.priceAndService}>
+                  <div key={service.title} className="flex flex-col">
+                    <div className="flex flex-row justify-between items-center border-b border-dotted mb-[2rem]">
+                      <div className="flex flex-col items-start">
                         <span className="text-xs sm:text-sm">
                           {service.title}
                         </span>
@@ -169,7 +167,7 @@ export default function ContactModal({
             <div>Message sent successfully!</div>
           </>
         ) : (
-          <div className={PricingStyle.errorMessage}>
+          <div className="text-center text-lg text-hoverAction w-[80%] lg:w-[50%] my-0 mx-auto">
             "Could not send the message. Please try again!"
           </div>
         )}

@@ -3,25 +3,27 @@ import Textarea from "@mui/joy/Textarea";
 import Checkbox from "@mui/joy/Checkbox";
 import { z } from "zod";
 import { useState } from "react";
-import AppointmentStyle from "../styles/appointment/Appointment.module.css";
 import { colorPalette as color } from "../utils/colorPalette";
 import Button from "./ui/Button";
 import { Link } from "react-router-dom";
 
 const schema = z.object({
   name: z.string().regex(/^([\wöüóőúéáűí]{3,})+\s+([\wöüóőúéáűí\s]{3,})+$/gim, {
-      message: "Must be the full name!"}),
+    message: "Must be the full name!",
+  }),
   email: z.string().email({ message: "Must be a valid email address!" }),
   phone: z.string().length(11, { message: "Must be a valid phone number!" }),
-  comment: z.string().refine(
-    (val) => !/[<>]/.test(val),
-    { message: "Comment contains invalid characters." }),
+  comment: z
+    .string()
+    .refine((val) => !/[<>]/.test(val), {
+      message: "Comment contains invalid characters.",
+    }),
   isChecked: z.boolean(),
 });
 
 type BookingFormType = {
-  setBookingState: React.Dispatch<React.SetStateAction<boolean>>,
-  onSubmitForm: (bookingData: formData) => void
+  setBookingState: React.Dispatch<React.SetStateAction<boolean>>;
+  onSubmitForm: (bookingData: formData) => void;
 };
 
 export type formData = z.infer<typeof schema>;
@@ -31,11 +33,13 @@ type ValidationError = {
   name?: { _errors: string[] };
   email?: { _errors: string[] };
   phone?: { _errors: string[] };
-  comment?: {_errors: string[] }
+  comment?: { _errors: string[] };
 };
 
-export default function BookingDetailsForm({setBookingState, onSubmitForm}: BookingFormType) {
-
+export default function BookingDetailsForm({
+  setBookingState,
+  onSubmitForm,
+}: BookingFormType) {
   const [validationError, setValidationError] = useState<ValidationError>();
 
   const [bookingFormData, setBookingFormData] = useState<formData>({
@@ -45,7 +49,7 @@ export default function BookingDetailsForm({setBookingState, onSubmitForm}: Book
     comment: "",
     isChecked: false,
   });
-  
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -54,7 +58,6 @@ export default function BookingDetailsForm({setBookingState, onSubmitForm}: Book
     if (!result.success) {
       const errors = result.error.format();
       setValidationError(errors);
-      
     } else {
       setBookingState(true);
       onSubmitForm(bookingFormData); //send the data to the Booking component
@@ -70,12 +73,15 @@ export default function BookingDetailsForm({setBookingState, onSubmitForm}: Book
   };
 
   return (
-    <article className={AppointmentStyle.margin}>
-      <div className={AppointmentStyle.formOuterCt}>
-        <h2 className="font-title text-lg border-b-[1px] my-[2rem] border-action">
+    <article className="my-[3rem]">
+      <div className="box-border flex flex-col items-center">
+        <h2 className="font-title border-action my-[2rem] border-b-[1px] text-lg">
           Contact Information
         </h2>
-        <form className={AppointmentStyle.form} onSubmit={handleSubmit}>
+        <form
+          className="flex w-[80%] flex-col items-center gap-[2rem] py-[4rem] md:w-[50vw] lg:w-[30vw] xl:w-[20vw]"
+          onSubmit={handleSubmit}
+        >
           <TextInput
             onChange={(e) =>
               setBookingFormData((f) => ({ ...f, name: e.target.value }))
@@ -84,7 +90,11 @@ export default function BookingDetailsForm({setBookingState, onSubmitForm}: Book
             label="Full Name"
             value={bookingFormData.name}
           />
-          {validationError?.name && <p className={AppointmentStyle.error}>{validationError?.name._errors[0]}</p>}
+          {validationError?.name && (
+            <p className="relative top-[-20px] text-xs text-red-400">
+              {validationError?.name._errors[0]}
+            </p>
+          )}
           <TextInput
             onChange={(e) =>
               setBookingFormData((f) => ({ ...f, email: e.target.value }))
@@ -93,7 +103,11 @@ export default function BookingDetailsForm({setBookingState, onSubmitForm}: Book
             label="E-mail"
             value={bookingFormData.email}
           />
-          {validationError?.email && <p className={AppointmentStyle.error}>{validationError?.email._errors[0]}</p>}
+          {validationError?.email && (
+            <p className="relative top-[-20px] text-xs text-red-400">
+              {validationError?.email._errors[0]}
+            </p>
+          )}
           <TextInput
             onChange={(e) =>
               setBookingFormData((f) => ({ ...f, phone: e.target.value }))
@@ -103,7 +117,11 @@ export default function BookingDetailsForm({setBookingState, onSubmitForm}: Book
             value={bookingFormData.phone}
             placeholder="e.g. 01751234567"
           />
-          {validationError?.phone && <p className={AppointmentStyle.error}>{validationError?.phone._errors[0]}</p>}
+          {validationError?.phone && (
+            <p className="relative top-[-20px] text-xs text-red-400">
+              {validationError?.phone._errors[0]}
+            </p>
+          )}
           <Textarea
             minRows={2}
             placeholder="Booking comment (optional)"
@@ -128,13 +146,20 @@ export default function BookingDetailsForm({setBookingState, onSubmitForm}: Book
               },
             }}
           />
-          {validationError?.comment && <p className={AppointmentStyle.error}>{validationError?.comment._errors[0]}</p>}
+          {validationError?.comment && (
+            <p className="relative top-[-20px] text-xs text-red-400">
+              {validationError?.comment._errors[0]}
+            </p>
+          )}
           <div className="flex flex-row items-center gap-4">
             <Checkbox
-              id = 'policy'
+              id="policy"
               required
               onChange={(e) =>
-                setBookingFormData((f) => ({ ...f, isChecked: e.target.checked }))
+                setBookingFormData((f) => ({
+                  ...f,
+                  isChecked: e.target.checked,
+                }))
               }
               checked={bookingFormData.isChecked}
               sx={{
@@ -147,11 +172,18 @@ export default function BookingDetailsForm({setBookingState, onSubmitForm}: Book
                 },
               }}
             />
-            <label htmlFor="policy">I agree to the {" "}
-              <Link className="text-action underline hover:text-hoverAction" to={'/policy'}>Privacy Policy</Link>{" "}.
+            <label htmlFor="policy">
+              I agree to the{" "}
+              <Link
+                className="text-action hover:text-hoverAction underline"
+                to={"/policy"}
+              >
+                Privacy Policy
+              </Link>{" "}
+              .
             </label>
           </div>
-          <div className={AppointmentStyle.buttonBox}>
+          <div className="mt-[3rem] flex w-[80%] flex-row flex-wrap-reverse items-center justify-center gap-[3rem] lg:w-[40vw]">
             <Button
               type="reset"
               variant="contained"
@@ -159,7 +191,7 @@ export default function BookingDetailsForm({setBookingState, onSubmitForm}: Book
               onClick={() => {
                 if (
                   window.confirm(
-                    "Are you sure you want to reset your booking to make a new one?"
+                    "Are you sure you want to reset your booking to make a new one?",
                   )
                 ) {
                   window.location.reload();

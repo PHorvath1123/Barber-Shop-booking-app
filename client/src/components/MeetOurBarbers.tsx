@@ -1,8 +1,7 @@
 import BarbersTitleLogo from "/barbers-title-logo.png";
-import HomeStyle from "../styles/home/Home.module.css";
 import { useFetchBarbers } from "../hook/useFetchBarbers";
 import CircularProgressSpinner from "./ui/CircularProgressSpinner";
-import {useRef} from 'react'
+import { useRef } from "react";
 import useBarberAnimation from "../hook/animation/useBarberAnimation";
 
 export default function MeetOurBarbers() {
@@ -10,37 +9,41 @@ export default function MeetOurBarbers() {
 
   const barberRef = useRef<(HTMLDivElement | null)[]>([]);
 
-  useBarberAnimation(barberRef, barbers)
+  useBarberAnimation(barberRef, barbers);
 
   return (
     <section
       id="Barbers"
-      className="flex flex-col items-center mb-[3rem] overflow-x-hidden "
+      className="mb-[3rem] flex flex-col items-center overflow-x-hidden"
     >
-      <div className="flex flex-col justify-center items-center relative">
+      <div className="relative flex flex-col items-center justify-center">
         <img
-          className={HomeStyle.titleLogo}
+          className="w-[35vw] sm:max-w-[30vw] md:max-w-[200px]"
           src={BarbersTitleLogo}
           alt="Meet our barbers title logo"
         />
-        <div className={HomeStyle.barberTitle}>
+        <div className="title absolute">
           Meet Our <span className="text-action font-title">Barbers</span>
         </div>
       </div>
-      <p className={HomeStyle.barberText}>
+      <p className="mt-[3rem] w-[80vw] text-center text-sm italic md:w-[65ch]">
         Get to know the skilled professionals dedicated to providing you with
         the finest grooming experience.
       </p>
-      <div className={HomeStyle.BarbersCt}>
-        {isLoading && 
-          <CircularProgressSpinner/>
-        }
+      <div className="relative mt-[3rem] flex w-[85vw] flex-wrap justify-center gap-10 overflow-hidden md:w-[65vw]">
+        {isLoading && <CircularProgressSpinner />}
         {isError && (
-          <div className={HomeStyle.errorMessage}>{error.message}</div>
+          <div className="relative top-[-30px] text-xs text-red-400">
+            {error.message}
+          </div>
         )}
         {barbers?.map((barber, index) => {
           return (
-            <div key={barber.name} className={HomeStyle.barberInnerCt} ref={(el) => barberRef.current[index] = el}>
+            <div
+              key={barber.name}
+              className="flex flex-col items-center gap-1 py-3"
+              ref={(el) => (barberRef.current[index] = el)}
+            >
               <img
                 src={barber.photo}
                 alt="Barber1"

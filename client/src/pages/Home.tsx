@@ -3,7 +3,6 @@ import Services from "../components/Services";
 import MeetOurBarbers from "../components/MeetOurBarbers";
 import Contact from "../components/Contact";
 import Footer from "../components/Footer";
-import HomeStyle from "../styles/home/Home.module.css";
 import Navbar from "../components/ui/Navbar";
 import { useEffect } from "react";
 
@@ -16,7 +15,7 @@ export default function Home() {
     <>
       <Navbar withBackground />
       <main>
-        <div className={HomeStyle.heroContainer}>
+        <div className="overflow-x-hidden bg-[url(/background.png)] bg-auto bg-fixed bg-center bg-no-repeat">
           <Hero />
         </div>
         <Services />

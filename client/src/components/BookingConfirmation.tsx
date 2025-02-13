@@ -1,6 +1,5 @@
 import summaryLogo from "/summary_logo.png";
 import Scissor from "/summary_scissor.png";
-import AppointmentStyle from "../styles/appointment/Appointment.module.css";
 import Button from "./ui/Button";
 import type { selectedBarberType } from "../pages/Booking";
 import type { selectedDateType } from "../pages/Booking";
@@ -66,8 +65,8 @@ export default function BookingConfirmation(props: confirmationProps) {
         <CircularProgressSpinner />
       </Backdrop>
       {isError && (
-        <div className="flex flex-col items-center gap-5 mb-10">
-          <div className={AppointmentStyle.errorMessage}>
+        <div className="mb-10 flex flex-col items-center gap-5">
+          <div className="text-hoverAction mx-auto my-0 w-[80%] text-center text-lg lg:w-[50%]">
             {error.message
               ? error.message
               : "An error occurred during the booking process. Please refresh the page and try again!"}
@@ -88,69 +87,83 @@ export default function BookingConfirmation(props: confirmationProps) {
           content={confirmedBookingResponse}
         />
       )}
-      <section className={AppointmentStyle.summaryCt}>
-        <img src={Scissor} alt="Scissor" />
-        <h2 className={AppointmentStyle.title}>Booking summary</h2>
-        <article className={AppointmentStyle.selectedOptionsCt}>
-          <div className={AppointmentStyle.barberSummaryCt}>
+      <section className="box-border flex flex-col items-center">
+        <img src={Scissor} alt="Scissor" className="mt-[1rem] w-[150px]" />
+        <h2 className="font-title mb-[5rem] mt-[3rem] w-[100vw] text-center text-lg font-bold uppercase md:text-xl">
+          Booking summary
+        </h2>
+        <article className="relative top-[-50px] flex w-[80%] flex-col items-center gap-[2rem] md:top-0 md:flex-row md:items-center md:justify-between lg:w-[70%] xl:w-[50%]">
+          <div className="flex flex-col items-center md:h-[100%]">
             <img
-              className={AppointmentStyle.choosedBarberImg}
+              className="barber-img w-[32vw] sm:max-w-[18vw] md:max-w-[160px]"
               src={props.barber?.photo}
               alt={`Photo of the barber: ${props.barber?.name}`}
             />
-            <p className="relative top-[-60px] font-title text-md">
+            <p className="font-title text-md relative top-[-60px]">
               {props.barber?.name}
             </p>
           </div>
-          <div className={AppointmentStyle.selectedBookingDetailsCt}>
-            <ul>
-              <li>
-                <p>Date:</p>
-                <span>
+          <div className="sm:text-md mb-[2rem] w-[100%] text-sm md:w-[35ch]">
+            <ul className="flex flex-col justify-between gap-[3.5rem] md:h-[100%]">
+              <li className="flex justify-between border-b-[2px] border-dotted">
+                <p className="font-title font-bold">Date:</p>
+                <span className="font-title">
                   {props.date?.date}
-                  <span className="ml-[1rem]">{props.appointment}</span>
+                  <span className="font-title ml-[1rem]">
+                    {props.appointment}
+                  </span>
                 </span>
               </li>
-              <li>
-                <p>Service:</p>
-                <span>{props.service?.title}</span>
+              <li className="flex justify-between border-b-[2px] border-dotted">
+                <p className="font-title font-bold">Service:</p>
+                <span className="font-title">{props.service?.title}</span>
               </li>
-              <li>
-                <p>Price:</p>
-                <span>{props.service?.price} $</span>
+              <li className="flex justify-between border-b-[2px] border-dotted">
+                <p className="font-title font-bold">Price:</p>
+                <span className="font-title">{props.service?.price} $</span>
               </li>
             </ul>
           </div>
         </article>
-        <div className="border-b-2 border-action w-[90%]"></div>
-        <article className={AppointmentStyle.customerDetailsCt}>
-          <h3 className="text-md sm:text-lg font-title mb-[3rem]">
+        <div className="border-action w-[90%] border-b-2"></div>
+        <article className="mt-[2rem] flex w-[80%] flex-col lg:w-[70%] xl:w-[50%]">
+          <h3 className="text-md font-title mb-[3rem] sm:text-lg">
             Customer Information
           </h3>
-          <div className={AppointmentStyle.customerDetails}>
-            <ul>
-              <li>
-                <p>Name:</p>
-                <span>{props.formData?.name}</span>
+          <div className="flex min-w-[100%] flex-col items-center lg:items-start">
+            <ul className="sm:text-md mb-[4rem] flex w-[100%] flex-col gap-[2.5rem] text-sm">
+              <li className="flex justify-between gap-3 border-b-[2px] border-dotted">
+                <p className="font-title whitespace-nowrap font-bold">Name:</p>
+                <span className="font-title overflow-hidden text-ellipsis">
+                  {props.formData?.name}
+                </span>
               </li>
-              <li>
-                <p>E-mail:</p>
-                <span>{props.formData?.email}</span>
+              <li className="flex justify-between gap-3 border-b-[2px] border-dotted">
+                <p className="font-title whitespace-nowrap font-bold">
+                  E-mail:
+                </p>
+                <span className="font-title overflow-hidden text-ellipsis">
+                  {props.formData?.email}
+                </span>
               </li>
-              <li>
-                <p>Phone:</p>
-                <span className="tracking-[.2rem]">
+              <li className="flex justify-between gap-3 border-b-[2px] border-dotted">
+                <p className="font-title whitespace-nowrap font-bold">Phone:</p>
+                <span className="font-title overflow-hidden text-ellipsis tracking-[.2rem]">
                   {props.formData?.phone}
                 </span>
               </li>
-              <li>
-                <p>Comment:</p>
-                <span>{props.formData?.comment}</span>
+              <li className="flex justify-between gap-3 border-b-0 border-dotted">
+                <p className="font-title whitespace-nowrap font-bold">
+                  Comment:
+                </p>
+                <span className="font-title textarea-scrollbar max-h-[150px] overflow-x-hidden overflow-y-scroll text-ellipsis hyphens-auto pl-[2rem] text-justify">
+                  {props.formData?.comment}
+                </span>
               </li>
             </ul>
           </div>
         </article>
-        <div className={AppointmentStyle.buttonBox}>
+        <div className="mt-[3rem] flex w-[80%] flex-row flex-wrap-reverse items-center justify-center gap-[3rem] lg:w-[40vw]">
           <Button
             type="reset"
             variant="contained"
@@ -180,7 +193,7 @@ export default function BookingConfirmation(props: confirmationProps) {
           </Button>
         </div>
         <img
-          className={AppointmentStyle.endLogoInSummary}
+          className="h-[260px] w-auto py-[3rem]"
           src={summaryLogo}
           alt="Barber decoration graphic"
         />

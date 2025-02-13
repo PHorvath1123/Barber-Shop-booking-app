@@ -1,4 +1,3 @@
-import AppointmentStyle from "../styles/appointment/Appointment.module.css";
 import { useState } from "react";
 import Button from "./ui/Button";
 import Modal from "./ui/Modal";
@@ -29,13 +28,15 @@ export default function ServiceSelector() {
 
     if (isError) {
       return (
-        <div className={AppointmentStyle.errorMessage}>{error.message}</div>
+        <div className="text-hoverAction mx-auto my-0 w-[80%] text-center text-lg lg:w-[50%]">
+          {error.message}
+        </div>
       );
     }
 
     if (isSuccess) {
       return (
-        <div className={AppointmentStyle.serviceButtons}>
+        <div className="mx-[.5rem] mt-[3rem] flex flex-col items-center gap-[2rem] lg:mx-auto lg:my-0 lg:mt-[3rem] lg:flex lg:max-w-[50vw] lg:flex-row lg:flex-wrap lg:justify-center 2xl:max-w-[45vw]">
           {data?.map((categories) => {
             return (
               <Button
@@ -62,17 +63,23 @@ export default function ServiceSelector() {
   const selectedService = (selectedService: string) => {
     return (
       <>
-        <div className={AppointmentStyle.serviceOuterCt}>
-          <span className={AppointmentStyle.articleTitle}>Service</span>
-          <p className={AppointmentStyle.selectedService}>{selectedService}</p>
+        <div className="mt-[2rem] flex flex-col items-center gap-[1.1rem] py-[2rem] md:flex md:justify-center">
+          <span className="font-title border-action relative top-[-20px] mb-[2rem] border-b-[1px] text-lg">
+            Service
+          </span>
+          <p className="text-md text-action text-center">{selectedService}</p>
         </div>
       </>
     );
   };
 
   return (
-    <article className={AppointmentStyle.serviceArticle}>
-      {!service?.title && <h2 className={AppointmentStyle.title}>Service</h2>}
+    <article className="mx-[1rem] box-border flex flex-col items-center justify-evenly gap-5 pb-[2rem]">
+      {!service?.title && (
+        <h2 className="font-title mb-[5rem] mt-[3rem] w-[100vw] text-center text-lg font-bold uppercase md:text-xl">
+          Service
+        </h2>
+      )}
       {!service?.title ? serviceList() : selectedService(service.title)}
     </article>
   );

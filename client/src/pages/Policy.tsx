@@ -15,7 +15,7 @@ export default function Policy() {
 
   return (
     <>
-      <Navbar></Navbar>
+      <Navbar/>
       <main>
         <section className="flex flex-col items-center">
           <h1 className="text-xl font-title mb-[5rem]">Privacy Policy</h1>
